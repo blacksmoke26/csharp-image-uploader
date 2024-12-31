@@ -9,6 +9,7 @@ namespace ImageShare;
 /// </summary>
 public partial class MainWindow : Window {
   private readonly List<ImageThumb> _uploadedImages = [];
+
   public MainWindow() {
     InitializeComponent();
     FileAreaBorder.DragEnter += (_, _) => { DragPreviewPanelVisible(); };
@@ -35,28 +36,31 @@ public partial class MainWindow : Window {
 
     var filePaths = e.Data.GetData(DataFormats.FileDrop, false) as string[];
 
-    if (filePaths == null || filePaths.Length == 0) return;
-
-    foreach (var path in filePaths) {
-      var imageThumb = new ImageThumb(path);
-      if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
-    }
+    if (filePaths != null)
+      ProcessUploadedImageList(filePaths);
   }
 
   private void StartUploadingButton_OnClick(object sender, RoutedEventArgs e) {
     var extensions = ImageHelper.ImageExtTypes.Select(x => $"*.{x}").ToArray();
 
-    OpenFileDialog fileDialog = new () {
-      Filter = $"Image Files ({string.Join(",", extensions)})|{string.Join(";",extensions)}",
+    OpenFileDialog fileDialog = new() {
+      Filter = $"Image Files ({string.Join(",", extensions)})|{string.Join(";", extensions)}",
       Multiselect = true,
       InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
     };
 
-    if (fileDialog.ShowDialog() == null || fileDialog.FileNames.Length == 0) return;
+    if (fileDialog.ShowDialog() != null)
+      ProcessUploadedImageList(fileDialog.FileNames);
+  }
 
-    foreach (var path in fileDialog.FileNames) {
+  private void ProcessUploadedImageList(string[] files) {
+    if (files.Length == 0) return;
+
+    foreach (var path in files) {
       var imageThumb = new ImageThumb(path);
       if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
     }
+
+    ControlImageGridView.ImagesList = _uploadedImages;
   }
 }
