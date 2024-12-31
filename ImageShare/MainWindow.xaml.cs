@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using Dumpify;
-using ImageShare.Dialogs;
 using ImageShare.Helpers;
+using Microsoft.Win32;
 
 namespace ImageShare;
 
@@ -42,13 +41,22 @@ public partial class MainWindow : Window {
       var imageThumb = new ImageThumb(path);
       if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
     }
-
-    _uploadedImages[0].Dump();
   }
 
   private void StartUploadingButton_OnClick(object sender, RoutedEventArgs e) {
-    var dialog = new EditImageDialog();
-    //dialog.Owner = this;
-    dialog.ShowDialog();
+    var extensions = ImageHelper.ImageExtTypes.Select(x => $"*.{x}").ToArray();
+
+    OpenFileDialog fileDialog = new () {
+      Filter = $"Image Files ({string.Join(",", extensions)})|{string.Join(";",extensions)}",
+      Multiselect = true,
+      InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+    };
+
+    if (fileDialog.ShowDialog() == null || fileDialog.FileNames.Length == 0) return;
+
+    foreach (var path in fileDialog.FileNames) {
+      var imageThumb = new ImageThumb(path);
+      if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
+    }
   }
 }
