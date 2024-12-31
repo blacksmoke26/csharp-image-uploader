@@ -1,0 +1,47 @@
+﻿<Window x:Class="ImageShare.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:ImageShare"
+  xmlns:uc="clr-namespace:ImageShare.UserControls"
+  mc:Ignorable="d"
+  WindowStartupLocation="CenterScreen"
+  Title="MainWindow" Height="450" Width="800">
+  <Grid Margin="10">
+    <Border Name="FileAreaBorder" AllowDrop="True"
+      Padding="50 30" VerticalAlignment="Top" Background="#F2F2F2">
+      <StackPanel>
+        <StackPanel Name="DragPreviewPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+          <Image Source="/images/upload-cloud.png" Width="74" Height="74"/>
+          <TextBlock FontSize="18" Margin=" 0 15 0 10">Drag and Drop or paste images here to upload</TextBlock>
+          <TextBlock
+            FontSize="16"
+            TextAlignment="Center">
+            <Span>You can also</Span> <Span Foreground="DodgerBlue">browser from your computer</Span>
+          </TextBlock>
+        </StackPanel>
+        <StackPanel Name="FileInfoPanel" HorizontalAlignment="Center" Margin="0 6 0 7">
+          <TextBlock FontSize="30" FontWeight="Medium" HorizontalAlignment="Center" Margin="0 0 0 6">
+            Upload and share your images.
+          </TextBlock>
+          <TextBlock
+            FontSize="18"
+            FontWeight="Light"
+            HorizontalAlignment="Center"
+            Margin="0 0 0 15">
+            Drag and drop anywhere you want and start uploading your images now
+          </TextBlock>
+          <Button Click="StartUploadingButton_OnClick" Background="#2a80b9"
+            Padding="30 12"
+            FontSize="15"
+            FontWeight="DemiBold"
+            Foreground="White"
+            HorizontalAlignment="Center"
+            Content="START UPLOADING"/>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <uc:ImageGridView/>
+  </Grid>
+</Window>
