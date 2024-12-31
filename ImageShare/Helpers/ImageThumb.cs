@@ -22,6 +22,7 @@ public class ImageThumb {
 
   private void Initialize() {
     if (!ImageHelper.IsImageExt(Source)) return;
+    
     ImageInfo imageInfo;
     try {
       imageInfo = Image.Identify(Source);
@@ -36,5 +37,6 @@ public class ImageThumb {
     Width = imageInfo.Width;
     Height = imageInfo.Height;
     Title = Path.GetFileNameWithoutExtension(Source);
+    IsProcessed = true;
   }
 }
