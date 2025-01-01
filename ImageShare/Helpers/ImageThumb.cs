@@ -21,38 +21,32 @@ public class ImageThumb {
 
   public ImageThumb(string source) {
     Source = source;
-    Initialize();
+    FromFile(source);
   }
 
-  private bool IsUrl(string source) {
-    try {
-      var uri = new Uri(source);
-      return uri.Scheme.StartsWith("http");
-    }
-    catch {
+  private bool FromFile(string filename) {
+    if (!ImageHelper.IsImageMime(filename)) {
       return false;
     }
-  }
 
-  private void Initialize() {
-    if (!ImageHelper.IsImageExt(Source)) return;
-
-    ImageInfo imageInfo;
-    try {
-      imageInfo = Image.Identify(Source);
-    }
-    catch {
-      return;
-    }
-
-    var imgExt = imageInfo.Metadata.DecodedImageFormat?.Name ?? "";
-    if (!ImageHelper.ImageExtTypes.Contains(imgExt.ToLowerInvariant())) return;
+    var imageInfo = Image.Identify(filename)!;
 
     OriginalWidth = Width = imageInfo.Width;
     OriginalHeight = Height = imageInfo.Height;
-    Title = Path.GetFileNameWithoutExtension(Source);
+    Title = Path.GetFileNameWithoutExtension(filename);
     ThumbnailPath = GenerateThumbnail(110, 110);
     IsProcessed = true;
+    Source = filename;
+    return true;
+  }
+
+  public async Task<bool> FromUrl(string url) {
+    if (!url.StartsWith("http", StringComparison.InvariantCultureIgnoreCase)) {
+      return false;
+    }
+
+    var filePath = await ImageHelper.DownloadAsync(url);
+    return filePath != null && FromFile(filePath);
   }
 
   public string GenerateThumbnail(int width = 120, int height = 120) {
