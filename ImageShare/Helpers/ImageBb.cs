@@ -1,5 +1,3 @@
-using System.IO;
-using Dumpify;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -48,7 +46,7 @@ public sealed class ImageBb {
   }
 
   public static async Task<ImageApiResponse?> UploadImageAsync(string filename,
-    UploadImageOptions? uploadOptions = null) {
+    UploadImageOptions? uploadOptions = null, CancellationToken cancellationToken = default) {
     using RestClient client = new(UploadEndpoint);
 
     RestRequest request = new() {
@@ -57,16 +55,16 @@ public sealed class ImageBb {
 
     if (uploadOptions is not null) {
       if (!string.IsNullOrEmpty(uploadOptions.Name))
-        request.AddQueryParameter("name", uploadOptions.Name);
+        request.AddParameter("name", uploadOptions.Name);
 
       if (uploadOptions.Expiration > 0)
-        request.AddQueryParameter("expiration", uploadOptions.Expiration);
+        request.AddParameter("expiration", uploadOptions.Expiration);
     }
 
-    request.AddQueryParameter("key", ApiKey);
+    request.AddParameter("key", ApiKey);
     request.AddFile("image", filename);
 
-    var response = await client.PostAsync(request);
+    var response = await client.PostAsync(request, cancellationToken);
 
     if (!response.IsSuccessful) {
       return null;

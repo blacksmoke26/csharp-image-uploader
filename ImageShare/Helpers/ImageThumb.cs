@@ -13,6 +13,9 @@ public class ImageThumb {
   public string ThumbnailPath { get; private set; } = string.Empty;
   public string Description { get; set; } = string.Empty;
 
+  public int OriginalWidth { get; private set; }
+  public int OriginalHeight { get; private set; }
+
   public int Width { get; set; }
   public int Height { get; set; }
 
@@ -21,14 +24,14 @@ public class ImageThumb {
     Initialize();
   }
 
-  public string GenerateThumbnail(int width = 120, int height = 120) {
-    var outPath = Path.GetTempFileName();
-
-    using var image = Image.Load(Source);
-    image.Mutate(x => x.Resize(width, height));
-
-    image.SaveAsJpeg(outPath);
-    return outPath;
+  private bool IsUrl(string source) {
+    try {
+      var uri = new Uri(source);
+      return uri.Scheme.StartsWith("http");
+    }
+    catch {
+      return false;
+    }
   }
 
   private void Initialize() {
@@ -45,15 +48,27 @@ public class ImageThumb {
     var imgExt = imageInfo.Metadata.DecodedImageFormat?.Name ?? "";
     if (!ImageHelper.ImageExtTypes.Contains(imgExt.ToLowerInvariant())) return;
 
-    Width = imageInfo.Width;
-    Height = imageInfo.Height;
+    OriginalWidth = Width = imageInfo.Width;
+    OriginalHeight = Height = imageInfo.Height;
     Title = Path.GetFileNameWithoutExtension(Source);
     ThumbnailPath = GenerateThumbnail(110, 110);
     IsProcessed = true;
   }
 
+  public string GenerateThumbnail(int width = 120, int height = 120) {
+    var outPath = Path.GetTempFileName();
+
+    using var image = Image.Load(Source);
+    image.Mutate(x => x.Resize(width, height));
+
+    image.SaveAsJpeg(outPath);
+    return outPath;
+  }
+
   public void Resize(int width, int height) {
     if (width == Width && height == Height) return;
+    Width = width;
+    Height = height;
     Source = GenerateThumbnail(width, height);
   }
 
