@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ImageShare.Helpers;
 
 namespace ImageShare.UserControls;
@@ -14,6 +15,7 @@ public partial class ImageGridView : UserControl {
     
     var list = (List<ImageThumb>)e.NewValue;
     control.ThumbsListView.ItemsSource = list;
+    Console.WriteLine(list.Count);
   }
 
   public List<ImageThumb> ImagesList {
@@ -27,6 +29,14 @@ public partial class ImageGridView : UserControl {
   }
 
   private void ImageThumbControl_OnRemoveClick(object sender, RoutedEventArgs e) {
+    Console.WriteLine("____CLICKED____");
+  }
+
+  private void ImageEdit_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    Console.WriteLine("____CLICKED____");
+  }
+
+  private void ImageRemove_OnMouseDown(object sender, MouseButtonEventArgs e) {
     Console.WriteLine("____CLICKED____");
   }
 }

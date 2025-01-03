@@ -7,14 +7,58 @@
   xmlns:uc="clr-namespace:ImageShare.UserControls"
   mc:Ignorable="d"
   Background="Transparent">
-  <ListView Name="ThumbsListView" VerticalAlignment="Center">
-    <!--
-    <ListView.View><GridView /></ListView.View>
-    -->
+  <UserControl.Resources>
+    <Style x:Key="ThumbAction"
+      TargetType="TextBlock">
+      <Setter Property="FontFamily"
+        Value="{StaticResource Phosphor}" />
+      <Setter Property="FontSize"
+        Value="18" />
+      <Setter Property="HorizontalAlignment"
+        Value="Left" />
+      <Setter Property="VerticalAlignment"
+        Value="Top" />
+    </Style>
+    <Style x:Key="ThumbActionBorder"
+      TargetType="Border">
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Padding" Value="8" />
+      <Setter Property="CornerRadius" Value="50" />
+      <Setter Property="Background"
+        Value="White" />
+      <Setter Property="Effect">
+        <Setter.Value>
+          <DropShadowEffect ShadowDepth="4" BlurRadius="5"
+            Direction="250" Color="Silver" Opacity="0.4"
+          />
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+  <ListView Name="ThumbsListView"
+    VerticalAlignment="Center">
     <ListView.ItemTemplate>
       <DataTemplate>
-        <!--<Image Source="{Binding Path=ThumbnailPath}" Width="110" Height="110" />-->
-        <uc:ImageThumbControl RemoveClick="ImageThumbControl_OnRemoveClick"/>
+        <DockPanel HorizontalAlignment="Left"
+          VerticalAlignment="Bottom">
+          <StackPanel HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            ZIndex="12">
+            <Border MouseDown="ImageEdit_OnMouseDown" Margin="0 -11 0 0"
+              Style="{StaticResource ThumbActionBorder}">
+              <TextBlock Style="{StaticResource ThumbAction}"
+                Text="&#xE34C;" />
+            </Border>
+            <Border MouseDown="ImageRemove_OnMouseDown" Margin="0 3 0 0"
+              Style="{StaticResource ThumbActionBorder}">
+              <TextBlock Style="{StaticResource ThumbAction}"
+                Text="&#xE4A6;" />
+            </Border>
+          </StackPanel>
+          <Image Margin="-20 0 0 0"
+            Source="{Binding Path=ThumbnailPath}"
+            Width="110" />
+        </DockPanel>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
