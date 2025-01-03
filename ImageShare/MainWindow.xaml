@@ -20,7 +20,12 @@
       HorizontalAlignment="Stretch">
       <uc:DragOverPreview x:Name="DragPreviewPanel"
         Visibility="Collapsed" />
-      <uc:ImageDropArea x:Name="FileInfoPanel" UploadClick="ImageDropArea_OnUploadClick"/>
+      <uc:ImageDropArea x:Name="FileInfoPanel"
+        Visibility="Collapsed"
+        UploadClick="ImageDropArea_OnUploadClick" />
+      <uc:ImageGridView Visibility="Hidden"/>
+      <uc:ImageGridView Width="5"
+        x:Name="ImagesViewer" />
     </StackPanel>
   </Border>
 </Window>

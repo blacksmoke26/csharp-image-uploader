@@ -16,6 +16,7 @@ public partial class MainWindow : Window {
     FileAreaBorder.DragEnter += (_, _) => { DragPreviewPanelVisible(); };
     FileAreaBorder.DragLeave += (_, _) => { FileInfoPanelVisible(); };
     FileAreaBorder.Drop += FileAreaBorder_Drop;
+    ImagesViewer.ImagesList = _uploadedImages;
   }
 
   private void DragPreviewPanelVisible() {
@@ -49,12 +50,15 @@ public partial class MainWindow : Window {
       if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
     }
 
-    /*ControlImageGridView.ImagesList = _uploadedImages;*/
+    ImagesViewer.ImagesList = _uploadedImages;
   }
 
   private void MainWindow_OnMouseDown(object sender, MouseButtonEventArgs e) {
-    if (e.ButtonState == MouseButtonState.Pressed) {
-      DragMove();
+    try {
+      if (e.ButtonState == MouseButtonState.Pressed) DragMove();
+    }
+    catch (Exception exception) {
+      Console.WriteLine(exception);
     }
   }
 
