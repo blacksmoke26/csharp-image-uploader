@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using ImageShare.Helpers;
 using Microsoft.Win32;
 
@@ -61,6 +62,12 @@ public partial class MainWindow : Window {
       if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
     }
 
-    ControlImageGridView.ImagesList = _uploadedImages;
+    /*ControlImageGridView.ImagesList = _uploadedImages;*/
+  }
+
+  private void MainWindow_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    if (e.ButtonState == MouseButtonState.Pressed) {
+      DragMove();
+    }
   }
 }

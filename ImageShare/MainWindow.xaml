@@ -7,46 +7,62 @@
   xmlns:uc="clr-namespace:ImageShare.UserControls"
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
-  Title="MainWindow" Height="450" Width="800">
-  <Grid Margin="10">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="*"/>
-      <RowDefinition Height="*"/>
-    </Grid.RowDefinitions>
-    <Border Name="FileAreaBorder" AllowDrop="True"
-      Padding="50 30" VerticalAlignment="Top" Background="#F2F2F2">
-      <StackPanel>
-        <StackPanel Name="DragPreviewPanel" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-          <Image Source="/images/upload-cloud.png" Width="74" Height="74"/>
-          <TextBlock FontSize="18" Margin=" 0 15 0 10">Drag and Drop or paste images here to upload</TextBlock>
-          <TextBlock
-            FontSize="16"
-            TextAlignment="Center">
-            <Span>You can also</Span> <Span Foreground="DodgerBlue">browser from your computer</Span>
-          </TextBlock>
-        </StackPanel>
-        <StackPanel Name="FileInfoPanel" HorizontalAlignment="Center" Margin="0 6 0 7">
-          <TextBlock FontSize="30" FontWeight="Medium" HorizontalAlignment="Center" Margin="0 0 0 6">
-            Upload and share your images.
-          </TextBlock>
-          <TextBlock
-            FontSize="18"
-            FontWeight="Light"
-            HorizontalAlignment="Center"
-            Margin="0 0 0 15">
-            Drag and drop anywhere you want and start uploading your images now
-          </TextBlock>
-          <Button Click="StartUploadingButton_OnClick" Background="#2a80b9"
-            Padding="30 12"
-            FontSize="15"
-            FontWeight="DemiBold"
-            Foreground="White"
-            HorizontalAlignment="Center"
-            Content="START UPLOADING"/>
-        </StackPanel>
+  Title="Image Share"
+  Height="450"
+  Width="800"
+  MouseDown="MainWindow_OnMouseDown">
+  <Border Name="FileAreaBorder"
+    AllowDrop="True"
+    Padding="50 0"
+    VerticalAlignment="Stretch"
+    Background="#F2F2F2">
+    <StackPanel VerticalAlignment="Center"
+      HorizontalAlignment="Stretch">
+      <StackPanel Name="DragPreviewPanel"
+        Visibility="Collapsed">
+        <TextBlock VerticalAlignment="Bottom"
+          HorizontalAlignment="Center"
+          FontFamily="{StaticResource Phosphor}"
+          Text="&#xE1AE;"
+          FontWeight="Medium"
+          Foreground="#76C2AF"
+          FontSize="90" />
+        <TextBlock FontSize="18"
+          HorizontalAlignment="Center"
+          Margin=" 0 15 0 10">
+          Drag and Drop or paste images here to upload
+        </TextBlock>
+        <TextBlock FontSize="16"
+          TextAlignment="Center">
+          <Span>You can also</Span> <Span Foreground="DodgerBlue">browser from your computer</Span>
+        </TextBlock>
       </StackPanel>
-    </Border>
-    <uc:ImageGridView Grid.Row="1" x:Name="ControlImageGridView"/>
-    <!--<Button Grid.Row="2" Content="Show Edit Image" Click="ButtonBase_OnClick"/>-->
-  </Grid>
+      <StackPanel Name="FileInfoPanel"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Bottom"
+        Margin="0 6 0 7">
+        <TextBlock FontSize="30"
+          FontWeight="Medium"
+          HorizontalAlignment="Center"
+          Margin="0 0 0 6">
+          Upload and share your images.
+        </TextBlock>
+        <TextBlock FontSize="18"
+          FontWeight="Light"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Stretch"
+          Margin="0 0 0 15">
+          Drag and drop anywhere you want and start uploading your images now
+        </TextBlock>
+        <Button Click="StartUploadingButton_OnClick"
+          Background="#2a80b9"
+          Padding="30 12"
+          FontSize="15"
+          FontWeight="DemiBold"
+          Foreground="White"
+          HorizontalAlignment="Center"
+          Content="START UPLOADING" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
 </Window>

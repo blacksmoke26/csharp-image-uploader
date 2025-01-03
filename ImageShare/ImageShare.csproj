@@ -1,25 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dumpify" Version="0.6.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="RestSharp" Version="112.1.1-alpha.0.4" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Dumpify" Version="0.6.6"/>
+        <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="RestSharp" Version="112.1.1-alpha.0.4"/>
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="images\upload-cloud.png" />
-    <Resource Include="images\upload-cloud.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Fonts\Phosphor.ttf"/>
+        <Resource Include="Fonts\Phosphor.ttf">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Fonts\"/>
+        <Folder Include="images\"/>
+    </ItemGroup>
 
 </Project>
