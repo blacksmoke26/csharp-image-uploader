@@ -41,19 +41,6 @@ public partial class MainWindow : Window {
       ProcessUploadedImageList(filePaths);
   }
 
-  private void StartUploadingButton_OnClick(object sender, RoutedEventArgs e) {
-    var extensions = ImageHelper.ImageExtTypes.Select(x => $"*.{x}").ToArray();
-
-    OpenFileDialog fileDialog = new() {
-      Filter = $"Image Files ({string.Join(",", extensions)})|{string.Join(";", extensions)}",
-      Multiselect = true,
-      InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-    };
-
-    if (fileDialog.ShowDialog() != null)
-      ProcessUploadedImageList(fileDialog.FileNames);
-  }
-
   private void ProcessUploadedImageList(string[] files) {
     if (files.Length == 0) return;
 
@@ -69,5 +56,18 @@ public partial class MainWindow : Window {
     if (e.ButtonState == MouseButtonState.Pressed) {
       DragMove();
     }
+  }
+
+  private void ImageDropArea_OnUploadClick(object sender, RoutedEventArgs e) {
+    var extensions = ImageHelper.ImageExtTypes.Select(x => $"*.{x}").ToArray();
+
+    OpenFileDialog fileDialog = new() {
+      Filter = $"Image Files ({string.Join(",", extensions)})|{string.Join(";", extensions)}",
+      Multiselect = true,
+      InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+    };
+
+    if (fileDialog.ShowDialog() != null)
+      ProcessUploadedImageList(fileDialog.FileNames);
   }
 }
