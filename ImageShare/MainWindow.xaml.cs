@@ -1,7 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shapes;
+using ImageShare.Dialogs;
 using ImageShare.Helpers;
 using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace ImageShare;
 
@@ -45,9 +48,21 @@ public partial class MainWindow : Window {
   private void ProcessUploadedImageList(string[] files) {
     if (files.Length == 0) return;
 
+    var invalidFilesList = new List<string>();
+
+    var i = 0;
     foreach (var path in files) {
       var imageThumb = new ImageThumb(path);
       if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
+      else invalidFilesList.Add(Path.GetFileName(path) + " - Invalid or supported file format.");
+    }
+
+    if (invalidFilesList.Count > 0) {
+      var dialog = new SimpleDialog {
+        HeadingText = "Some files couldn't be added",
+        DescriptionText = string.Join("\n", invalidFilesList.ToArray())
+      };
+      dialog.ShowDialog();
     }
 
     ImagesViewer.ImagesList = _uploadedImages;
