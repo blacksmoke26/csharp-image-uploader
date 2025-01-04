@@ -5,13 +5,12 @@ using SixLabors.ImageSharp.Processing;
 namespace ImageShare.Helpers;
 
 public class ImageThumb {
+  public ImageApiResponse? UploadResponse { get; private set; } = null;
   public string Source { get; private set; }
 
   public string Title { get; set; } = string.Empty;
-  public bool IsProcessed { get; private set; }
-  public ImageApiResponse? UploadResponse { get; private set; } = null;
+  public bool IsLoaded { get; private set; }
   public string ThumbnailPath { get; private set; } = string.Empty;
-  public string Description { get; set; } = string.Empty;
 
   public int OriginalWidth { get; private set; }
   public int OriginalHeight { get; private set; }
@@ -35,7 +34,7 @@ public class ImageThumb {
     OriginalHeight = Height = imageInfo.Height;
     Title = Path.GetFileNameWithoutExtension(filename);
     ThumbnailPath = GenerateThumbnail(110, 110);
-    IsProcessed = true;
+    IsLoaded = true;
     Source = filename;
     return true;
   }
