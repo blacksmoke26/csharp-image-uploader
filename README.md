@@ -1,3 +1,8 @@
-Simple Wrapper for ImgBB to upload files online Written in C#
+PixPost - Image Sharing Online - Written in C#
 
-![image](https://github.com/user-attachments/assets/a5d30dfe-ba5e-40c6-94d4-b171b4912bbb)
+![image](https://github.com/user-attachments/assets/80420fc0-1a79-40f0-8031-95c6b24ec20a)
+
+![image](https://github.com/user-attachments/assets/4f12f307-74c2-4021-a307-eac26e9c8451)
+
+![image](https://github.com/user-attachments/assets/4a9e785c-3b08-46d0-b326-99f28cd11024)
+
