@@ -1,83 +1,80 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
 using ImageShare.Dialogs;
 using ImageShare.Helpers;
 using Microsoft.Win32;
-using Path = System.IO.Path;
+using System.IO;
 
 namespace ImageShare;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window {
-  private readonly List<ImageThumb> _uploadedImages = [];
+public partial class MainWindow {
+  private readonly BindingList<ImageThumb> _uploadedImages = new BindingList<ImageThumb>() {
+    AllowRemove = true,
+    AllowEdit = true,
+    RaiseListChangedEvents = true,
+  };
 
   public MainWindow() {
     InitializeComponent();
-    FileAreaBorder.DragEnter += (_, _) => { DragPreviewPanelVisible(); };
-    FileAreaBorder.DragLeave += (_, _) => { FileInfoPanelVisible(); };
-    FileAreaBorder.Drop += FileAreaBorder_Drop;
-    ImagesViewer.ImagesList = _uploadedImages;
-  }
-
-  private void DragPreviewPanelVisible() {
-    DragPreviewPanel.Visibility = Visibility.Visible;
-    FileInfoPanel.Visibility = Visibility.Collapsed;
-  }
-
-  private void FileInfoPanelVisible() {
-    DragPreviewPanel.Visibility = Visibility.Collapsed;
     FileInfoPanel.Visibility = Visibility.Visible;
+
+    PreviewDrop += MainWindow_Drop;
+    MouseDown += MainWindow_OnMouseDown;
+    ImagesViewer.ImagesList = _uploadedImages;
+    PreviewDragEnter += (_, _) => DragPreviewPanel.Visibility = Visibility.Visible;
+    PreviewDragLeave += (_, _) => DragPreviewPanel.Visibility = Visibility.Collapsed;
+    _uploadedImages.ListChanged += (_, e) => {
+      FileInfoPanel.Visibility = _uploadedImages.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+      ImagesViewer.ImagesList = _uploadedImages;
+    };
+    ImagesViewer.EditClick += (_, e) => {
+      var dialog = new EditImageDialog((ImageThumb)e.OriginalSource);
+      dialog.ShowDialog();
+    };
   }
 
-  private void FileAreaBorder_Drop(object sender, DragEventArgs e) {
-    FileInfoPanelVisible();
+  private void MainWindow_Drop(object sender, DragEventArgs e) {
+    DragPreviewPanel.Visibility = Visibility.Collapsed;
 
-    if (!e.Data.GetDataPresent(DataFormats.FileDrop)) {
-      return;
-    }
+    if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
-    var filePaths = e.Data.GetData(DataFormats.FileDrop, false) as string[];
-
-    if (filePaths != null)
+    if (e.Data.GetData(DataFormats.FileDrop, true) is string[] filePaths)
       ProcessUploadedImageList(filePaths);
   }
 
   private void ProcessUploadedImageList(string[] files) {
     if (files.Length == 0) return;
-
-    var invalidFilesList = new List<string>();
+    List<string> invalidFilesList = [];
 
     var i = 0;
     foreach (var path in files) {
+      if (_uploadedImages.Any(x => string.Equals(x.Source, path, StringComparison.CurrentCultureIgnoreCase))) continue;
+
       var imageThumb = new ImageThumb(path);
-      if (imageThumb.IsProcessed) _uploadedImages.Add(imageThumb);
-      else invalidFilesList.Add(Path.GetFileName(path) + " - Invalid or supported file format.");
+      if (imageThumb.IsLoaded) {
+        _uploadedImages.Add(imageThumb);
+      }
+      else invalidFilesList.Add($"{Path.GetFileName(path)} - Invalid or supported file format.");
     }
 
-    if (invalidFilesList.Count > 0) {
-      var dialog = new SimpleDialog {
-        HeadingText = "Some files couldn't be added",
-        DescriptionText = string.Join("\n", invalidFilesList.ToArray())
-      };
-      dialog.ShowDialog();
-    }
+    if (invalidFilesList.Count <= 0) return;
 
-    ImagesViewer.ImagesList = _uploadedImages;
+    var dialog = new SimpleDialog {
+      HeadingText = "Some files couldn't be added",
+      DescriptionText = string.Join("\n", invalidFilesList.ToArray())
+    };
+    dialog.ShowDialog();
   }
 
-  private void MainWindow_OnMouseDown(object sender, MouseButtonEventArgs e) {
-    try {
-      if (e.ButtonState == MouseButtonState.Pressed) DragMove();
-    }
-    catch (Exception exception) {
-      Console.WriteLine(exception);
-    }
+  private void MainWindow_OnMouseDown(object _, MouseButtonEventArgs e) {
+    if (e is { LeftButton: MouseButtonState.Pressed, ButtonState: MouseButtonState.Pressed }) DragMove();
   }
 
-  private void ImageDropArea_OnUploadClick(object sender, RoutedEventArgs e) {
+  private void ImageDropArea_OnUploadClick(object _, RoutedEventArgs e) {
     var extensions = ImageHelper.ImageExtTypes.Select(x => $"*.{x}").ToArray();
 
     OpenFileDialog fileDialog = new() {
@@ -88,5 +85,17 @@ public partial class MainWindow : Window {
 
     if (fileDialog.ShowDialog() != null)
       ProcessUploadedImageList(fileDialog.FileNames);
+  }
+
+  private void ContentElement_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    _uploadedImages.Clear();
+  }
+
+  private void WindowMinimize_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    WindowState = WindowState.Minimized;
+  }
+
+  private void WindowClose_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    Close();
   }
 }

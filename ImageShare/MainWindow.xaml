@@ -7,25 +7,113 @@
   xmlns:uc="clr-namespace:ImageShare.UserControls"
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
-  Title="Image Share"
+  Title="PixPost - Image Sharing Online"
   Height="450"
   Width="800"
-  MouseDown="MainWindow_OnMouseDown">
-  <Border Name="FileAreaBorder"
-    AllowDrop="True"
-    Padding="50 0"
-    VerticalAlignment="Stretch"
-    Background="#F2F2F2">
-    <StackPanel VerticalAlignment="Center"
-      HorizontalAlignment="Stretch">
+  WindowStyle="None"
+  AllowsTransparency="True"
+  Background="Transparent"
+  AllowDrop="True">
+  <Border Background="#F2F2F2" CornerRadius="10" BorderThickness="10">
+    <Border.Effect>
+      <DropShadowEffect Color="#A7A7A7" Direction="260"
+        ShadowDepth="5" BlurRadius="10" Opacity="0.4" />
+    </Border.Effect>
+    <Grid>
       <uc:DragOverPreview x:Name="DragPreviewPanel"
+        Background="#F2F2F2"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        Panel.ZIndex="2"
         Visibility="Collapsed" />
-      <uc:ImageDropArea x:Name="FileInfoPanel"
-        Visibility="Collapsed"
-        UploadClick="ImageDropArea_OnUploadClick" />
-      <uc:ImageGridView Visibility="Hidden"/>
-      <uc:ImageGridView Width="5"
-        x:Name="ImagesViewer" />
-    </StackPanel>
+
+      <StackPanel Margin="20" Panel.ZIndex="1"
+        x:Name="FileInfoPanel"
+        Background="#F2F2F2">
+        <DockPanel>
+          <TextBlock
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            FontWeight="Medium"
+            Text="PixPost - Image Sharing Online"
+            Foreground="#333" />
+          <DockPanel HorizontalAlignment="Right">
+            <TextBlock
+              MouseDown="WindowMinimize_OnMouseDown"
+              Margin="10 0" Foreground="#444"
+              Cursor="Hand"
+              HorizontalAlignment="Right" VerticalAlignment="Center">
+              <Run FontFamily="{StaticResource Phosphor}"
+                FontSize="18"
+                Cursor="Hand"
+                ToolTip="Minimize"
+                MouseDown="ContentElement_OnMouseDown"
+                Text="&#xE136;" />
+            </TextBlock>
+            <TextBlock
+              MouseDown="WindowClose_OnMouseDown"
+              Foreground="#444"
+              Cursor="Hand"
+              HorizontalAlignment="Right" VerticalAlignment="Center">
+              <Run FontFamily="{StaticResource Phosphor}"
+                FontSize="18"
+                Cursor="Hand"
+                ToolTip="Close"
+                MouseDown="ContentElement_OnMouseDown"
+                Text="&#xE4F6;" />
+            </TextBlock>
+          </DockPanel>
+        </DockPanel>
+        <uc:ImageDropArea
+          Margin="0 130 0 0"
+          Background="#F2F2F2"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          UploadClick="ImageDropArea_OnUploadClick" />
+      </StackPanel>
+      <StackPanel Margin="20" VerticalAlignment="Top" Panel.ZIndex="0" Background="#F2F2F2">
+        <DockPanel>
+          <TextBlock
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Text="JPG PNG BMP GIF TIF WEBP HEIC AVIF PDF 32 MB"
+            Foreground="#999" />
+          <TextBlock Foreground="#444"
+            HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Run FontFamily="{StaticResource Phosphor}"
+              FontSize="18"
+              Cursor="Hand"
+              ToolTip="Clear selected images"
+              MouseDown="ContentElement_OnMouseDown"
+              Text="&#xE3F6;" />
+          </TextBlock>
+        </DockPanel>
+        <TextBlock Margin="0 18" HorizontalAlignment="Center"
+          FontFamily="{StaticResource Phosphor}"
+          FontSize="80"
+          Foreground="#2a80b9"
+          Text="&#xE834;" />
+        <TextBlock TextAlignment="Center"
+          Width="400"
+          FontWeight="Light"
+          Margin="0 0 0 20"
+          TextWrapping="WrapWithOverflow" FontSize="22">
+          Edit or resize any image by clicking the image preview
+        </TextBlock>
+        <TextBlock FontSize="16"
+          Margin="0 0 0 25"
+          Cursor="Hand"
+          TextAlignment="Center">
+          <Span>You can also</Span>
+          <Span Foreground="DodgerBlue"
+            MouseDown="ImageDropArea_OnUploadClick">
+            browser from your computer
+          </Span>
+        </TextBlock>
+        <uc:ImageGridView Width="600" HorizontalContentAlignment="Center" Height="100"
+          x:Name="ImagesViewer" />
+      </StackPanel>
+    </Grid>
   </Border>
 </Window>
