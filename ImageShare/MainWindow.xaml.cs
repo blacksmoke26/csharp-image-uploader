@@ -12,7 +12,7 @@ namespace ImageShare;
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow {
-  private readonly BindingList<ImageThumb> _uploadedImages = new BindingList<ImageThumb>() {
+  private readonly BindingList<ImageThumb> _uploadedImages = new() {
     AllowRemove = true,
     AllowEdit = true,
     RaiseListChangedEvents = true,
@@ -20,6 +20,9 @@ public partial class MainWindow {
 
   public MainWindow() {
     InitializeComponent();
+    PreviewHeaderFilesInfo.Text = string.Concat(
+      string.Join(" ", ImageHelper.ImageExtTypes),
+      " ", ImageBb.SizeToMb(ImageBb.MaxSize), " MB").ToUpper();
     FileInfoPanel.Visibility = Visibility.Visible;
 
     PreviewDrop += MainWindow_Drop;
@@ -73,7 +76,7 @@ public partial class MainWindow {
       if (!ValidateFile(path, errors)) continue;
 
       var imageThumb = new ImageThumb(path);
-      
+
       if (!imageThumb.IsLoaded) {
         errors.Add($"{Path.GetFileName(path)} - Invalid or supported file format.");
         continue;
