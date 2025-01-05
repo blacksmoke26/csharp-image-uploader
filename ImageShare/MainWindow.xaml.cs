@@ -52,7 +52,7 @@ public partial class MainWindow {
 
     var info = new FileInfo(filePath);
 
-    if (info.Length < 0) {
+    if (info.Length <= 0) {
       errors.Add($"{Path.GetFileName(filePath)} - Empty file.");
       return false;
     }
