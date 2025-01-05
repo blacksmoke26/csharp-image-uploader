@@ -73,10 +73,10 @@ public partial class EditImageDialog {
   }
 
   private void SubmitButton_OnClick(object sender, RoutedEventArgs e) {
-    if (int.Parse(WidthTextBox.Text) <= 0) {
+    if (string.IsNullOrEmpty(WidthTextBox.Text) || int.Parse(WidthTextBox.Text) <= 0) {
       var dialog = new SimpleDialog {
         Width = 250,
-        HeadingText = "Zero Width",
+        HeadingText = "Invalid Width",
         DescriptionText = "The width value must be greater than zero.",
         Owner = this,
         WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -86,10 +86,10 @@ public partial class EditImageDialog {
       return;
     }
 
-    if (int.Parse(HeightTextBox.Text) <= 0) {
+    if (string.IsNullOrEmpty(HeightTextBox.Text) || int.Parse(HeightTextBox.Text) <= 0) {
       var dialog = new SimpleDialog {
         Width = 250,
-        HeadingText = "Zero Height",
+        HeadingText = "Invalid Height",
         DescriptionText = "The height value must be greater than zero.",
         Owner = this,
         WindowStartupLocation = WindowStartupLocation.CenterOwner,

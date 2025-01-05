@@ -88,7 +88,9 @@
         <TextBlock Text="Edit" FontSize="21"
           Foreground="#333"
           HorizontalAlignment="Left" VerticalAlignment="Top" />
-        <TextBlock Text="×" FontSize="20"
+        <TextBlock FontSize="18"
+          FontFamily="{StaticResource Phosphor}"
+          Text="&#xE4F6;"
           Foreground="#333"
           Cursor="Hand"
           FontWeight="Bold"
@@ -132,8 +134,10 @@
               Margin="-25 6 0 0" HorizontalAlignment="Left">
               <Span Style="{StaticResource InputCaptionOptional}"
                 FontFamily="{StaticResource Phosphor}"
-                FontSize="15">
-                &#xE038;
+                FontSize="18"
+                Cursor="Hand"
+                ToolTip="Close">
+                &#xE4F6;
               </Span>
             </TextBlock>
           </DockPanel>
