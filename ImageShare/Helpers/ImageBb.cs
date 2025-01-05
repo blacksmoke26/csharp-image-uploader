@@ -6,6 +6,7 @@ namespace ImageShare.Helpers;
 public sealed class ImageBb {
   private const string ApiKey = "d5c3b51bde505c7c0de168937f998f6d";
   private const string UploadEndpoint = "https://api.imgbb.com/1/upload";
+  public const long MaxSize = 33554432; // 32 MB
 
   public readonly Dictionary<string, string> Expirations = new() {
     { "", "Don't autodelete" },
@@ -32,6 +33,15 @@ public sealed class ImageBb {
     { "P5M", "After 5 months" },
     { "P6M", "After 6 months" },
   };
+
+  /// <summary>
+  /// Convert bytes into megabytes
+  /// </summary>
+  /// <param name="bytesSize">Size in bytes</param>
+  /// <returns>Final value</returns>
+  public static double SizeToMb(double bytesSize) {
+    return Math.Round(bytesSize / 1024 / 1024);
+  }
 
   public sealed class UploadImageOptions {
     /// <summary>
