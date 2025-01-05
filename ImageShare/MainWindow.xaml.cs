@@ -65,7 +65,9 @@ public partial class MainWindow {
 
     var dialog = new SimpleDialog {
       HeadingText = "Some files couldn't be added",
-      DescriptionText = string.Join("\n", invalidFilesList.ToArray())
+      DescriptionText = string.Join("\n", invalidFilesList.ToArray()),
+      Owner = this,
+      WindowStartupLocation = WindowStartupLocation.CenterOwner,
     };
     dialog.ShowDialog();
   }
