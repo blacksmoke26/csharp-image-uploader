@@ -59,8 +59,8 @@
                 FontSize="18"
                 Cursor="Hand"
                 ToolTip="Close"
-                MouseDown="ContentElement_OnMouseDown"
-                Text="&#xE4F6;" />
+                Text="&#xE4F6;"
+                MouseDown="ContentElement_OnMouseDown" />
             </TextBlock>
           </DockPanel>
         </DockPanel>
@@ -85,8 +85,8 @@
               FontSize="18"
               Cursor="Hand"
               ToolTip="Clear selected images"
-              MouseDown="ContentElement_OnMouseDown"
-              Text="&#xE3F6;" />
+              Text="&#xE038;"
+              MouseDown="ContentElement_OnMouseDown" />
           </TextBlock>
         </DockPanel>
         <TextBlock Margin="0 18" HorizontalAlignment="Center"
