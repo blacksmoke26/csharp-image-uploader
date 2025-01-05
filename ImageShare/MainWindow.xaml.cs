@@ -46,26 +46,47 @@ public partial class MainWindow {
       ProcessUploadedImageList(filePaths);
   }
 
-  private void ProcessUploadedImageList(string[] files) {
-    if (files.Length == 0) return;
-    List<string> invalidFilesList = [];
+  private bool ValidateFile(string filePath, List<string> errors) {
+    if (_uploadedImages.Any(f => string.Equals(f.Source, filePath, StringComparison.CurrentCultureIgnoreCase)))
+      return false;
 
-    var i = 0;
-    foreach (var path in files) {
-      if (_uploadedImages.Any(x => string.Equals(x.Source, path, StringComparison.CurrentCultureIgnoreCase))) continue;
+    var info = new FileInfo(filePath);
 
-      var imageThumb = new ImageThumb(path);
-      if (imageThumb.IsLoaded) {
-        _uploadedImages.Add(imageThumb);
-      }
-      else invalidFilesList.Add($"{Path.GetFileName(path)} - Invalid or supported file format.");
+    if (info.Length < 0) {
+      errors.Add($"{Path.GetFileName(filePath)} - Empty file.");
+      return false;
     }
 
-    if (invalidFilesList.Count <= 0) return;
+    if (info.Length > ImageBb.MaxSize) {
+      errors.Add($"{Path.GetFileName(filePath)} - File is too big.");
+      return false;
+    }
+
+    return true;
+  }
+
+  private void ProcessUploadedImageList(string[] files) {
+    if (files.Length == 0) return;
+    List<string> errors = [];
+
+    foreach (var path in files) {
+      if (!ValidateFile(path, errors)) continue;
+
+      var imageThumb = new ImageThumb(path);
+      
+      if (!imageThumb.IsLoaded) {
+        errors.Add($"{Path.GetFileName(path)} - Invalid or supported file format.");
+        continue;
+      }
+
+      _uploadedImages.Add(imageThumb);
+    }
+
+    if (errors.Count <= 0) return;
 
     var dialog = new SimpleDialog {
       HeadingText = "Some files couldn't be added",
-      DescriptionText = string.Join("\n", invalidFilesList.ToArray()),
+      DescriptionText = string.Join("\n", errors.ToArray()),
       Owner = this,
       WindowStartupLocation = WindowStartupLocation.CenterOwner,
     };
