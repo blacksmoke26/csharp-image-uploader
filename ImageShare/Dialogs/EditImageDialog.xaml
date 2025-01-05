@@ -26,23 +26,34 @@
       </Style.Resources>
     </Style>
     <Style x:Key="ButtonStyle" TargetType="Button">
-      <Setter Property="FontSize" Value="16" />
+      <Setter Property="FontSize" Value="14" />
       <Setter Property="FontWeight" Value="Medium" />
-      <Setter Property="BorderBrush" Value="Transparent" />
-      <Setter Property="Background" Value="#8200AFF9" />
-      <Setter Property="Foreground" Value="#333" />
+      <Setter Property="Background" Value="#1B8755" />
+      <Setter Property="Foreground" Value="White" />
       <Setter Property="Margin" Value="0 7 0 0" />
-      <Setter Property="Padding" Value="25 5" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border Name="border" 
+              BorderThickness="1"
+              Padding="40 2" 
+              CornerRadius="6" 
+              Background="{TemplateBinding Background}">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#319265" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
       <Style.Resources>
         <Style TargetType="{x:Type Border}">
           <Setter Property="CornerRadius" Value="4" />
         </Style>
       </Style.Resources>
-      <Style.Triggers>
-        <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="Background" Value="#D8D8D8" />
-        </Trigger>
-      </Style.Triggers>
     </Style>
     <Style x:Key="InputCaptionTextBox" TargetType="TextBlock">
       <Setter Property="FontSize" Value="14" />
@@ -59,8 +70,8 @@
   <Border CornerRadius="10" Background="#F2F2F2"
     Padding="6" BorderThickness="10">
     <Border.Effect>
-      <DropShadowEffect Color="#333" Direction="270"
-        ShadowDepth="5" BlurRadius="10" Opacity="0.8" />
+      <DropShadowEffect Color="#A7A7A7" Direction="260"
+        ShadowDepth="5" BlurRadius="10" Opacity="0.4" />
     </Border.Effect>
     <Grid Margin="20 15" VerticalAlignment="Top" HorizontalAlignment="Stretch">
       <Grid.ColumnDefinitions>

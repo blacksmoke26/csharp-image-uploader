@@ -77,7 +77,9 @@ public partial class EditImageDialog {
       var dialog = new SimpleDialog {
         Width = 250,
         HeadingText = "Zero Width",
-        DescriptionText = "The width value must be greater than zero."
+        DescriptionText = "The width value must be greater than zero.",
+        Owner = this,
+        WindowStartupLocation = WindowStartupLocation.CenterOwner,
       };
       dialog.ShowDialog();
       dialog.Closing += (_, _) => { WidthTextBox.Focus(); };
@@ -88,7 +90,9 @@ public partial class EditImageDialog {
       var dialog = new SimpleDialog {
         Width = 250,
         HeadingText = "Zero Height",
-        DescriptionText = "The height value must be greater than zero."
+        DescriptionText = "The height value must be greater than zero.",
+        Owner = this,
+        WindowStartupLocation = WindowStartupLocation.CenterOwner,
       };
       dialog.ShowDialog();
       dialog.Closing += (_, _) => { HeightTextBox.Focus(); };
