@@ -8,8 +8,8 @@ public sealed class ImageBb {
   private const string UploadEndpoint = "https://api.imgbb.com/1/upload";
   public const long MaxSize = 33554432; // 32 MB
 
-  public readonly Dictionary<string, string> Expirations = new() {
-    { "", "Don't autodelete" },
+  public static readonly Dictionary<string, string> Expirations = new() {
+    { "None", "Don't autodelete" },
     { "PT5M", "After 5 minutes" },
     { "PT15M", "After 15 minutes" },
     { "PT30M", "After 30 minutes" },
