@@ -5,7 +5,6 @@ using ImageShare.Dialogs;
 using ImageShare.Helpers;
 using Microsoft.Win32;
 using System.IO;
-using System.Windows.Controls;
 
 namespace ImageShare;
 
