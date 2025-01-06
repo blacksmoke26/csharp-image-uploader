@@ -5,5 +5,36 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
       <FontFamily x:Key="Phosphor">/Fonts/Phosphor.ttf#Phosphor</FontFamily>
+      <Style x:Key="PlainButtonStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="Background" Value="#1B8755" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="0 7 0 0" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Border Name="border" 
+                BorderThickness="1"
+                Padding="40 10" 
+                CornerRadius="6" 
+                Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter Property="Background" Value="#319265" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+        <Style.Resources>
+          <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="4" />
+          </Style>
+        </Style.Resources>
+      </Style>
+
     </Application.Resources>
 </Application>
