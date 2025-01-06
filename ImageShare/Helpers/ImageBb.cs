@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -9,30 +10,46 @@ public sealed class ImageBb {
   public const long MaxSize = 33554432; // 32 MB
 
   public static readonly Dictionary<string, string> Expirations = new() {
-    { "None", "Don't autodelete" },
-    { "PT5M", "After 5 minutes" },
-    { "PT15M", "After 15 minutes" },
-    { "PT30M", "After 30 minutes" },
-    { "PT1H", "After 1 hour" },
-    { "PT3H", "After 3 hours" },
-    { "PT6H", "After 6 hours" },
-    { "PT12H", "After 12 hours" },
-    { "P1D", "After 1 day" },
-    { "P2D", "After 2 days" },
-    { "P3D", "After 3 days" },
-    { "P4D", "After 4 days" },
-    { "P5D", "After 5 days" },
-    { "P6D", "After 6 days" },
-    { "P1W", "After 1 week" },
-    { "P2W", "After 2 weeks" },
-    { "P3W", "After 3 weeks" },
-    { "P1M", "After 1 month" },
-    { "P2M", "After 2 months" },
-    { "P3M", "After 3 months" },
-    { "P4M", "After 4 months" },
-    { "P5M", "After 5 months" },
-    { "P6M", "After 6 months" },
+    { "None", "Don't auto delete" },
+    { "TM5", "After 5 minutes" },
+    { "TM15", "After 15 minutes" },
+    { "TM30", "After 30 minutes" },
+    { "TH1", "After 1 hour" },
+    { "TH3", "After 3 hours" },
+    { "TH6", "After 6 hours" },
+    { "TH12", "After 12 hours" },
+    { "ED1", "After 1 day" },
+    { "ED2", "After 2 days" },
+    { "ED3", "After 3 days" },
+    { "ED4", "After 4 days" },
+    { "ED5", "After 5 days" },
+    { "ED6", "After 6 days" },
+    { "EW1", "After 1 week" },
+    { "EW2", "After 2 weeks" },
+    { "EW3", "After 3 weeks" },
+    { "EM1", "After 1 month" },
+    { "EM2", "After 2 months" },
+    { "EM3", "After 3 months" },
+    { "EM4", "After 4 months" },
+    { "EM5", "After 5 months" },
+    { "EM6", "After 6 months" },
   };
+
+  public static int? ExpiryToSeconds(string expiry) {
+    if (expiry == "None") return null;
+
+    var value = int.Parse(Regex.Replace(expiry, @"[^\d]+", string.Empty));
+    var unit = Regex.Replace(expiry, "[0-9]+", string.Empty);
+
+    return unit switch {
+      "TM" => (int)TimeSpan.FromMinutes(value).TotalSeconds,
+      "TH" => (int)TimeSpan.FromHours(value).TotalSeconds,
+      "ED" => (int)TimeSpan.FromDays(value).TotalSeconds,
+      "EW" => (int)TimeSpan.FromDays(value * 7).TotalSeconds,
+      "EM" => (int)TimeSpan.FromDays(value * 30).TotalSeconds,
+      _ => null
+    };
+  }
 
   /// <summary>
   /// Convert bytes into megabytes
@@ -52,7 +69,7 @@ public sealed class ImageBb {
     /// <summary>
     /// Enable this if you want to force uploads to be auto deleted after a certain time (in seconds 60-15552000)
     /// </summary>
-    public int Expiration { get; init; }
+    public int? Expiration { get; init; }
   }
 
   public static async Task<ImageApiResponse?> UploadImageAsync(string filename,
@@ -67,8 +84,8 @@ public sealed class ImageBb {
       if (!string.IsNullOrEmpty(uploadOptions.Name))
         request.AddParameter("name", uploadOptions.Name);
 
-      if (uploadOptions.Expiration > 0)
-        request.AddParameter("expiration", uploadOptions.Expiration);
+      if (uploadOptions.Expiration is > 0)
+        request.AddParameter("expiration", (int)uploadOptions.Expiration);
     }
 
     request.AddParameter("key", ApiKey);
