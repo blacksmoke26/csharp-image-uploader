@@ -31,7 +31,7 @@ public partial class MainWindow {
     ImagesViewer.ImagesList = _uploadedImages;
     PreviewDragEnter += (_, _) => DragPreviewPanel.Visibility = Visibility.Visible;
     PreviewDragLeave += (_, _) => DragPreviewPanel.Visibility = Visibility.Collapsed;
-    _uploadedImages.ListChanged += (_, e) => {
+    _uploadedImages.ListChanged += (_, _) => {
       FileInfoPanel.Visibility = _uploadedImages.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
       ImagesViewer.ImagesList = _uploadedImages;
     };
