@@ -5,6 +5,7 @@ using ImageShare.Dialogs;
 using ImageShare.Helpers;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Controls;
 
 namespace ImageShare;
 
@@ -24,7 +25,7 @@ public partial class MainWindow {
       string.Join(" ", ImageHelper.ImageExtTypes),
       " ", ImageBb.SizeToMb(ImageBb.MaxSize), " MB").ToUpper();
     FileInfoPanel.Visibility = Visibility.Visible;
-
+    ExpiryComboBox.ItemsSource = ImageBb.Expirations;
     PreviewDrop += MainWindow_Drop;
     MouseDown += MainWindow_OnMouseDown;
     ImagesViewer.ImagesList = _uploadedImages;
