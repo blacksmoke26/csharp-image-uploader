@@ -5,5 +5,56 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:ImageShare.UserControls"
   mc:Ignorable="d">
-  <Button Click="ImageRemoveButton_OnClick">Click Here</Button>
+  <UserControl.Resources>
+    <Style x:Key="ThumbAction"
+      TargetType="TextBlock">
+      <Setter Property="FontFamily"
+        Value="{StaticResource Phosphor}" />
+      <Setter Property="FontSize"
+        Value="14" />
+      <Setter Property="HorizontalAlignment"
+        Value="Left" />
+      <Setter Property="VerticalAlignment"
+        Value="Top" />
+    </Style>
+    <Style x:Key="ThumbActionBorder"
+      TargetType="Border">
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Padding" Value="6" />
+      <Setter Property="CornerRadius" Value="50" />
+      <Setter Property="Background"
+        Value="White" />
+      <Setter Property="Effect">
+        <Setter.Value>
+          <DropShadowEffect ShadowDepth="4" BlurRadius="5"
+            Direction="250" Color="Silver" Opacity="0.4" />
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </UserControl.Resources>
+  <DockPanel HorizontalAlignment="Left"
+    Margin="5 0"
+    VerticalAlignment="Bottom">
+    <StackPanel HorizontalAlignment="Left"
+      VerticalAlignment="Top"
+      ZIndex="12">
+      <Border ToolTip="Edit Image" MouseDown="ImageEditButton_MouseDown"
+        DataContext="{Binding}"
+        Margin="0 3 0 0"
+        Style="{StaticResource ThumbActionBorder}">
+        <TextBlock Style="{StaticResource ThumbAction}"
+          Text="&#xE34C;" />
+      </Border>
+      <Border ToolTip="Remove Image" MouseDown="ImageRemoveButton_MouseDown" Margin="0 3 0 0"
+        Style="{StaticResource ThumbActionBorder}" DataContext="{Binding}">
+        <TextBlock Style="{StaticResource ThumbAction}"
+          Text="&#xE4A6;" />
+      </Border>
+    </StackPanel>
+    <Border>
+      <Image Margin="-20 0 0 0"
+        Source="{Binding Path=ThumbnailPath}"
+        Width="80" />
+    </Border>
+  </DockPanel>
 </UserControl>

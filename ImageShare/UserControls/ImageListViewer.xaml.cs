@@ -1,13 +1,11 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using Dumpify;
 using ImageShare.Helpers;
 
 namespace ImageShare.UserControls;
 
-public partial class ImageListViewer : UserControl {
+public partial class ImageListViewer {
   public static readonly DependencyProperty ImagesListProperty = DependencyProperty.Register(
     nameof(ImagesList), typeof(BindingList<ImageThumb>), typeof(ImageListViewer),
     new PropertyMetadata(null, ImagesListChangedCallback));
@@ -49,14 +47,16 @@ public partial class ImageListViewer : UserControl {
     ThumbsListView.ItemsSource = ImagesList;
   }
 
-  private void ImageEdit_OnMouseDown(object sender, MouseButtonEventArgs e) {
+  private void ImageListViewItem_OnEditClick(object sender, RoutedEventArgs e) {
+    var obj = (ImageListViewItem)sender;
     RaiseEvent(new RoutedEventArgs(EditClickEvent) {
-      Source = (sender as Border)?.DataContext
+      Source = obj.ImageItem
     });
   }
 
-  private void ImageRemove_OnMouseDown(object sender, MouseButtonEventArgs e) {
-    ImagesList.Remove((ImageThumb)(sender as Border)?.DataContext!);
+  private void ImageListViewItem_OnRemoveClick(object sender, RoutedEventArgs e) {
+    var obj = (ImageListViewItem)sender;
+    ImagesList.Remove(obj.ImageItem);
     RaiseEvent(new RoutedEventArgs(RemoveClickEvent));
   }
 }

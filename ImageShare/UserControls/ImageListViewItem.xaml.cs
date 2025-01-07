@@ -24,21 +24,29 @@ public partial class ImageListViewItem {
     remove => RemoveHandler(EditClickEvent, value);
   }
 
-  public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register(
-    nameof(ImageSource), typeof(ImageThumb), typeof(ImageListViewItem),
+  public static readonly DependencyProperty ImageItemProperty = DependencyProperty.Register(
+    nameof(ImageItem), typeof(ImageThumb), typeof(ImageListViewItem),
     new PropertyMetadata(default(ImageThumb))
   );
 
-  public ImageThumb ImageSource {
-    get => (ImageThumb)GetValue(ImageSourceProperty);
-    set => SetValue(ImageSourceProperty, value);
+  public ImageThumb ImageItem {
+    get => (ImageThumb)GetValue(ImageItemProperty);
+    set => SetValue(ImageItemProperty, value);
   }
 
   public ImageListViewItem() {
     InitializeComponent();
   }
 
-  private void ImageRemoveButton_OnClick(object sender, RoutedEventArgs e) {
+  private void ImageEditButton_MouseDown(object sender, RoutedEventArgs e) {
+    // Create a RoutedEventArgs instance.
+    RoutedEventArgs routedEventArgs = new(routedEvent: EditClickEvent);
+
+    // Raise the event, which will bubble up through the element tree.
+    RaiseEvent(routedEventArgs);
+  }
+
+  private void ImageRemoveButton_MouseDown(object sender, RoutedEventArgs e) {
     // Create a RoutedEventArgs instance.
     RoutedEventArgs routedEventArgs = new(routedEvent: RemoveClickEvent);
 
