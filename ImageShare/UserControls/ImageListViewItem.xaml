@@ -4,6 +4,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:ImageShare.UserControls"
+  xmlns:apngPlayer="clr-namespace:ImoutoRebirth.Navigator.ApngWpfPlayer.ApngPlayer;assembly=ImoutoRebirth.Navigator.ApngWpfPlayer"
   mc:Ignorable="d">
   <UserControl.Resources>
     <Style x:Key="ThumbAction"
@@ -32,29 +33,34 @@
       </Setter>
     </Style>
   </UserControl.Resources>
-  <DockPanel HorizontalAlignment="Left"
-    Margin="5 0"
-    VerticalAlignment="Bottom">
-    <StackPanel HorizontalAlignment="Left"
-      VerticalAlignment="Top"
-      ZIndex="12">
-      <Border ToolTip="Edit Image" MouseDown="ImageEditButton_MouseDown"
-        DataContext="{Binding}"
-        Margin="0 3 0 0"
-        Style="{StaticResource ThumbActionBorder}">
-        <TextBlock Style="{StaticResource ThumbAction}"
-          Text="&#xE34C;" />
-      </Border>
-      <Border ToolTip="Remove Image" MouseDown="ImageRemoveButton_MouseDown" Margin="0 3 0 0"
-        Style="{StaticResource ThumbActionBorder}" DataContext="{Binding}">
-        <TextBlock Style="{StaticResource ThumbAction}"
-          Text="&#xE4A6;" />
-      </Border>
-    </StackPanel>
-    <Border>
-      <Image Margin="-20 0 0 0"
-        Source="{Binding Path=ThumbnailPath}"
-        Width="80" />
+  <Grid>
+    <Border Name="ProcessingArea" Panel.ZIndex="1" Background="#4CFFFFFF">
+      <apngPlayer:ApngPlayer Source="Images/Spinner.png" Width="60" VerticalAlignment="Center" HorizontalAlignment="Center" />
     </Border>
-  </DockPanel>
+    <DockPanel Panel.ZIndex="0" HorizontalAlignment="Left"
+      Margin="5 0"
+      VerticalAlignment="Bottom">
+      <StackPanel HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        ZIndex="12">
+        <Border Name="EditBorder" ToolTip="Edit Image" MouseDown="ImageEditButton_MouseDown"
+          DataContext="{Binding}"
+          Margin="0 3 0 0"
+          Style="{StaticResource ThumbActionBorder}">
+          <TextBlock Style="{StaticResource ThumbAction}"
+            Text="&#xE34C;" />
+        </Border>
+        <Border Name="RemoveBorder" ToolTip="Remove Image" MouseDown="ImageRemoveButton_MouseDown" Margin="0 3 0 0"
+          Style="{StaticResource ThumbActionBorder}" DataContext="{Binding}">
+          <TextBlock Style="{StaticResource ThumbAction}"
+            Text="&#xE4A6;" />
+        </Border>
+      </StackPanel>
+      <Border>
+        <Image Margin="-20 0 0 0"
+          Source="{Binding Path=ThumbnailPath}"
+          Width="90" />
+      </Border>
+    </DockPanel>
+  </Grid>
 </UserControl>

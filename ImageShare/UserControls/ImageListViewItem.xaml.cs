@@ -26,8 +26,17 @@ public partial class ImageListViewItem {
 
   public static readonly DependencyProperty ImageItemProperty = DependencyProperty.Register(
     nameof(ImageItem), typeof(ImageThumb), typeof(ImageListViewItem),
-    new PropertyMetadata(default(ImageThumb))
+    new PropertyMetadata(null, (o, args) => OnProcessingImage((ImageListViewItem)o, (ImageThumb)args.NewValue))
   );
+
+  private static void OnProcessingImage(ImageListViewItem control, ImageThumb image) {
+    control.EditBorder.Visibility =
+      image.UploadResponse != null || image.IsProcessing ? Visibility.Hidden : Visibility.Visible;
+    control.RemoveBorder.Visibility =
+      image.UploadResponse != null || image.IsProcessing ? Visibility.Hidden : Visibility.Visible;
+    // Process the image area
+    control.ProcessingArea.Visibility = image.IsProcessing ? Visibility.Visible : Visibility.Hidden;
+  }
 
   public ImageThumb ImageItem {
     get => (ImageThumb)GetValue(ImageItemProperty);
