@@ -7,13 +7,13 @@ using ImageShare.Helpers;
 
 namespace ImageShare.UserControls;
 
-public partial class ImageGridView : UserControl {
+public partial class ImageListViewer : UserControl {
   public static readonly DependencyProperty ImagesListProperty = DependencyProperty.Register(
-    nameof(ImagesList), typeof(BindingList<ImageThumb>), typeof(ImageGridView),
+    nameof(ImagesList), typeof(BindingList<ImageThumb>), typeof(ImageListViewer),
     new PropertyMetadata(null, ImagesListChangedCallback));
 
   private static void ImagesListChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e) {
-    if (d is not ImageGridView control || e.NewValue == null) return;
+    if (d is not ImageListViewer control || e.NewValue == null) return;
 
     var list = (BindingList<ImageThumb>)e.NewValue;
     control.ThumbsListView.ItemsSource = list;
@@ -44,7 +44,7 @@ public partial class ImageGridView : UserControl {
     remove => RemoveHandler(EditClickEvent, value);
   }
 
-  public ImageGridView() {
+  public ImageListViewer() {
     InitializeComponent();
     ThumbsListView.ItemsSource = ImagesList;
   }

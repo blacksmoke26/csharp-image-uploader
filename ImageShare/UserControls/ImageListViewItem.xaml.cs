@@ -3,10 +3,10 @@ using ImageShare.Helpers;
 
 namespace ImageShare.UserControls;
 
-public partial class ImageThumbControl {
+public partial class ImageListViewItem {
   private static readonly RoutedEvent RemoveClickEvent = EventManager.RegisterRoutedEvent(
     nameof(RemoveClick), RoutingStrategy.Bubble,
-    typeof(RoutedEventHandler), typeof(ImageThumbControl)
+    typeof(RoutedEventHandler), typeof(ImageListViewItem)
   );
 
   public event RoutedEventHandler RemoveClick {
@@ -16,7 +16,7 @@ public partial class ImageThumbControl {
 
   private static readonly RoutedEvent EditClickEvent = EventManager.RegisterRoutedEvent(
     nameof(EditClick), RoutingStrategy.Bubble,
-    typeof(RoutedEventHandler), typeof(ImageThumbControl)
+    typeof(RoutedEventHandler), typeof(ImageListViewItem)
   );
 
   public event RoutedEventHandler EditClick {
@@ -25,7 +25,7 @@ public partial class ImageThumbControl {
   }
 
   public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register(
-    nameof(ImageSource), typeof(ImageThumb), typeof(ImageThumbControl),
+    nameof(ImageSource), typeof(ImageThumb), typeof(ImageListViewItem),
     new PropertyMetadata(default(ImageThumb))
   );
 
@@ -34,7 +34,7 @@ public partial class ImageThumbControl {
     set => SetValue(ImageSourceProperty, value);
   }
 
-  public ImageThumbControl() {
+  public ImageListViewItem() {
     InitializeComponent();
   }
 
