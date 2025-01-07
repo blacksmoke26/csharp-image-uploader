@@ -49,6 +49,7 @@ public partial class ImageListViewer {
 
   private void ImageListViewItem_OnEditClick(object sender, RoutedEventArgs e) {
     var obj = (ImageListViewItem)sender;
+    ImagesList.ResetItem(ImagesList.IndexOf(obj.ImageItem));
     RaiseEvent(new RoutedEventArgs(EditClickEvent) {
       Source = obj.ImageItem
     });
