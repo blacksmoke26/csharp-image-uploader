@@ -142,6 +142,7 @@
           <Button
             Margin="0 8 0 0"
             FontSize="16"
+            Click="UploadButton_OnClick"
             Style="{StaticResource PlainButtonStyle}"
             Content="Upload" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </StackPanel>

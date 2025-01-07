@@ -124,4 +124,11 @@ public partial class MainWindow {
   private void WindowClose_OnMouseDown(object sender, MouseButtonEventArgs e) {
     Close();
   }
+
+  private void UploadButton_OnClick(object sender, RoutedEventArgs e) {
+    var img = _uploadedImages.FirstOrDefault()!;
+    var idx = _uploadedImages.IndexOf(img);
+    img.IsProcessing = true;
+    _uploadedImages.ResetItem(idx);
+  }
 }
