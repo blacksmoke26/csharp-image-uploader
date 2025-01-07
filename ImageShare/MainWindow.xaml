@@ -125,7 +125,7 @@
             browser from your computer
           </Span>
         </TextBlock>
-        <uc:ImageGridView Width="600"
+        <uc:ImageListViewer Width="600"
           HorizontalContentAlignment="Center"
           Height="110"
           x:Name="ImagesViewer" />
