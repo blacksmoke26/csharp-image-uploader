@@ -25,7 +25,6 @@
 
     <ItemGroup>
         <Folder Include="Fonts\"/>
-        <Folder Include="images\"/>
     </ItemGroup>
 
 </Project>
