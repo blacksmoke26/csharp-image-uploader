@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="Dumpify" Version="0.6.6"/>
+        <PackageReference Include="ImoutoRebirth.ApngWpfPlayer" Version="1.4.2" />
         <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="RestSharp" Version="112.1.1-alpha.0.4"/>
@@ -21,10 +22,17 @@
         <Resource Include="Fonts\Phosphor.ttf">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Resource>
+        <None Remove="Images\Spinner.png" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Fonts\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Images\Spinner.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>
