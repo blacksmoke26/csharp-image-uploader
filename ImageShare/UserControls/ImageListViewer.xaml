@@ -36,7 +36,10 @@
       <DataTemplate>
         <uc:ImageListViewItem ImageItem="{Binding}"
           EditClick="ImageListViewItem_OnEditClick"
-          RemoveClick="ImageListViewItem_OnRemoveClick" />
+          RemoveClick="ImageListViewItem_OnRemoveClick"
+          ViewDetailsClick="ImageListViewItem_OnViewDetailsClick"
+          ViewErrorClick="ImageListViewItem_OnViewErrorClick"
+          />
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
