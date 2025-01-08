@@ -10,9 +10,15 @@
         <Company>AtariLabs</Company>
         <Product>PixPost</Product>
         <AssemblyVersion>0.1</AssemblyVersion>
-        <AssemblyName>pixpost</AssemblyName>
+        <AssemblyName>PixPost</AssemblyName>
         <RootNamespace>PixPost</RootNamespace>
+        <FileVersion>0.1.0</FileVersion>
     </PropertyGroup>
+
+    <Target Name="Rename" AfterTargets="AfterBuild">
+        <Move SourceFiles="$(OUTDIR)\$(AssemblyName).exe" DestinationFiles="$(OUTDIR)\pixpost.exe" />
+        <Message Text="Renamed executable file." Importance="high" />
+    </Target>
 
     <ItemGroup>
         <PackageReference Include="DotNetEnv" Version="3.1.1" />
