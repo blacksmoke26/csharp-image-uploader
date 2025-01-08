@@ -8,10 +8,16 @@
   mc:Ignorable="d"
   Background="Transparent">
   <ListView Name="ThumbsListView"
-    BorderBrush="Transparent" BorderThickness="0" Background="Transparent"
-    VerticalAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Left">
+    FocusVisualStyle="{x:Null}"
+    BorderBrush="Transparent"
+    BorderThickness="0"
+    Background="Transparent"
+    VerticalAlignment="Center"
+    HorizontalContentAlignment="Left"
+    HorizontalAlignment="Left">
     <ListView.ItemContainerStyle>
       <Style TargetType="{x:Type ListViewItem}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
           <Setter.Value>
             <ControlTemplate TargetType="{x:Type ListViewItem}">
