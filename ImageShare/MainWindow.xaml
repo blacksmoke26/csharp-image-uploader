@@ -13,6 +13,7 @@
   WindowStyle="None"
   AllowsTransparency="True"
   Background="Transparent"
+  KeyDown="MainWindow_OnKeyDown"
   AllowDrop="True">
   <Window.Resources>
   </Window.Resources>
@@ -45,6 +46,18 @@
             Text="PixPost - Image Sharing Online"
             Foreground="#333" />
           <DockPanel HorizontalAlignment="Right">
+            <TextBlock MouseDown="DrawerIcon_OnMouseDown"
+              Margin="0"
+              Foreground="#444"
+              Cursor="Hand"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Center">
+              <Run FontFamily="{StaticResource Phosphor}"
+                FontSize="18"
+                Cursor="Hand"
+                ToolTip="Show options sidebar"
+                Text="&#xEAB6;" />
+            </TextBlock>
             <TextBlock MouseDown="WindowMinimize_OnMouseDown"
               Margin="10 0"
               Foreground="#444"

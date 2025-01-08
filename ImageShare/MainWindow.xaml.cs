@@ -38,6 +38,7 @@ public partial class MainWindow {
       var dialog = new EditImageDialog((ImageThumb)e.OriginalSource);
       dialog.ShowDialog();
     };
+    SidebarDrawer.DrawerClose += (_, _) => SidebarDrawer.Visibility = Visibility.Collapsed;
   }
 
   private void MainWindow_Drop(object sender, DragEventArgs e) {
@@ -130,5 +131,14 @@ public partial class MainWindow {
     var idx = _uploadedImages.IndexOf(img);
     img.IsProcessing = true;
     _uploadedImages.ResetItem(idx);
+  }
+
+  private void DrawerIcon_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    SidebarDrawer.Visibility = Visibility.Visible;
+  }
+
+  private void MainWindow_OnKeyDown(object sender, KeyEventArgs e) {
+    if (e.Key != Key.Escape && SidebarDrawer.Visibility == Visibility.Visible)
+      SidebarDrawer.Visibility = Visibility.Collapsed;
   }
 }
