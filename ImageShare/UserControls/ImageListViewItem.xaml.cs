@@ -26,6 +26,26 @@ public partial class ImageListViewItem {
     remove => RemoveHandler(EditClickEvent, value);
   }
 
+  private static readonly RoutedEvent ViewErrorClickEvent = EventManager.RegisterRoutedEvent(
+    nameof(ViewErrorClick), RoutingStrategy.Bubble,
+    typeof(RoutedEventHandler), typeof(ImageListViewItem)
+  );
+
+  public event RoutedEventHandler ViewErrorClick {
+    add => AddHandler(ViewErrorClickEvent, value);
+    remove => RemoveHandler(ViewErrorClickEvent, value);
+  }
+
+  private static readonly RoutedEvent ViewDetailsClickEvent = EventManager.RegisterRoutedEvent(
+    nameof(ViewDetailsClick), RoutingStrategy.Bubble,
+    typeof(RoutedEventHandler), typeof(ImageListViewItem)
+  );
+
+  public event RoutedEventHandler ViewDetailsClick {
+    add => AddHandler(ViewDetailsClickEvent, value);
+    remove => RemoveHandler(ViewDetailsClickEvent, value);
+  }
+
   public static readonly DependencyProperty ImageItemProperty = DependencyProperty.Register(
     nameof(ImageItem), typeof(ImageThumb), typeof(ImageListViewItem),
     new PropertyMetadata(null, (o, args) => OnProcessingImage((ImageListViewItem)o, (ImageThumb)args.NewValue))
@@ -64,18 +84,22 @@ public partial class ImageListViewItem {
   }
 
   private void ImageEditButton_MouseDown(object sender, RoutedEventArgs e) {
-    // Create a RoutedEventArgs instance.
     RoutedEventArgs routedEventArgs = new(routedEvent: EditClickEvent);
-
-    // Raise the event, which will bubble up through the element tree.
     RaiseEvent(routedEventArgs);
   }
 
   private void ImageRemoveButton_MouseDown(object sender, RoutedEventArgs e) {
-    // Create a RoutedEventArgs instance.
     RoutedEventArgs routedEventArgs = new(routedEvent: RemoveClickEvent);
+    RaiseEvent(routedEventArgs);
+  }
 
-    // Raise the event, which will bubble up through the element tree.
+  private void FailedArea_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    RoutedEventArgs routedEventArgs = new(routedEvent: ViewErrorClickEvent);
+    RaiseEvent(routedEventArgs);
+  }
+
+  private void ViewArea_OnMouseDown(object sender, MouseButtonEventArgs e) {
+    RoutedEventArgs routedEventArgs = new(routedEvent: ViewDetailsClickEvent);
     RaiseEvent(routedEventArgs);
   }
 }
