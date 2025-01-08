@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 using ImageShare.Helpers;
 
 namespace ImageShare.UserControls;
@@ -30,12 +32,17 @@ public partial class ImageListViewItem {
   );
 
   private static void OnProcessingImage(ImageListViewItem control, ImageThumb image) {
-    control.EditBorder.Visibility =
-      image.UploadResponse != null || image.IsProcessing ? Visibility.Hidden : Visibility.Visible;
-    control.RemoveBorder.Visibility =
-      image.UploadResponse != null || image.IsProcessing ? Visibility.Hidden : Visibility.Visible;
+    var buttonVisibility = image.ApiResponse != null || image.LastError != null || image.IsProcessing
+      ? Visibility.Hidden
+      : Visibility.Visible;
+
+    control.EditBorder.Visibility = buttonVisibility;
+    control.RemoveBorder.Visibility = buttonVisibility;
+
     // Process the image area
-    control.ProcessingArea.Visibility = image.IsProcessing ? Visibility.Visible : Visibility.Hidden;
+    control.ProcessingArea.Visibility = image.IsProcessing ? Visibility.Visible : Visibility.Collapsed;
+    control.FailedArea.Visibility = image.LastError != null ? Visibility.Visible : Visibility.Collapsed;
+    control.ViewArea.Visibility = image.ApiResponse != null ? Visibility.Visible : Visibility.Collapsed;
   }
 
   public ImageThumb ImageItem {
@@ -45,6 +52,15 @@ public partial class ImageListViewItem {
 
   public ImageListViewItem() {
     InitializeComponent();
+    ViewArea.MouseEnter += (_, _) => {
+      ViewAreaIcon.Text = "\uE310";
+      ViewAreaIcon.Foreground = Brushes.SlateGray;
+    };
+    
+    ViewArea.MouseLeave += (_, _) => {
+      ViewAreaIcon.Text = "\uE182";
+      ViewAreaIcon.Foreground = Brushes.ForestGreen;
+    };
   }
 
   private void ImageEditButton_MouseDown(object sender, RoutedEventArgs e) {

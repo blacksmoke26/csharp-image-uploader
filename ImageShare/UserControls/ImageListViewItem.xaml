@@ -20,38 +20,83 @@
     </Style>
     <Style x:Key="ThumbActionBorder"
       TargetType="Border">
-      <Setter Property="Cursor" Value="Hand" />
-      <Setter Property="Padding" Value="6" />
-      <Setter Property="CornerRadius" Value="50" />
+      <Setter Property="Cursor"
+        Value="Hand" />
+      <Setter Property="Padding"
+        Value="6" />
+      <Setter Property="CornerRadius"
+        Value="50" />
       <Setter Property="Background"
         Value="White" />
       <Setter Property="Effect">
         <Setter.Value>
-          <DropShadowEffect ShadowDepth="4" BlurRadius="5"
-            Direction="250" Color="Silver" Opacity="0.4" />
+          <DropShadowEffect ShadowDepth="4"
+            BlurRadius="5"
+            Direction="250"
+            Color="Silver"
+            Opacity="0.4" />
         </Setter.Value>
       </Setter>
     </Style>
   </UserControl.Resources>
   <Grid>
-    <Border Name="ProcessingArea" Panel.ZIndex="1" Background="#4CFFFFFF">
-      <apngPlayer:ApngPlayer Source="Images/Spinner.png" Width="60" VerticalAlignment="Center" HorizontalAlignment="Center" />
+    <Border Name="ProcessingArea"
+      Panel.ZIndex="1" Cursor="Wait"
+      ToolTip="Processing image"
+      Background="#4CFFFFFF">
+      <apngPlayer:ApngPlayer Source="Images/Spinner.png"
+        Width="60"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center" />
     </Border>
-    <DockPanel Panel.ZIndex="0" HorizontalAlignment="Left"
+    <Border Name="FailedArea"
+      Cursor="Hand"
+      ToolTip="View error details"
+      Panel.ZIndex="1" Margin="5 0"
+      Background="#56F2F2F2"
+      Visibility="Collapsed">
+      <TextBlock Foreground="#C3181D"
+        FontSize="40"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        Text="&#xE7FC;"
+        FontFamily="{StaticResource Phosphor}" />
+    </Border>
+    <Border x:Name="ViewArea"
+      Cursor="Hand"
+      ToolTip="View details"
+      Panel.ZIndex="1" Margin="5 0"
+      Background="#56F2F2F2"
+      Visibility="Collapsed">
+      <TextBlock x:Name="ViewAreaIcon" Foreground="ForestGreen"
+        FontSize="40"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        Text="&#xE182;"
+        FontFamily="{StaticResource Phosphor}" />
+    </Border>
+    <DockPanel Panel.ZIndex="0"
+      HorizontalAlignment="Left"
       Margin="5 0"
       VerticalAlignment="Bottom">
       <StackPanel HorizontalAlignment="Left"
         VerticalAlignment="Top"
         ZIndex="12">
-        <Border Name="EditBorder" ToolTip="Edit Image" MouseDown="ImageEditButton_MouseDown"
+        <Border Name="EditBorder"
+          ToolTip="Edit Image"
+          MouseDown="ImageEditButton_MouseDown"
           DataContext="{Binding}"
           Margin="0 3 0 0"
           Style="{StaticResource ThumbActionBorder}">
           <TextBlock Style="{StaticResource ThumbAction}"
             Text="&#xE34C;" />
         </Border>
-        <Border Name="RemoveBorder" ToolTip="Remove Image" MouseDown="ImageRemoveButton_MouseDown" Margin="0 3 0 0"
-          Style="{StaticResource ThumbActionBorder}" DataContext="{Binding}">
+        <Border Name="RemoveBorder"
+          ToolTip="Remove Image"
+          MouseDown="ImageRemoveButton_MouseDown"
+          Margin="0 3 0 0"
+          Style="{StaticResource ThumbActionBorder}"
+          DataContext="{Binding}">
           <TextBlock Style="{StaticResource ThumbAction}"
             Text="&#xE4A6;" />
         </Border>
