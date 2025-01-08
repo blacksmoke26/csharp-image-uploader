@@ -6,7 +6,6 @@
   xmlns:local="clr-namespace:PixPost.UserControls"
   mc:Ignorable="d"
   Background="Transparent"
-  
   d:DesignHeight="Infinity" d:DesignWidth="Infinity">
   <UserControl.Resources>
     <ScaleTransform x:Key="FontStretchCondensed" ScaleX="0.8" />
@@ -76,7 +75,7 @@
           </DockPanel>
           <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ExitMenuItem_OnMouseDown">
             <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE3DA;" FontSize="16" Foreground="Brown" />
-            <TextBlock Style="{StaticResource MenuItemLabel}" Text="Exit" Foreground="Brown" />
+            <TextBlock Style="{StaticResource MenuItemLabel}" Text="Close" Foreground="Brown" />
           </DockPanel>
         </StackPanel>
       </StackPanel>

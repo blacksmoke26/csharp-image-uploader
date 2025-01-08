@@ -4,18 +4,18 @@ using System.Windows.Input;
 namespace PixPost.UserControls;
 
 public partial class SidebarDrawer {
-  private static readonly RoutedEvent CloseEvent = EventManager.RegisterRoutedEvent(
-    nameof(Close), RoutingStrategy.Bubble,
+  private static readonly RoutedEvent DrawerCloseEvent = EventManager.RegisterRoutedEvent(
+    nameof(DrawerClose), RoutingStrategy.Bubble,
     typeof(RoutedEventHandler), typeof(SidebarDrawer)
   );
 
-  public event RoutedEventHandler Close {
-    add => AddHandler(CloseEvent, value);
-    remove => RemoveHandler(CloseEvent, value);
+  public event RoutedEventHandler DrawerClose {
+    add => AddHandler(DrawerCloseEvent, value);
+    remove => RemoveHandler(DrawerCloseEvent, value);
   }
 
   private void DrawerOutside_OnMouseDown(object sender, RoutedEventArgs e) {
-    RaiseEvent(new RoutedEventArgs(routedEvent: CloseEvent));
+    RaiseEvent(new RoutedEventArgs(routedEvent: DrawerCloseEvent));
   }
 
   private static readonly RoutedEvent ConfigurationClickEvent = EventManager.RegisterRoutedEvent(
@@ -45,16 +45,12 @@ public partial class SidebarDrawer {
   private void HistoryMenuItem_OnClick(object sender, RoutedEventArgs e) {
     RaiseEvent(new RoutedEventArgs(routedEvent: HistoryClickEvent));
   }
-  
+
   public SidebarDrawer() {
     InitializeComponent();
   }
 
   private void ExitMenuItem_OnMouseDown(object sender, MouseButtonEventArgs e) {
-    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Close();
-  }
-
-  private void SidebarDrawer_OnPreviewKeyDown(object sender, KeyEventArgs e) {
-    // TODO: Close click
+    RaiseEvent(new RoutedEventArgs(routedEvent: DrawerCloseEvent));
   }
 }
