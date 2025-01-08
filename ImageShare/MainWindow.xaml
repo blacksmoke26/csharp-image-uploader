@@ -110,7 +110,7 @@
           Text="&#xE834;" />
         <TextBlock TextAlignment="Center"
           FontWeight="Light"
-          Margin="0 0 0 8"
+          Margin="0 0 0 5"
           TextWrapping="WrapWithOverflow"
           FontSize="18">
           Edit or resize any image by clicking the image preview
@@ -133,7 +133,7 @@
           HorizontalAlignment="Center">
           <TextBlock Text="Auto delete image"
             FontSize="16" Margin="0 0 0 5" />
-          <ComboBox FocusVisualStyle="{x:Null}" Padding="8 5 5 8" ItemsSource="{Binding }"
+          <ComboBox FocusVisualStyle="{x:Null}" Padding="8 3 3 8" ItemsSource="{Binding }"
             Name="ExpiryComboBox"
             SelectedIndex="0"
             FontSize="16"
