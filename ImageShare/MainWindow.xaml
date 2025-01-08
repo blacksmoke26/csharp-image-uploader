@@ -5,7 +5,6 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:local="clr-namespace:PixPost"
   xmlns:uc="clr-namespace:PixPost.UserControls"
-  xmlns:hl="clr-namespace:PixPost.Helpers"
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
   Title="PixPost - Image Sharing Online"
@@ -34,11 +33,9 @@
         VerticalContentAlignment="Center"
         Panel.ZIndex="2"
         Visibility="Collapsed" />
-
       <StackPanel Margin="20"
         Panel.ZIndex="1"
         x:Name="FileInfoPanel"
-        Visibility="Collapsed"
         Background="#F2F2F2">
         <DockPanel>
           <TextBlock VerticalAlignment="Top"
@@ -84,6 +81,7 @@
       <StackPanel Margin="20"
         VerticalAlignment="Top"
         Panel.ZIndex="0"
+        Visibility="Collapsed"
         Background="#F2F2F2">
         <DockPanel>
           <TextBlock Name="PreviewHeaderFilesInfo"
