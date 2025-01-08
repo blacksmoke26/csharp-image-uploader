@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace ImageShare;
+namespace PixPost;
 
 /// <summary>
 /// Interaction logic for App.xaml

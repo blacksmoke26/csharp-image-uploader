@@ -3,7 +3,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Metadata;
 using HeyRed.Mime;
 
-namespace ImageShare.Helpers;
+namespace PixPost.Helpers;
 
 public abstract class ImageHelper {
   public static readonly string[] ImageExtTypes = ["jpg", "jpeg", "jfif", "png", "gif", "bmp", "webp"];

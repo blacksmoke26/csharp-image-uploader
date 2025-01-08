@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace ImageShare.UserControls;
+namespace PixPost.UserControls;
 
 public partial class ImageDropArea {
   public ImageDropArea() {

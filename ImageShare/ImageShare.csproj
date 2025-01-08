@@ -7,9 +7,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
         <ApplicationIcon>Images\AppIcon.ico</ApplicationIcon>
+        <Company>AtariLabs</Company>
+        <Product>PixPost</Product>
+        <AssemblyVersion>0.1</AssemblyVersion>
+        <AssemblyName>pixpost</AssemblyName>
+        <RootNamespace>PixPost</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="DotNetEnv" Version="3.1.1" />
         <PackageReference Include="Dumpify" Version="0.6.6"/>
         <PackageReference Include="ImoutoRebirth.ApngWpfPlayer" Version="1.4.2" />
         <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
@@ -34,6 +40,10 @@
       <Resource Include="Images\Spinner.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Resource>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Include="Embedded\env.initial"/>
     </ItemGroup>
 
 </Project>

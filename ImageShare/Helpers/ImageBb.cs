@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace ImageShare.Helpers;
+namespace PixPost.Helpers;
 
 public sealed class ImageBb {
   private const string ApiKey = "d5c3b51bde505c7c0de168937f998f6d";

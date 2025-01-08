@@ -2,7 +2,7 @@ using System.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 
-namespace ImageShare.Helpers;
+namespace PixPost.Helpers;
 
 public class ImageThumb {
   public ImageApiResponse? ApiResponse { get; set; }

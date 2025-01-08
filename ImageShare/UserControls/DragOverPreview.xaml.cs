@@ -1,4 +1,4 @@
-﻿namespace ImageShare.UserControls;
+﻿namespace PixPost.UserControls;
 
 public partial class DragOverPreview {
   public DragOverPreview() {

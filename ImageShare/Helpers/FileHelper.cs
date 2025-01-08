@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using RestSharp;
 
-namespace ImageShare.Helpers;
+namespace PixPost.Helpers;
 
 public class FileHelper {
   public static async Task<string?> DownloadFileAsync(string url, CancellationToken cancellationToken = default) {

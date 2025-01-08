@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using ImageShare.Helpers;
+using PixPost.Helpers;
 
-namespace ImageShare.UserControls;
+namespace PixPost.UserControls;
 
 public partial class ImageListViewItem {
   private static readonly RoutedEvent RemoveClickEvent = EventManager.RegisterRoutedEvent(

@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace ImageShare.Dialogs;
+namespace PixPost.Dialogs;
 
 public partial class SimpleDialog {
   public static readonly DependencyProperty HeadingTextProperty = DependencyProperty.Register(

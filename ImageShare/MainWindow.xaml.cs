@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using ImageShare.Dialogs;
-using ImageShare.Helpers;
+using PixPost.Dialogs;
+using PixPost.Helpers;
 using Microsoft.Win32;
 using System.IO;
 
-namespace ImageShare;
+namespace PixPost;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

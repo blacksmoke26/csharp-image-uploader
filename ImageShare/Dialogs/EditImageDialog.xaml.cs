@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ImageShare.Helpers;
+using PixPost.Helpers;
 
-namespace ImageShare.Dialogs;
+namespace PixPost.Dialogs;
 
 public partial class EditImageDialog {
   public static readonly DependencyProperty ImageItemProperty = DependencyProperty.Register(

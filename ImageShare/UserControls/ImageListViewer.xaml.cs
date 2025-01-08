@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using ImageShare.Helpers;
+using PixPost.Helpers;
 
-namespace ImageShare.UserControls;
+namespace PixPost.UserControls;
 
 public partial class ImageListViewer {
   public static readonly DependencyProperty ImagesListProperty = DependencyProperty.Register(
