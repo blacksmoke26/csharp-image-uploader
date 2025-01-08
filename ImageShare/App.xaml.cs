@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using PixPost.Helpers;
 
 namespace PixPost;
 
@@ -8,5 +6,8 @@ namespace PixPost;
 /// Interaction logic for App.xaml
 /// https://icon-icons.com/icon/upload-pictures/93667
 /// </summary>
-public partial class App : Application {
+public partial class App {
+  public App() {
+    ConfigLoader.LoadExisting();
+  }
 }
