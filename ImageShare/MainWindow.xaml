@@ -133,13 +133,14 @@
           HorizontalAlignment="Center">
           <TextBlock Text="Auto delete image"
             FontSize="16" Margin="0 0 0 5" />
-          <ComboBox Padding="8 5 5 8" ItemsSource="{Binding }"
+          <ComboBox FocusVisualStyle="{x:Null}" Padding="8 5 5 8" ItemsSource="{Binding }"
             Name="ExpiryComboBox"
             SelectedIndex="0"
             FontSize="16"
             SelectedValuePath="Key" DisplayMemberPath="Value"
             Width="250"/>
           <Button
+            FocusVisualStyle="{x:Null}"
             Margin="0 8 0 0"
             FontSize="16"
             BorderThickness="0"
