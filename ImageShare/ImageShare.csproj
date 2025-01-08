@@ -43,13 +43,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Images\Spinner.png">
+      <Content Include="Images\Spinner.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Resource>
+      </Content>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <EmbeddedResource Include="Embedded\env.initial"/>
+      <None Remove="Resources\.env-initial" />
+      <EmbeddedResource Include="Resources\.env-initial">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Resources\Spinner.png" />
+      <EmbeddedResource Include="Resources\Spinner.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
