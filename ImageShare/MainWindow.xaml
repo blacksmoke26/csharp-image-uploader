@@ -27,6 +27,7 @@
         Opacity="0.4" />
     </Border.Effect>
     <Grid>
+      <uc:SidebarDrawer x:Name="SidebarDrawer" Visibility="Collapsed" Panel.ZIndex="3"/>
       <uc:DragOverPreview x:Name="DragPreviewPanel"
         Background="#F2F2F2"
         HorizontalContentAlignment="Center"
