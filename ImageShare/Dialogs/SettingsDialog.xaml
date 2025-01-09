@@ -1,0 +1,92 @@
+﻿<Window x:Class="PixPost.Dialogs.SettingsDialog"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:PixPost.Dialogs"
+  mc:Ignorable="d"
+  Title="Configuration"
+  WindowStartupLocation="CenterOwner"
+  WindowStyle="None"
+  AllowsTransparency="True"
+  SizeToContent="WidthAndHeight"
+  Background="Transparent"
+  MouseDown="MainWindow_OnMouseDown"
+  Width="600">
+  <Border CornerRadius="10"
+    Background="#F2F2F2"
+    Padding="6"
+    BorderThickness="10">
+    <Border.Effect>
+      <DropShadowEffect Color="#A7A7A7"
+        Direction="260"
+        ShadowDepth="5"
+        BlurRadius="10"
+        Opacity="0.4" />
+    </Border.Effect>
+    <StackPanel Margin="20 15"
+      VerticalAlignment="Top"
+      HorizontalAlignment="Stretch">
+      <DockPanel HorizontalAlignment="Stretch"
+        VerticalAlignment="Top" Margin="0 0 0 15">
+        <TextBlock Text="Configuration"
+          FontSize="21"
+          Foreground="#333"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
+        <TextBlock FontSize="18"
+          FontFamily="{StaticResource Phosphor}"
+          Text="&#xE4F6;"
+          MouseDown="CloseTextBlock_OnMouseDown"
+          Foreground="#333"
+          Cursor="Hand"
+          FontWeight="Bold"
+          ToolTip="Close"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top" />
+      </DockPanel>
+
+      <StackPanel Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
+          <Span>Endpoint URL</Span>
+        </TextBlock>
+        <TextBox Name="EndpointTextBox"
+          Style="{StaticResource FormTextBoxStyle}"
+          Text="{Binding Path=Title}" />
+      </StackPanel>
+
+      <StackPanel Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
+          <Span>API Key</Span> <Span Style="{StaticResource FormInputCaptionOptional}">(imgbb)</Span>
+        </TextBlock>
+        <TextBox Name="ApiKeyTextBox"
+          Style="{StaticResource FormTextBoxStyle}"
+          Text="{Binding Path=Title}" />
+        <TextBlock Foreground="#666"
+          FontSize="13"
+          FontWeight="Light"
+          Margin="2 4 0 0">
+          <Span>Add your ImgBB API key.</Span>
+          <Hyperlink Foreground="DodgerBlue"
+            NavigateUri="https://api.imgbb.com/">
+            Click here
+          </Hyperlink>
+          <Span>to obtain your api key.</Span>
+        </TextBlock>
+      </StackPanel>
+      
+      <DockPanel Margin="0 20 0 0">
+        <Button Style="{StaticResource SimpleButtonStyle}"
+          Content="Save"
+          Background="#1B8755"
+          Margin="0 0 10 0"
+          HorizontalAlignment="Left" />
+        <Button Style="{StaticResource SimpleButtonStyle}"
+          Content="Discard"
+          Background="#848484"
+          Margin="0 0 0 0"
+          HorizontalAlignment="Left" />
+      </DockPanel>
+    </StackPanel>
+  </Border>
+</Window>
