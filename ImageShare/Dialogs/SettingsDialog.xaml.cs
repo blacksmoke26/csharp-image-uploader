@@ -54,7 +54,7 @@ public partial class SettingsDialog {
     var dict = ConfigLoader.ReadFile(ConfigLoader.GetEnvFilePath());
     dict[ConfigLoader.ImgBbEndpoint] = EndpointTextBox.Text;
     dict[ConfigLoader.ImgBbApiKey] = ApiKeyTextBox.Text;
-    ConfigLoader.SaveFile(ConfigLoader.GetEnvFilePath(), dict);
+    ConfigLoader.SaveFile(ConfigLoader.GetEnvFilePath(), dict, true);
     Close();
   }
 
