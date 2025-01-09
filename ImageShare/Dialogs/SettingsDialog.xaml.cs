@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Input;
+using PixPost.Helpers;
 
 namespace PixPost.Dialogs;
 
@@ -26,5 +28,13 @@ public partial class SettingsDialog {
 
   private void SettingsDialog_OnKeyDown(object sender, KeyEventArgs e) {
     if (e.Key == Key.Escape) Close();
+  }
+
+  private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
+    DialogHelper.ShowErrorDialog(this, "Test message", "Caption");
+  }
+
+  private void CancelButton_OnClick(object sender, RoutedEventArgs e) {
+    Close();
   }
 }
