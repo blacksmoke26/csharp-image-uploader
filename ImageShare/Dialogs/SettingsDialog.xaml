@@ -15,9 +15,8 @@
   KeyDown="SettingsDialog_OnKeyDown"
   ShowInTaskbar="False"
   Width="600">
-  <Border CornerRadius="10"
-    Background="#F2F2F2"
-    Padding="6"
+  <Border CornerRadius="6"
+    Background="Transparent"
     BorderThickness="10">
     <Border.Effect>
       <DropShadowEffect Color="#A7A7A7"
@@ -26,70 +25,75 @@
         BlurRadius="10"
         Opacity="0.4" />
     </Border.Effect>
-    <StackPanel Margin="20 15"
-      VerticalAlignment="Top"
-      HorizontalAlignment="Stretch">
-      <DockPanel HorizontalAlignment="Stretch"
-        VerticalAlignment="Top" Margin="0 0 0 15">
-        <TextBlock Text="Configuration"
-          FontSize="21"
-          Foreground="#333"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Top" />
-        <TextBlock FontSize="18"
-          FontFamily="{StaticResource Phosphor}"
-          Text="&#xE4F6;"
-          MouseDown="CloseTextBlock_OnMouseDown"
-          Foreground="#333"
-          Cursor="Hand"
-          FontWeight="Bold"
-          ToolTip="Close"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Top" />
-      </DockPanel>
+    <Border BorderBrush="#dee2e6"
+      Background="#F2F2F2"
+      BorderThickness="1" CornerRadius="6"
+      Padding="6">
+      <StackPanel Margin="20 15"
+        VerticalAlignment="Top"
+        HorizontalAlignment="Stretch">
+        <DockPanel HorizontalAlignment="Stretch"
+          VerticalAlignment="Top" Margin="0 0 0 15">
+          <TextBlock Text="Configuration"
+            FontSize="21"
+            Foreground="#333"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+          <TextBlock FontSize="18"
+            FontFamily="{StaticResource Phosphor}"
+            Text="&#xE4F6;"
+            MouseDown="CloseTextBlock_OnMouseDown"
+            Foreground="#333"
+            Cursor="Hand"
+            FontWeight="Bold"
+            ToolTip="Close"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top" />
+        </DockPanel>
 
-      <StackPanel Margin="0 15 0 0">
-        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
-          <Span>Endpoint URL</Span>
-        </TextBlock>
-        <TextBox Name="EndpointTextBox" Style="{StaticResource FormTextBoxStyle}" />
-      </StackPanel>
-
-      <StackPanel Margin="0 15 0 0" MinWidth="450">
-        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
-          <Span>API Key</Span>
-        </TextBlock>
-        <TextBox Name="ApiKeyTextBox" Style="{StaticResource FormTextBoxStyle}" />
-        <TextBlock Foreground="#666"
-          FontSize="13"
-          FontWeight="Light"
-          Margin="2 4 0 0">
-          <Span>Add your ImgBB API key.</Span>
-          <TextBlock Cursor="Hand"
-            MouseDown="WebUrlClick_OnMouseDown"
-            Foreground="DodgerBlue" TextDecorations="Underline">
-            Click here
+        <StackPanel Margin="0 15 0 0">
+          <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
+            <Span>Endpoint URL</Span>
           </TextBlock>
-          <Span>to obtain.</Span>
-        </TextBlock>
+          <TextBox Name="EndpointTextBox" Style="{StaticResource FormTextBoxStyle}" />
+        </StackPanel>
+
+        <StackPanel Margin="0 15 0 0" MinWidth="450">
+          <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
+            <Span>API Key</Span>
+          </TextBlock>
+          <TextBox Name="ApiKeyTextBox" Style="{StaticResource FormTextBoxStyle}" />
+          <TextBlock Foreground="#666"
+            FontSize="13"
+            FontWeight="Light"
+            Margin="2 4 0 0">
+            <Span>Add your ImgBB API key.</Span>
+            <TextBlock Cursor="Hand"
+              MouseDown="WebUrlClick_OnMouseDown"
+              Foreground="DodgerBlue" TextDecorations="Underline">
+              Click here
+            </TextBlock>
+            <Span>to obtain.</Span>
+          </TextBlock>
+        </StackPanel>
+
+        <DockPanel Margin="0 20 0 0">
+          <Button
+            Click="UpdateButton_OnClick"
+            Style="{StaticResource SimpleButtonStyle}"
+            Content="Update"
+            Background="#1B8755"
+            Margin="0 0 10 0"
+            HorizontalAlignment="Left" />
+          <Button
+            Click="CancelButton_OnClick"
+            Style="{StaticResource SimpleButtonStyle}"
+            Content="Cancel"
+            Background="#8E8E8E"
+            Margin="0 0 0 0"
+            HorizontalAlignment="Left" />
+        </DockPanel>
       </StackPanel>
-      
-      <DockPanel Margin="0 20 0 0">
-        <Button
-          Click="UpdateButton_OnClick"
-          Style="{StaticResource SimpleButtonStyle}"
-          Content="Update"
-          Background="#1B8755"
-          Margin="0 0 10 0"
-          HorizontalAlignment="Left" />
-        <Button
-          Click="CancelButton_OnClick"
-          Style="{StaticResource SimpleButtonStyle}"
-          Content="Cancel"
-          Background="#8E8E8E"
-          Margin="0 0 0 0"
-          HorizontalAlignment="Left" />
-      </DockPanel>
-    </StackPanel>
+    </Border>
   </Border>
 </Window>
