@@ -45,7 +45,7 @@
             <ControlTemplate TargetType="Button">
               <Border Name="border"
                 BorderThickness="1"
-                Padding="40 10"
+                Padding="40 8"
                 CornerRadius="4"
                 Background="{TemplateBinding Background}">
                 <ContentPresenter HorizontalAlignment="Center"
