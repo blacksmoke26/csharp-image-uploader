@@ -95,7 +95,6 @@
       <StackPanel Margin="20"
         VerticalAlignment="Top"
         Panel.ZIndex="0"
-        Visibility="Collapsed"
         Background="#F2F2F2">
         <DockPanel>
           <TextBlock Name="PreviewHeaderFilesInfo"
