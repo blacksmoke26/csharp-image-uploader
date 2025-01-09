@@ -4,8 +4,8 @@ using PixPost.Dialogs;
 namespace PixPost.Helpers;
 
 public static class DialogHelper {
-  public static void ShowErrorDialog(Window window, string description, string heading, Action<SimpleDialog>? callback) {
-    var dialog = new SimpleDialog() {
+  public static void ShowErrorDialog(Window window, string description, string heading, Action<SimpleDialog>? callback = null) {
+    var dialog = new SimpleDialog {
       HeadingText = heading,
       DescriptionText = description,
       Owner = window,
