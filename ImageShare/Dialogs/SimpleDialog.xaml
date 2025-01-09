@@ -11,7 +11,8 @@
   Background="Transparent"
   ShowInTaskbar="False"
   SizeToContent="WidthAndHeight"
-  Width="600">
+  MinWidth="550"
+  MinHeight="120">
   <Window.Resources>
     <Style x:Key="HeadingText" TargetType="TextBlock">
       <Setter Property="FontSize" Value="22" />
