@@ -16,7 +16,7 @@
       <Setter Property="VerticalAlignment" Value="Center"></Setter>
       <Style.Triggers>
         <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="Background" Value="#19000000"/>
+          <Setter Property="Background" Value="#19000000" />
         </Trigger>
       </Style.Triggers>
     </Style>
@@ -36,8 +36,9 @@
   </UserControl.Resources>
   <Grid>
     <Border Panel.ZIndex="1"
+      Background="Transparent"
       HorizontalAlignment="Left" VerticalAlignment="Stretch"
-      CornerRadius="5 0 0 5">
+      CornerRadius="6 0 0 5">
       <Border.Effect>
         <DropShadowEffect Color="#A7A7A7"
           ShadowDepth="5"
@@ -45,41 +46,46 @@
           Opacity="0.2" />
       </Border.Effect>
 
-      <StackPanel Panel.ZIndex="1" Background="White" Width="300">
-        <Border Background="#7CBD54" VerticalAlignment="Top" Height="15" CornerRadius="0 0 0 0" />
-        <Image Source="/Images/AppIcon-72x72.png" Width="64" HorizontalAlignment="Left" Margin="15 15" />
-        <TextBlock
-          HorizontalAlignment="Left" Margin="19 0">
-          <Span FontWeight="Medium" FontSize="18">PixPost</Span>
-          <Span FontSize="14" FontWeight="Light" Foreground="#666"> - Image Sharing Online</Span>
-        </TextBlock>
+      <Border Panel.ZIndex="1" Width="300" Background="White" CornerRadius="6 0 0 6">
+        <StackPanel>
+          <Border Background="#7CBD54" VerticalAlignment="Top" Height="15" CornerRadius="6 0 0 0" />
+          <Border Background="#CC3C79" VerticalAlignment="Top" Height="2" />
+          <StackPanel Height="430">
+            <Image Source="/Images/AppIcon-72x72.png" Width="64" HorizontalAlignment="Left" Margin="15 15" />
+            <TextBlock
+              HorizontalAlignment="Left" Margin="19 0">
+              <Span FontWeight="Medium" FontSize="18">PixPost</Span>
+              <Span FontSize="14" FontWeight="Light" Foreground="#666"> - Image Sharing Online</Span>
+            </TextBlock>
 
-        <TextBlock
-          HorizontalAlignment="Left" Margin="19 3" Width="180"
-          FontSize="14" FontWeight="UltraLight" FontStretch="ExtraCondensed" Foreground="#333">
-          <Run Text="Made with" />
-          <Run Text="&#xE2A8;" FontWeight="Normal" Foreground="Firebrick" FontFamily="{StaticResource Phosphor}" />
-          <Run Text="by" />
-          <Run FontWeight="Medium" Text="Junaid Atari" />
-        </TextBlock>
+            <TextBlock
+              HorizontalAlignment="Left" Margin="19 3" Width="180"
+              FontSize="14" FontWeight="UltraLight" FontStretch="ExtraCondensed" Foreground="#333">
+              <Run Text="Made with" />
+              <Run Text="&#xE2A8;" FontWeight="Normal" Foreground="Firebrick" FontFamily="{StaticResource Phosphor}" />
+              <Run Text="by" />
+              <Run FontWeight="Medium" Text="Junaid Atari" />
+            </TextBlock>
 
-        <Rectangle Fill="#DBDBDB" Height="1" Margin="0 20 0 10" />
+            <Rectangle Fill="#DBDBDB" Height="1" Margin="0 20 0 10" />
 
-        <StackPanel Margin="0 0">
-          <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ConfigurationMenuItem_OnClick">
-              <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE270;" FontSize="16" />
-              <TextBlock Style="{StaticResource MenuItemLabel}" Text="Configuration" />
-          </DockPanel>
-          <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="HistoryMenuItem_OnClick">
-            <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE834;" FontSize="16" />
-            <TextBlock Style="{StaticResource MenuItemLabel}" Text="Upload History" />
-          </DockPanel>
-          <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ExitMenuItem_OnMouseDown">
-            <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE3DA;" FontSize="16" Foreground="Brown" />
-            <TextBlock Style="{StaticResource MenuItemLabel}" Text="Close" Foreground="Brown" />
-          </DockPanel>
+            <StackPanel Margin="0 0">
+              <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ConfigurationMenuItem_OnClick">
+                <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE270;" FontSize="16" />
+                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Configuration" />
+              </DockPanel>
+              <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="HistoryMenuItem_OnClick">
+                <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE834;" FontSize="16" />
+                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Upload History" />
+              </DockPanel>
+              <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ExitMenuItem_OnMouseDown">
+                <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE3DA;" FontSize="16" Foreground="Brown" />
+                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Close" Foreground="Brown" />
+              </DockPanel>
+            </StackPanel>
+          </StackPanel>
         </StackPanel>
-      </StackPanel>
+      </Border>
     </Border>
     <Border Panel.ZIndex="0" Background="#99000000"
       MouseDown="DrawerOutside_OnMouseDown"

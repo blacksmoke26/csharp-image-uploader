@@ -17,8 +17,8 @@
   AllowDrop="True">
   <Window.Resources>
   </Window.Resources>
-  <Border Background="#F2F2F2"
-    CornerRadius="10"
+  <Border
+    CornerRadius="6"
     BorderThickness="10">
     <Border.Effect>
       <DropShadowEffect Color="#A7A7A7"
@@ -27,7 +27,11 @@
         BlurRadius="10"
         Opacity="0.4" />
     </Border.Effect>
-    <Grid>
+    <Border Background="#F2F2F2"
+      BorderThickness="1"
+      BorderBrush="#dee2e6"
+      CornerRadius="6">
+      <Grid>
       <uc:SidebarDrawer x:Name="SidebarDrawer" Visibility="Collapsed" Panel.ZIndex="3"/>
       <uc:DragOverPreview x:Name="DragPreviewPanel"
         Background="#F2F2F2"
@@ -161,5 +165,6 @@
         </StackPanel>
       </StackPanel>
     </Grid>
+    </Border>
   </Border>
 </Window>
