@@ -55,7 +55,7 @@
           Text="{Binding Path=Title}" />
       </StackPanel>
 
-      <StackPanel Margin="0 15 0 0">
+      <StackPanel Margin="0 15 0 0" MinWidth="450">
         <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
           <Span>API Key</Span> <Span Style="{StaticResource FormInputCaptionOptional}">(imgbb)</Span>
         </TextBlock>
@@ -67,22 +67,23 @@
           FontWeight="Light"
           Margin="2 4 0 0">
           <Span>Add your ImgBB API key.</Span>
-          <Hyperlink Foreground="DodgerBlue"
-            NavigateUri="https://api.imgbb.com/">
+          <TextBlock Cursor="Hand"
+            MouseDown="WebUrlClick_OnMouseDown"
+            Foreground="DodgerBlue" TextDecorations="Underline">
             Click here
-          </Hyperlink>
+          </TextBlock>
           <Span>to obtain your api key.</Span>
         </TextBlock>
       </StackPanel>
       
       <DockPanel Margin="0 20 0 0">
         <Button Style="{StaticResource SimpleButtonStyle}"
-          Content="Save"
+          Content="Update"
           Background="#1B8755"
           Margin="0 0 10 0"
           HorizontalAlignment="Left" />
         <Button Style="{StaticResource SimpleButtonStyle}"
-          Content="Discard"
+          Content="Cancel"
           Background="#848484"
           Margin="0 0 0 0"
           HorizontalAlignment="Left" />
