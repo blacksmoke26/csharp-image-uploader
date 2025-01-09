@@ -35,4 +35,12 @@ public partial class SimpleDialog {
   private void CloseTextBox_OnMouseDown(object sender, MouseButtonEventArgs e) {
     Close();
   }
+
+  private void SimpleDialog_OnKeyDown(object sender, KeyEventArgs e) {
+    if (e.Key == Key.Escape) Close();
+  }
+
+  private void CloseButton_OnClick(object sender, RoutedEventArgs e) {
+    Close();
+  }
 }
