@@ -61,13 +61,14 @@
           </Style>
         </Style.Resources>
       </Style>
-      
       <Style x:Key="FormTextBoxStyle"
         TargetType="TextBox">
+        <Setter Property="BorderBrush"
+          Value="#ced4da" />
+        <Setter Property="BorderThickness"
+          Value="1" />
         <Setter Property="FontSize"
           Value="15" />
-        <Setter Property="BorderBrush"
-          Value="Transparent" />
         <Setter Property="Background"
           Value="White" />
         <Setter Property="Margin"
