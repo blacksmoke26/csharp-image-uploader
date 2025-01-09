@@ -149,7 +149,7 @@ public partial class MainWindow {
   }
 
   private void MainWindow_OnKeyDown(object sender, KeyEventArgs e) {
-    if (e.Key != Key.Escape && SidebarDrawer.Visibility == Visibility.Visible)
+    if (e.Key == Key.Escape && SidebarDrawer.Visibility == Visibility.Visible)
       SidebarDrawer.Visibility = Visibility.Collapsed;
   }
 

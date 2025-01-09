@@ -23,4 +23,8 @@ public partial class SettingsDialog {
       UseShellExecute = true
     });
   }
+
+  private void SettingsDialog_OnKeyDown(object sender, KeyEventArgs e) {
+    if (e.Key == Key.Escape) Close();
+  }
 }

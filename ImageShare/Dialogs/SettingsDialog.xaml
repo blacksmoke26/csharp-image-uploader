@@ -12,6 +12,8 @@
   SizeToContent="WidthAndHeight"
   Background="Transparent"
   MouseDown="MainWindow_OnMouseDown"
+  KeyDown="SettingsDialog_OnKeyDown"
+  ShowInTaskbar="False"
   Width="600">
   <Border CornerRadius="10"
     Background="#F2F2F2"
