@@ -8,7 +8,7 @@ namespace PixPost.Dialogs;
 public partial class SettingsDialog {
   public SettingsDialog() {
     InitializeComponent();
-    EndpointTextBox.Focus();
+    ApiKeyTextBox.Focus();
     EndpointTextBox.Text = ConfigLoader.GetEndpoint();
     ApiKeyTextBox.Text = ConfigLoader.GetApiKey();
   }
@@ -33,7 +33,29 @@ public partial class SettingsDialog {
   }
 
   private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
-    DialogHelper.ShowErrorDialog(this, "Test message", "Caption");
+    if (!Uri.TryCreate(EndpointTextBox.Text, UriKind.Absolute, out _)) {
+      DialogHelper.ShowErrorDialog(this, "Endpoint is not a valid URL.", "Validation Error",
+        dialog => { dialog.Closed += (_, _) => EndpointTextBox.Focus(); });
+      return;
+    }
+
+    if (string.IsNullOrWhiteSpace(ApiKeyTextBox.Text)) {
+      DialogHelper.ShowErrorDialog(this, "API key should not be empty.", "Validation Error",
+        dialog => { dialog.Closed += (_, _) => ApiKeyTextBox.Focus(); });
+      return;
+    }
+
+    if (ApiKeyTextBox.Text.Length != 32) {
+      DialogHelper.ShowErrorDialog(this, "The API key you have entered is invalid.", "Validation Error",
+        dialog => { dialog.Closed += (_, _) => ApiKeyTextBox.Focus(); });
+      return;
+    }
+
+    var dict = ConfigLoader.ReadFile(ConfigLoader.GetEnvFilePath());
+    dict[ConfigLoader.ImgBbEndpoint] = EndpointTextBox.Text;
+    dict[ConfigLoader.ImgBbApiKey] = ApiKeyTextBox.Text;
+    ConfigLoader.SaveFile(ConfigLoader.GetEnvFilePath(), dict);
+    Close();
   }
 
   private void CancelButton_OnClick(object sender, RoutedEventArgs e) {
