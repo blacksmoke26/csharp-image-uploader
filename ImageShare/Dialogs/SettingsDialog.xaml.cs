@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using DotNetEnv;
-using Dumpify;
 using PixPost.Helpers;
 
 namespace PixPost.Dialogs;
@@ -13,7 +11,6 @@ public partial class SettingsDialog {
     EndpointTextBox.Focus();
     EndpointTextBox.Text = ConfigLoader.GetEndpoint();
     ApiKeyTextBox.Text = ConfigLoader.GetApiKey();
-    ConfigLoader.GetEndpoint().Dump();
   }
 
   private void CloseTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e) {
