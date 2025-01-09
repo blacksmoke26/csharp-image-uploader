@@ -1,4 +1,6 @@
-﻿using PixPost.Helpers;
+﻿using System.ComponentModel;
+using PixPost.Helpers;
+using PixPost.Objects;
 
 namespace PixPost;
 
@@ -7,6 +9,8 @@ namespace PixPost;
 /// https://icon-icons.com/icon/upload-pictures/93667
 /// </summary>
 public partial class App {
+  public static BindingList<Logging.LogItem> LogItems { get; set; } = [];
+
   public App() {
     ConfigLoader.Load();
   }
