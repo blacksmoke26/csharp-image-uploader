@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using PixPost.Dialogs;
@@ -20,6 +21,10 @@ public partial class MainWindow {
 
   public MainWindow() {
     InitializeComponent();
+    InitializeUi();
+  }
+
+  private void InitializeUi() {
     PreviewHeaderFilesInfo.Text = string.Concat(
       string.Join(" ", ImageHelper.ImageExtTypes),
       " ", ImageBb.SizeToMb(ImageBb.MaxSize), " MB").ToUpper();
@@ -28,6 +33,9 @@ public partial class MainWindow {
     PreviewDrop += MainWindow_Drop;
     MouseDown += MainWindow_OnMouseDown;
     ImagesViewer.ImagesList = _uploadedImages;
+
+    #region Events Binding
+
     PreviewDragEnter += (_, _) => DragPreviewPanel.Visibility = Visibility.Visible;
     PreviewDragLeave += (_, _) => DragPreviewPanel.Visibility = Visibility.Collapsed;
     _uploadedImages.ListChanged += (_, _) => {
@@ -39,6 +47,9 @@ public partial class MainWindow {
       dialog.ShowDialog();
     };
     SidebarDrawer.DrawerClose += (_, _) => SidebarDrawer.Visibility = Visibility.Collapsed;
+    SidebarDrawer.ConfigurationClick += SidebarDrawer_OnConfigurationClick;
+    SidebarDrawer.HistoryClick += SidebarDrawer_OnHistoryClick;
+    #endregion
   }
 
   private void MainWindow_Drop(object sender, DragEventArgs e) {
@@ -140,5 +151,18 @@ public partial class MainWindow {
   private void MainWindow_OnKeyDown(object sender, KeyEventArgs e) {
     if (e.Key != Key.Escape && SidebarDrawer.Visibility == Visibility.Visible)
       SidebarDrawer.Visibility = Visibility.Collapsed;
+  }
+
+  private void SidebarDrawer_OnConfigurationClick(object sender, RoutedEventArgs e) {
+    SidebarDrawer.Visibility = Visibility.Collapsed;
+    var dialog = new SettingsDialog() {
+      Owner = this,
+      WindowStartupLocation = WindowStartupLocation.CenterOwner,
+    };
+    dialog.ShowDialog();
+  }
+
+  private void SidebarDrawer_OnHistoryClick(object sender, RoutedEventArgs e) {
+    throw new NotImplementedException();
   }
 }
