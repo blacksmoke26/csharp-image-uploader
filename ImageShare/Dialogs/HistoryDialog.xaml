@@ -1,0 +1,21 @@
+<base:BaseDialogWindow x:Class="PixPost.Dialogs.HistoryDialog"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:PixPost.Dialogs"
+  xmlns:base="clr-namespace:PixPost.Ui.Dialogs"
+  mc:Ignorable="d"
+  Title="Upload History"
+  WindowStartupLocation="CenterOwner"
+  WindowStyle="None"
+  AllowsTransparency="True"
+  KeyDown="BaseWindow_OnKeyDown"
+  MouseDown="BaseWindow_OnMouseDown"
+  SizeToContent="WidthAndHeight"
+  Background="Transparent">
+  <base:BaseDialog CloseClick="BaseCloseButton_OnClick" Width="600"
+    DialogHeading="Upload History">
+    <TextBlock FontSize="16">Contents goes here</TextBlock>
+  </base:BaseDialog>
+</base:BaseDialogWindow>
