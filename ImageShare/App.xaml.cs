@@ -8,6 +8,6 @@ namespace PixPost;
 /// </summary>
 public partial class App {
   public App() {
-    ConfigLoader.LoadExisting();
+    ConfigLoader.Load();
   }
 }
