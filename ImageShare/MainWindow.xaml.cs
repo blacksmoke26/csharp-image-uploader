@@ -162,6 +162,11 @@ public partial class MainWindow {
   }
 
   private void SidebarDrawer_OnHistoryClick(object sender, RoutedEventArgs e) {
-    throw new NotImplementedException();
+    SidebarDrawer.Visibility = Visibility.Collapsed;
+    var dialog = new HistoryDialog() {
+      Owner = this,
+      WindowStartupLocation = WindowStartupLocation.CenterOwner,
+    };
+    dialog.ShowDialog();
   }
 }
