@@ -52,18 +52,14 @@
         <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
           <Span>Endpoint URL</Span>
         </TextBlock>
-        <TextBox Name="EndpointTextBox"
-          Style="{StaticResource FormTextBoxStyle}"
-          Text="{Binding Path=Title}" />
+        <TextBox Name="EndpointTextBox" Style="{StaticResource FormTextBoxStyle}" />
       </StackPanel>
 
       <StackPanel Margin="0 15 0 0" MinWidth="450">
         <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
-          <Span>API Key</Span> <Span Style="{StaticResource FormInputCaptionOptional}">(imgbb)</Span>
+          <Span>API Key</Span>
         </TextBlock>
-        <TextBox Name="ApiKeyTextBox"
-          Style="{StaticResource FormTextBoxStyle}"
-          Text="{Binding Path=Title}" />
+        <TextBox Name="ApiKeyTextBox" Style="{StaticResource FormTextBoxStyle}" />
         <TextBlock Foreground="#666"
           FontSize="13"
           FontWeight="Light"
@@ -74,7 +70,7 @@
             Foreground="DodgerBlue" TextDecorations="Underline">
             Click here
           </TextBlock>
-          <Span>to obtain your api key.</Span>
+          <Span>to obtain.</Span>
         </TextBlock>
       </StackPanel>
       
@@ -90,7 +86,7 @@
           Click="CancelButton_OnClick"
           Style="{StaticResource SimpleButtonStyle}"
           Content="Cancel"
-          Background="#848484"
+          Background="#8E8E8E"
           Margin="0 0 0 0"
           HorizontalAlignment="Left" />
       </DockPanel>
