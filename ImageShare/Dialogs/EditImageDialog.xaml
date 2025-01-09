@@ -5,75 +5,28 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:PixPost.Dialogs"
   mc:Ignorable="d"
-  Title="EditImageDialog" Width="680"
+  Title="Edit Image"
+  Width="680"
   WindowStartupLocation="CenterOwner"
   WindowStyle="None"
   AllowsTransparency="True"
   SizeToContent="WidthAndHeight"
   MouseDown="MainWindow_OnMouseDown"
   Background="Transparent">
-  <Window.Resources>
-    <Style x:Key="TextBoxStyle" TargetType="TextBox">
-      <Setter Property="FontSize" Value="15" />
-      <Setter Property="BorderBrush" Value="Transparent" />
-      <Setter Property="Background" Value="White" />
-      <Setter Property="Margin" Value="0 7 0 0" />
-      <Setter Property="Padding" Value="6 7" />
-      <Style.Resources>
-        <Style TargetType="{x:Type Border}">
-          <Setter Property="CornerRadius" Value="4" />
-        </Style>
-      </Style.Resources>
-    </Style>
-    <Style x:Key="ButtonStyle" TargetType="Button">
-      <Setter Property="FontSize" Value="14" />
-      <Setter Property="FontWeight" Value="Medium" />
-      <Setter Property="Background" Value="#1B8755" />
-      <Setter Property="Foreground" Value="White" />
-      <Setter Property="Margin" Value="0 7 0 0" />
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Button">
-            <Border Name="border" 
-              BorderThickness="1"
-              Padding="40 2" 
-              CornerRadius="6" 
-              Background="{TemplateBinding Background}">
-              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Border>
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#319265" />
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-      <Style.Resources>
-        <Style TargetType="{x:Type Border}">
-          <Setter Property="CornerRadius" Value="4" />
-        </Style>
-      </Style.Resources>
-    </Style>
-    <Style x:Key="InputCaptionTextBox" TargetType="TextBlock">
-      <Setter Property="FontSize" Value="14" />
-      <Setter Property="FontWeight" Value="Medium" />
-      <Setter Property="Foreground" Value="#333" />
-      <Setter Property="TextAlignment" Value="Left" />
-    </Style>
-    <Style x:Key="InputCaptionOptional" TargetType="Span">
-      <Setter Property="FontSize" Value="14" />
-      <Setter Property="Foreground" Value="#aaa" />
-      <Setter Property="FontWeight" Value="Normal" />
-    </Style>
-  </Window.Resources>
-  <Border CornerRadius="10" Background="#F2F2F2"
-    Padding="6" BorderThickness="10">
+  <Border CornerRadius="10"
+    Background="#F2F2F2"
+    Padding="6"
+    BorderThickness="10">
     <Border.Effect>
-      <DropShadowEffect Color="#A7A7A7" Direction="260"
-        ShadowDepth="5" BlurRadius="10" Opacity="0.4" />
+      <DropShadowEffect Color="#A7A7A7"
+        Direction="260"
+        ShadowDepth="5"
+        BlurRadius="10"
+        Opacity="0.4" />
     </Border.Effect>
-    <Grid Margin="20 15" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+    <Grid Margin="20 15"
+      VerticalAlignment="Top"
+      HorizontalAlignment="Stretch">
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
@@ -84,10 +37,14 @@
         <RowDefinition Height="80" />
         <RowDefinition Height="60" />
       </Grid.RowDefinitions>
-      <DockPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-        <TextBlock Text="Edit" FontSize="21"
+      <DockPanel Grid.Row="0"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Top">
+        <TextBlock Text="Edit"
+          FontSize="21"
           Foreground="#333"
-          HorizontalAlignment="Left" VerticalAlignment="Top" />
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top" />
         <TextBlock FontSize="18"
           FontFamily="{StaticResource Phosphor}"
           Text="&#xE4F6;"
@@ -96,43 +53,63 @@
           FontWeight="Bold"
           ToolTip="Close"
           MouseDown="CloseTextBlock_OnMouseDown"
-          HorizontalAlignment="Right" VerticalAlignment="Top" />
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top" />
       </DockPanel>
-      <Border Grid.Row="1" Margin="0 15 0 5"
-        Background="Transparent" Height="330" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Image Source="{Binding Source}" Width="500" Name="ImagePreview" Height="330" />
+      <Border Grid.Row="1"
+        Margin="0 15 0 5"
+        Background="Transparent"
+        Height="330"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch">
+        <Image Source="{Binding Source}"
+          Width="500"
+          Height="330" />
       </Border>
 
-      <StackPanel Grid.Row="2" Margin="0 15 0 0">
-        <TextBlock Style="{StaticResource InputCaptionTextBox}">
-          <Span>Title</Span> <Span Style="{StaticResource InputCaptionOptional}">(optional)</Span>
+      <StackPanel Grid.Row="2"
+        Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
+          <Span>Title</Span> <Span Style="{StaticResource FormInputCaptionOptional}">(optional)</Span>
         </TextBlock>
-        <TextBox Name="TitleTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=Title}" />
+        <TextBox Name="TitleTextBox"
+          Style="{StaticResource FormTextBoxStyle}"
+          Text="{Binding Path=Title}" />
       </StackPanel>
 
-      <StackPanel Grid.Row="3" Margin="0 15 0 0">
-        <TextBlock Style="{StaticResource InputCaptionTextBox}">
+      <StackPanel Grid.Row="3"
+        Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}">
           <Span>Resize image</Span>
         </TextBlock>
         <DockPanel HorizontalAlignment="Left">
-          <DockPanel ToolTip="Width" Margin="0 0 30 0">
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="100" MaxLength="4"
+          <DockPanel ToolTip="Width"
+            Margin="0 0 30 0">
+            <TextBox Style="{StaticResource FormTextBoxStyle}"
+              Width="100"
+              MaxLength="4"
               Name="WidthTextBox"
               DataObject.Pasting="NumericTextBox_Pasting"
               Text="{Binding Path=Width}"
               HorizontalAlignment="Left"
               HorizontalContentAlignment="Left" />
-            <TextBlock FontSize="15" VerticalAlignment="Center"
-              Margin="-50 3 0 0" HorizontalAlignment="Left">
-              <Span Style="{StaticResource InputCaptionOptional}" FontSize="16">px</Span>
+            <TextBlock FontSize="15"
+              VerticalAlignment="Center"
+              Margin="-50 3 0 0"
+              HorizontalAlignment="Left">
+              <Span Style="{StaticResource FormInputCaptionOptional}"
+                FontSize="16">
+                px
+              </Span>
             </TextBlock>
-            <TextBlock
-              Name="ResetWidthIcon"
-              FontSize="15" VerticalAlignment="Center"
+            <TextBlock Name="ResetWidthIcon"
+              FontSize="15"
+              VerticalAlignment="Center"
               Cursor="Hand"
               ToolTip="Reset"
-              Margin="-25 6 0 0" HorizontalAlignment="Left">
-              <Span Style="{StaticResource InputCaptionOptional}"
+              Margin="-25 6 0 0"
+              HorizontalAlignment="Left">
+              <Span Style="{StaticResource FormInputCaptionOptional}"
                 FontFamily="{StaticResource Phosphor}"
                 FontSize="18"
                 Cursor="Hand"
@@ -141,25 +118,34 @@
               </Span>
             </TextBlock>
           </DockPanel>
-          <DockPanel ToolTip="Height" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <TextBox Style="{StaticResource TextBoxStyle}" Width="100" MaxLength="4"
+          <DockPanel ToolTip="Height"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center">
+            <TextBox Style="{StaticResource FormTextBoxStyle}"
+              Width="100"
+              MaxLength="4"
               Name="HeightTextBox"
               DataObject.Pasting="NumericTextBox_Pasting"
               Text="{Binding Path=Height}"
               HorizontalAlignment="Left"
               HorizontalContentAlignment="Left" />
-            <TextBlock
-              FontSize="15" VerticalAlignment="Center"
-              Margin="-50 3 0 0" HorizontalAlignment="Left">
-              <Span Style="{StaticResource InputCaptionOptional}" FontSize="16">px</Span>
+            <TextBlock FontSize="15"
+              VerticalAlignment="Center"
+              Margin="-50 3 0 0"
+              HorizontalAlignment="Left">
+              <Span Style="{StaticResource FormInputCaptionOptional}"
+                FontSize="16">
+                px
+              </Span>
             </TextBlock>
-            <TextBlock
-              Name="ResetHeightIcon"
-              FontSize="15" VerticalAlignment="Center"
+            <TextBlock Name="ResetHeightIcon"
+              FontSize="15"
+              VerticalAlignment="Center"
               Cursor="Hand"
               ToolTip="Reset"
-              Margin="-25 6 0 0" HorizontalAlignment="Left">
-              <Span Style="{StaticResource InputCaptionOptional}"
+              Margin="-25 6 0 0"
+              HorizontalAlignment="Left">
+              <Span Style="{StaticResource FormInputCaptionOptional}"
                 FontFamily="{StaticResource Phosphor}"
                 FontSize="15">
                 &#xE038;
@@ -168,9 +154,22 @@
           </DockPanel>
         </DockPanel>
       </StackPanel>
-      <Button Click="SubmitButton_OnClick" Grid.Row="4" Style="{StaticResource ButtonStyle}"
-        Content="Submit" Margin="0 15 0 0"
-        HorizontalAlignment="Left" />
+
+      <DockPanel Grid.Row="4"
+        Margin="0 20 0 0">
+        <Button Style="{StaticResource SimpleButtonStyle}"
+          Content="Save"
+          Click="SubmitButton_OnClick"
+          Background="#1B8755"
+          Margin="0 0 10 0"
+          HorizontalAlignment="Left" />
+        <Button Style="{StaticResource SimpleButtonStyle}"
+          Content="Discard"
+          Click="DiscardButton_OnClick"
+          Background="#848484"
+          Margin="0 0 0 0"
+          HorizontalAlignment="Left" />
+      </DockPanel>
     </Grid>
   </Border>
 </Window>

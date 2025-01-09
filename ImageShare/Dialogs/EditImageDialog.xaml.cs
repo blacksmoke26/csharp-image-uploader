@@ -107,4 +107,8 @@ public partial class EditImageDialog {
     
     Close();
   }
+
+  private void DiscardButton_OnClick(object sender, RoutedEventArgs e) {
+    Close();
+  }
 }
