@@ -76,7 +76,7 @@
               </DockPanel>
               <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="HistoryMenuItem_OnClick">
                 <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE834;" FontSize="16" />
-                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Upload History" />
+                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Notifications" />
               </DockPanel>
               <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ExitMenuItem_OnMouseDown">
                 <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE3DA;" FontSize="16" Foreground="Brown" />
