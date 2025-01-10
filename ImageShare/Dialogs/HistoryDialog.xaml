@@ -14,8 +14,67 @@
   MouseDown="BaseWindow_OnMouseDown"
   SizeToContent="WidthAndHeight"
   Background="Transparent">
-  <base:BaseDialog CloseClick="BaseCloseButton_OnClick" Width="600"
+  <base:BaseDialog CloseClick="BaseCloseButton_OnClick"
+    Width="600"
     DialogHeading="Upload History">
-    <TextBlock FontSize="16">Contents goes here</TextBlock>
+    <StackPanel>
+      <DockPanel Margin="0 0 0 10">
+        <TextBlock FontSize="13"
+          FontWeight="Medium"
+          Foreground="#333"
+          Text="Timeline" />
+        <TextBlock Foreground="#0d6efd"
+          HorizontalAlignment="Right"
+          FontWeight="Light"
+          FontSize="13"
+          Cursor="Hand"
+          Text="Clear all" />
+      </DockPanel>
+      <ListView BorderThickness="0"
+        Background="Transparent"
+        FocusVisualStyle="{x:Null}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <Border Padding="10"
+              BorderThickness="1"
+              CornerRadius="4"
+              BorderBrush="#C3C6CA"
+              Margin="0 0 0 10"
+              Background="#F0F4F9">
+              <StackPanel>
+                <DockPanel>
+                  <TextBlock HorizontalAlignment="Left"
+                    FontFamily="{StaticResource Phosphor}"
+                    Text="&#xE2CE;"
+                    Margin="0 2 0 0"
+                    FontSize="18" />
+                  <TextBlock Margin="7 0 0 0"
+                    TextWrapping="WrapWithOverflow"
+                    LineHeight="20"
+                    FontSize="14"
+                    Foreground="#343838"
+                    FontWeight="Medium"
+                    Text="Plugin 'Filename Template'" />
+                  <TextBlock Margin="7 0 0 0"
+                    TextWrapping="WrapWithOverflow"
+                    TextAlignment="Right"
+                    HorizontalAlignment="Right"
+                    LineHeight="20"
+                    FontSize="12"
+                    Foreground="#343838"
+                    Text="4:23 PM" />
+                </DockPanel>
+                <TextBlock Margin="24 5 0 0"
+                  TextWrapping="WrapWithOverflow"
+                  LineHeight="19"
+                  FontSize="14"
+                  Foreground="#3D4242"
+                  Text="Plugin 'Filename Template' (version '1.2.0-241') is not compatible with the current version of the IDE, because it requires build 241.* or older but the current build is RD-243.22562.250" />
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackPanel>
   </base:BaseDialog>
 </base:BaseDialogWindow>
