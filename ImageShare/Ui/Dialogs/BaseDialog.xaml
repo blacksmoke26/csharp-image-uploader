@@ -28,7 +28,7 @@
             <DockPanel HorizontalAlignment="Stretch"
               VerticalAlignment="Top" Margin="0 0 0 15">
               <TextBlock Text="{Binding DialogHeading}"
-                FontSize="21"
+                FontSize="19"
                 Foreground="#333"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" />
@@ -43,7 +43,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top" />
             </DockPanel>
-            <Grid>
+            <Grid Margin="0 10">
               <ContentPresenter />
             </Grid>
           </StackPanel>
