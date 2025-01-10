@@ -1,11 +1,11 @@
 using System.IO;
+using PixPost.Helpers;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 
-namespace PixPost.Helpers;
+namespace PixPost.Objects;
 
 public class ImageThumb {
-  public ImageApiResponse? ApiResponse { get; set; }
   public string Source { get; private set; }
 
   public string Title { get; set; } = string.Empty;
@@ -22,6 +22,8 @@ public class ImageThumb {
   public int Width { get; set; }
   public int Height { get; set; }
 
+  public ImageApiResponse? ApiResponse { get; set; }
+  
   public ImageThumb(string source) {
     Source = source;
     FromFile(source);
