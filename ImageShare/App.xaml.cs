@@ -12,6 +12,6 @@ public partial class App {
   public static BindingList<Logging.LogItem> LogItems { get; set; } = [];
 
   public App() {
-    ConfigLoader.Load();
+    ConfigHelper.Load();
   }
 }

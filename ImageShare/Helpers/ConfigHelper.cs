@@ -4,7 +4,7 @@ using DotNetEnv;
 
 namespace PixPost.Helpers;
 
-public static class ConfigLoader {
+public static class ConfigHelper {
   public const string ImgBbEndpoint = "IMGBB_ENDPOINT";
   public const string ImgBbApiKey = "IMGBB_API_KEY";
 

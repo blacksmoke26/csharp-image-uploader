@@ -9,8 +9,8 @@ public partial class SettingsDialog {
   public SettingsDialog() {
     InitializeComponent();
     ApiKeyTextBox.Focus();
-    EndpointTextBox.Text = ConfigLoader.GetEndpoint();
-    ApiKeyTextBox.Text = ConfigLoader.GetApiKey();
+    EndpointTextBox.Text = ConfigHelper.GetEndpoint();
+    ApiKeyTextBox.Text = ConfigHelper.GetApiKey();
   }
 
   private void CloseTextBlock_OnMouseDown(object sender, MouseButtonEventArgs e) {
@@ -51,10 +51,10 @@ public partial class SettingsDialog {
       return;
     }
 
-    var dict = ConfigLoader.ReadFile(ConfigLoader.GetEnvFilePath());
-    dict[ConfigLoader.ImgBbEndpoint] = EndpointTextBox.Text;
-    dict[ConfigLoader.ImgBbApiKey] = ApiKeyTextBox.Text;
-    ConfigLoader.SaveFile(ConfigLoader.GetEnvFilePath(), dict, true);
+    var dict = ConfigHelper.ReadFile(ConfigHelper.GetEnvFilePath());
+    dict[ConfigHelper.ImgBbEndpoint] = EndpointTextBox.Text;
+    dict[ConfigHelper.ImgBbApiKey] = ApiKeyTextBox.Text;
+    ConfigHelper.SaveFile(ConfigHelper.GetEnvFilePath(), dict, true);
     Close();
   }
 
