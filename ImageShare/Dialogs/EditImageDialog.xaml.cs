@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using PixPost.Helpers;
+using PixPost.Objects;
 
 namespace PixPost.Dialogs;
 

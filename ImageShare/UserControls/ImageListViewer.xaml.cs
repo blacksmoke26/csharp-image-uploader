@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using PixPost.Helpers;
+using PixPost.Objects;
 
 namespace PixPost.UserControls;
 
