@@ -6,6 +6,8 @@ using Microsoft.Win32;
 using PixPost.Dialogs;
 using PixPost.Helpers;
 using PixPost.Objects;
+using PixPost.UserControls;
+using PixPost.Utils;
 
 namespace PixPost;
 
@@ -46,10 +48,22 @@ public partial class MainWindow {
       var dialog = new EditImageDialog((ImageThumb)e.OriginalSource);
       dialog.ShowDialog();
     };
-    SidebarDrawer.DrawerClose += (_, _) => SidebarDrawer.Visibility = Visibility.Collapsed;
-    SidebarDrawer.ConfigurationClick += SidebarDrawer_OnConfigurationClick;
-    SidebarDrawer.HistoryClick += SidebarDrawer_OnHistoryClick;
+
+    InitializeSidebarDrawer();
+
     #endregion
+  }
+
+  private void InitializeSidebarDrawer() {
+    foreach (var menuItem in SidebarUtils.GetMenuItems(SidebarDrawer_MenuItemClick)) {
+      SidebarDrawer.MenuItems.Add(menuItem);
+    }
+  }
+
+  private void SidebarDrawer_MenuItemClick(SidebarMenuItem menuItem) {
+    if (menuItem.HideDrawer)
+      SidebarDrawer.Visibility = Visibility.Collapsed;
+    SidebarUtils.MenuItemClickHandler(menuItem);
   }
 
   private void MainWindow_Drop(object sender, DragEventArgs e) {
@@ -67,17 +81,16 @@ public partial class MainWindow {
 
     var info = new FileInfo(filePath);
 
-    if (info.Length <= 0) {
-      errors.Add($"{Path.GetFileName(filePath)} - Empty file.");
-      return false;
+    switch (info.Length) {
+      case <= 0:
+        errors.Add($"{Path.GetFileName(filePath)} - Empty file.");
+        return false;
+      case > ImageBb.MaxSize:
+        errors.Add($"{Path.GetFileName(filePath)} - File is too big.");
+        return false;
+      default:
+        return true;
     }
-
-    if (info.Length > ImageBb.MaxSize) {
-      errors.Add($"{Path.GetFileName(filePath)} - File is too big.");
-      return false;
-    }
-
-    return true;
   }
 
   private void ProcessUploadedImageList(string[] files) {
@@ -151,23 +164,5 @@ public partial class MainWindow {
   private void MainWindow_OnKeyDown(object sender, KeyEventArgs e) {
     if (e.Key == Key.Escape && SidebarDrawer.Visibility == Visibility.Visible)
       SidebarDrawer.Visibility = Visibility.Collapsed;
-  }
-
-  private void SidebarDrawer_OnConfigurationClick(object sender, RoutedEventArgs e) {
-    SidebarDrawer.Visibility = Visibility.Collapsed;
-    var dialog = new SettingsDialog() {
-      Owner = this,
-      WindowStartupLocation = WindowStartupLocation.CenterOwner,
-    };
-    dialog.ShowDialog();
-  }
-
-  private void SidebarDrawer_OnHistoryClick(object sender, RoutedEventArgs e) {
-    SidebarDrawer.Visibility = Visibility.Collapsed;
-    var dialog = new HistoryDialog() {
-      Owner = this,
-      WindowStartupLocation = WindowStartupLocation.CenterOwner,
-    };
-    dialog.ShowDialog();
   }
 }
