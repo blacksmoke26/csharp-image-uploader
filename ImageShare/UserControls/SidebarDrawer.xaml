@@ -4,6 +4,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:PixPost.UserControls"
+  xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
   mc:Ignorable="d"
   Background="Transparent"
   d:DesignHeight="Infinity" d:DesignWidth="Infinity">
@@ -69,20 +70,48 @@
 
             <Rectangle Fill="#DBDBDB" Height="1" Margin="0 20 0 10" />
 
-            <StackPanel Margin="0 0">
+            <Menu Background="Transparent"
+              Focusable="False"
+              FocusVisualStyle="{x:Null}"
+              Name="SidebarMenu"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top">
+              <Menu.Resources>
+                <Style TargetType="MenuItem">
+                  <Setter Property="Focusable" Value="False" />
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <StackPanel>
+                          <DockPanel Style="{StaticResource MenuItemDock}">
+                            <TextBlock Style="{StaticResource MenuItemIcon}" Text="{Binding MenuIcon}" FontSize="16" />
+                            <TextBlock Style="{StaticResource MenuItemLabel}">
+                              <ContentPresenter Content="{Binding Label}" />
+                            </TextBlock>
+                            <behavior:Interaction.Triggers>
+                              <behavior:EventTrigger EventName="MouseDown">
+                                <behavior:CallMethodAction TargetObject="{Binding}" MethodName="OnItemClick" />
+                              </behavior:EventTrigger>
+                            </behavior:Interaction.Triggers>
+                          </DockPanel>
+                        </StackPanel>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </Menu.Resources>
+              <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel HorizontalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+              </Menu.ItemsPanel>
+            </Menu>
+
+            <!--<StackPanel Margin="0 0">
               <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ConfigurationMenuItem_OnClick">
                 <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE270;" FontSize="16" />
                 <TextBlock Style="{StaticResource MenuItemLabel}" Text="Configuration" />
-              </DockPanel>
-              <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="HistoryMenuItem_OnClick">
-                <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE834;" FontSize="16" />
-                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Notifications" />
-              </DockPanel>
-              <DockPanel Style="{StaticResource MenuItemDock}" MouseDown="ExitMenuItem_OnMouseDown">
-                <TextBlock Style="{StaticResource MenuItemIcon}" Text="&#xE3DA;" FontSize="16" Foreground="Brown" />
-                <TextBlock Style="{StaticResource MenuItemLabel}" Text="Close" Foreground="Brown" />
-              </DockPanel>
-            </StackPanel>
+              </DockPanel>-->
           </StackPanel>
         </StackPanel>
       </Border>
