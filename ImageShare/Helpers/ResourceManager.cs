@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace PixPost.Helpers;
 
-public static class ResourceLoader {
+public static class ResourceManager {
   public const string ResourceDirectory = "Resources";
 
   /// <summary>
