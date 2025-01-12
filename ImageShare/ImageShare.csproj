@@ -24,6 +24,7 @@
         <PackageReference Include="DotNetEnv" Version="3.1.1" />
         <PackageReference Include="Dumpify" Version="0.6.6"/>
         <PackageReference Include="ImoutoRebirth.ApngWpfPlayer" Version="1.4.2" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
         <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
         <PackageReference Include="RestSharp" Version="112.1.1-alpha.0.4"/>
@@ -40,6 +41,8 @@
 
     <ItemGroup>
         <Folder Include="Fonts\"/>
+        <Folder Include="Objects\Service\Base\" />
+        <Folder Include="Services\ImgBb\Assets\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -64,6 +67,14 @@
       <None Remove="Resources\Spinner.png" />
       <EmbeddedResource Include="Resources\Spinner.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Services\ImgBb\Assets\logo.png" />
+      <EmbeddedResource Include="Services\ImgBb\Assets\logo.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <None Remove="Services\Available\ImgBb.json" />
+      <EmbeddedResource Include="Services\Available\ImgBb.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>
 
