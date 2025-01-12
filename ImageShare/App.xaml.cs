@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using PixPost.Helpers;
 using PixPost.Objects;
+
+// ReSharper disable All
 
 namespace PixPost;
 
@@ -9,9 +11,11 @@ namespace PixPost;
 /// https://icon-icons.com/icon/upload-pictures/93667
 /// </summary>
 public partial class App {
-  public static BindingList<Logging.LogItem> LogItems { get; set; } = [];
+  public static ObservableCollection<Logging.LogItem> HistoryLogs { get; set; } = [];
+  public static string CurrentService { get; set; } = string.Empty;
 
   public App() {
     ConfigHelper.Load();
+    //ServiceManager.Load();
   }
 }
