@@ -24,10 +24,10 @@
         <PackageReference Include="DotNetEnv" Version="3.1.1" />
         <PackageReference Include="Dumpify" Version="0.6.6"/>
         <PackageReference Include="ImoutoRebirth.ApngWpfPlayer" Version="1.4.2" />
-        <PackageReference Include="JsonSchema.Net" Version="7.3.1" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
         <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.2-beta1" />
         <PackageReference Include="RestSharp" Version="112.1.1-alpha.0.4"/>
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6"/>
     </ItemGroup>
@@ -74,6 +74,10 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Services\Available\ImgBb.json" />
+      <None Remove="Resources\Schemas\ImageService.schema.json" />
+      <EmbeddedResource Include="Resources\Schemas\ImageService.schema.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
