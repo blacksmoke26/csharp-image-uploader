@@ -1,3 +1,7 @@
+// Licensed to the end users under one or more agreements.
+// Copyright (c) 2024-2025 Junaid Atari, and contributors
+// Website: https://github.com/blacksmoke26/
+
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -7,7 +11,7 @@ using PixPost.Objects.Service;
 namespace PixPost.Services.ImgBb.Dialogs;
 
 public partial class SettingsDialog {
-  private static readonly ImageService ServiceInstance = ServiceManager.Locate<ImageService>(ImgBb.ServiceName);
+  private static readonly ImageService ServiceInstance = ServiceManager.GetCurrent();
 
   public SettingsDialog() {
     InitializeComponent();
