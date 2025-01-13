@@ -1,7 +1,10 @@
+// Licensed to the end users under one or more agreements.
+// Copyright (c) 2024-2025 Junaid Atari, and contributors
+// Website: https://github.com/blacksmoke26/
+
 using System.Collections.ObjectModel;
 using System.Windows;
 using PixPost.Dialogs;
-using PixPost.Objects.Service;
 using PixPost.Services;
 using PixPost.UserControls;
 
@@ -10,13 +13,13 @@ namespace PixPost.Utils;
 using ItemClicked = SidebarMenuItem.ItemClicked;
 
 public struct MenuId {
-  public const string History = "History";
   public const string Close = "Close";
+  public const string Notifications = "Notifications";
 }
 
 public static class SidebarUtils {
   public static void MenuItemClickHandler(SidebarMenuItem menuItem) {
-    if (menuItem.Id == MenuId.History) {
+    if (menuItem.Id == MenuId.Notifications) {
       var dialog = new HistoryDialog() {
         Owner = Application.Current.MainWindow,
         WindowStartupLocation = WindowStartupLocation.CenterOwner,
@@ -24,7 +27,7 @@ public static class SidebarUtils {
       dialog.ShowDialog();
     }
     else if (menuItem.Id.StartsWith("Service_")) {
-      var service = ServiceManager.Locate<ImageService>(menuItem.Id[8..]);
+      var service = ServiceManager.Locate(menuItem.Id[8..]);
       service.OpenSettingsDialog();
     }
   }
@@ -36,7 +39,7 @@ public static class SidebarUtils {
       var menuItem = new SidebarMenuItem {
         Id = "Service_" + service.GetServiceName(),
         Icon = service.GetMenu().Icon,
-        Label = service.GetMenu().Text,
+        Label = service.GetMenu().Caption,
       };
 
       list.Add(menuItem);
@@ -46,14 +49,12 @@ public static class SidebarUtils {
   }
 
   public static ObservableCollection<SidebarMenuItem> GetMenuItems(ItemClicked onItemClick) {
-    ObservableCollection<SidebarMenuItem> list = [];
-
-    /*foreach (var menuItem in CreateServicesMenu()) list.Add(menuItem);*/
+    ObservableCollection<SidebarMenuItem> list = CreateServicesMenu();
 
     list.Add(new() {
-      Id = MenuId.History,
+      Id = MenuId.Notifications,
       Label = "Notifications",
-      Icon = "\ue834"
+      Icon = "\ue0ce"
     });
 
     list.Add(new() {
