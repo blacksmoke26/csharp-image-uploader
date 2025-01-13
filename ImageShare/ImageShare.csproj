@@ -24,6 +24,7 @@
         <PackageReference Include="DotNetEnv" Version="3.1.1" />
         <PackageReference Include="Dumpify" Version="0.6.6"/>
         <PackageReference Include="ImoutoRebirth.ApngWpfPlayer" Version="1.4.2" />
+        <PackageReference Include="JsonSchema.Net" Version="7.3.1" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
         <PackageReference Include="MimeTypesMap" Version="1.0.9"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
@@ -73,9 +74,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <None Remove="Services\Available\ImgBb.json" />
-      <EmbeddedResource Include="Services\Available\ImgBb.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
