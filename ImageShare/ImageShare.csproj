@@ -37,27 +37,25 @@
         <Resource Include="Fonts\Phosphor.ttf">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Resource>
-        <None Remove="Images\Spinner.png" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Fonts\"/>
-        <Folder Include="Objects\Service\Base\" />
-        <Folder Include="Services\ImgBb\Assets\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Images\Spinner.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Images\AppIcon-32x32.png" />
-      <Content Include="Images\AppIcon-32x32.png">
+      <EmbeddedResource Include="Images\AppIcon-32x32.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </EmbeddedResource>
       <None Remove="Images\AppIcon-72x72.png" />
-      <Content Include="Images\AppIcon-72x72.png">
+      <EmbeddedResource Include="Images\AppIcon-72x72.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
+      </EmbeddedResource>
+      <None Remove="Resources\Schemas\ImageService.schema.json" />
+      <EmbeddedResource Include="Resources\Schemas\ImageService.schema.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -69,13 +67,8 @@
       <EmbeddedResource Include="Resources\Spinner.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </EmbeddedResource>
-      <None Remove="Services\ImgBb\Assets\logo.png" />
-      <EmbeddedResource Include="Services\ImgBb\Assets\logo.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-      <None Remove="Services\Available\ImgBb.json" />
-      <None Remove="Resources\Schemas\ImageService.schema.json" />
-      <EmbeddedResource Include="Resources\Schemas\ImageService.schema.json">
+      <None Remove="Services\Available\ImgBb.service.json" />
+      <EmbeddedResource Include="Services\Available\ImgBb.service.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>
