@@ -10,7 +10,7 @@ public static class ServiceFactory {
   }
 
   public static string GetServiceSchema() {
-    return ResourceManager.GetTextResource("Resources/Schemas/ImageService.schema.json");
+    return ResourceHelper.GetTextResource("Resources/Schemas/ImageService.schema.json");
   }
 
   public static bool ValidateSchemaFile(string schemaJson, out IList<string> errors) {

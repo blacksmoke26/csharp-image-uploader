@@ -6,8 +6,8 @@ using System.Windows.Media.Imaging;
 
 namespace PixPost.Helpers;
 
-public static class ResourceManager {
-  private static readonly Dictionary<string, string> _fileRegistry = [];
+public static class ResourceHelper {
+  private static readonly Dictionary<string, string> FileRegistry = [];
   public const string ResourceDirectory = "Resources";
 
   /// <summary>
@@ -90,12 +90,12 @@ public static class ResourceManager {
   /// <param name="fileName">Resource file name</param>
   /// <returns>The absolute file path</returns>
   public static string GetCachedFileResource(string fileName) {
-    if (_fileRegistry.TryGetValue(fileName, out var value)) {
+    if (FileRegistry.TryGetValue(fileName, out var value)) {
       return value;
     }
 
     var filePath = GetFileResource(fileName);
-    _fileRegistry.Add(fileName, filePath);
+    FileRegistry.Add(fileName, filePath);
     return filePath;
   }
 

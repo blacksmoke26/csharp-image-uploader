@@ -24,7 +24,7 @@ public static class ConfigHelper {
   public static void Load(string? file = null) {
     var envFilePath = file ?? GetEnvFilePath();
     if (!File.Exists(envFilePath)) {
-      File.WriteAllText(envFilePath, ResourceManager.ResourceList.GetInitialEnv());
+      File.WriteAllText(envFilePath, ResourceHelper.ResourceList.GetInitialEnv());
     }
 
     Env.Load(envFilePath);

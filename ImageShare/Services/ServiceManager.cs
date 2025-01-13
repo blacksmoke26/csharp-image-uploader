@@ -25,7 +25,7 @@ public static class ServiceManager {
 
   //TODO: Testing required
   public static string[] GetResourceServicesSchemas() {
-    return ResourceManager.GetList()
+    return ResourceHelper.GetList()
       .Where(x => x.StartsWith("PixPost.Services.Available."))
       .ToArray();
   }
