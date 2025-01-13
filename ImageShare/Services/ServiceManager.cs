@@ -23,6 +23,13 @@ public static class ServiceManager {
     }
   }
 
+  //TODO: Testing required
+  public static string[] GetResourceServicesSchemas() {
+    return ResourceManager.GetList()
+      .Where(x => x.StartsWith("PixPost.Services.Available."))
+      .ToArray();
+  }
+
   private static KeyValuePair<string, ImageService> PopulateService(string path) {
     var instance = CreateInstance<ImageService>(ToNamespace(path));
     return new(instance.GetServiceName(), instance);
@@ -55,9 +62,28 @@ public static class ServiceManager {
     if (!HasCurrent()) SetCurrent(configService);
   }
 
-  public static bool Exists(string name) {
-    return ServicesMap.ContainsKey(name);
+  public static List<string> FindDefinitions(string[]? directories = null) {
+    List<string> definitions = [];
+    definitions.AddRange(GetResourceServicesSchemas());
+
+    if (directories == null)
+      return definitions;
+
+    foreach (var dirPath in directories) {
+      if (!Directory.Exists(dirPath)) {
+        throw new DirectoryNotFoundException($"Directory {dirPath} does not exist.");
+      }
+
+      // TODO: Implement logic here
+      //var files = Directory.GetFiles(dirPath).Where(f => f.EndsWith(".Service.json")).ToArray();
+      /*if (files.Length)
+        definitions.AddRange(files);*/
+    }
+
+    return definitions;
   }
+
+  public static bool Exists(string name) => ServicesMap.ContainsKey(name);
 
   public static T Locate<T>(string id) where T : ImageService {
     var service = Services.FirstOrDefault(s => s.GetServiceName() == id);
@@ -66,9 +92,7 @@ public static class ServiceManager {
       : throw new KeyNotFoundException($"The service '{id}' does not exist");
   }
 
-  public static ObservableCollection<ImageService> GetAll() {
-    return Services;
-  }
+  public static ObservableCollection<ImageService> GetAll() => Services;
 
   public static void SetCurrent(string name) {
     if (!Exists(name)) {
