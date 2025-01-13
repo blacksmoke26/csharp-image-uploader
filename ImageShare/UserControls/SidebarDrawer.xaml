@@ -84,7 +84,7 @@
                       <ControlTemplate TargetType="{x:Type MenuItem}">
                         <StackPanel>
                           <DockPanel Style="{StaticResource MenuItemDock}">
-                            <TextBlock Style="{StaticResource MenuItemIcon}" Text="{Binding MenuIcon}" FontSize="16" />
+                            <TextBlock Style="{StaticResource MenuItemIcon}" Text="{Binding Icon}" FontSize="16" />
                             <TextBlock Style="{StaticResource MenuItemLabel}">
                               <ContentPresenter Content="{Binding Label}" />
                             </TextBlock>
