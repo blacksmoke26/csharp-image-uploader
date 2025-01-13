@@ -1,11 +1,24 @@
 using System.IO;
 using Newtonsoft.Json;
+using PixPost.Helpers;
 
 namespace PixPost.Objects.Service;
 
 public static class ServiceFactory {
   public static ImageService CreateFromFile(string jsonFile) {
     return CreateFromText(File.ReadAllText(jsonFile));
+  }
+
+  public static string GetServiceSchema() {
+    return ResourceManager.GetTextResource("Resources/Schemas/ImageService.schema.json");
+  }
+
+  public static bool ValidateSchemaFile(string schemaJson, out IList<string> errors) {
+    return SchemaHelper.ValidateFile(GetServiceSchema(), schemaJson, out errors);
+  }
+
+  public static bool ValidateSchemaText(string schemaJson, out IList<string> errors) {
+    return SchemaHelper.ValidateText(GetServiceSchema(), schemaJson, out errors);
   }
 
   public static ImageService CreateFromSchema(ImageSchema schema) => new(schema);
