@@ -1,6 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿// Licensed to the end users under one or more agreements.
+// Copyright (c) 2024-2025 Junaid Atari, and contributors
+// Website: https://github.com/blacksmoke26/
+
+using System.Collections.ObjectModel;
 using PixPost.Helpers;
 using PixPost.Objects;
+using PixPost.Services;
 
 // ReSharper disable All
 
@@ -16,6 +21,6 @@ public partial class App {
 
   public App() {
     ConfigHelper.Load();
-    //ServiceManager.Load();
+    ServiceManager.Load();
   }
 }
