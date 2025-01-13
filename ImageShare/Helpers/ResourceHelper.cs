@@ -33,8 +33,12 @@ public static class ResourceHelper {
   /// <param name="fileName">Filename e.g., "some.txt"</param>
   /// <returns>Absolute resource name</returns>
   private static string ToResourceName(string fileName) {
-    var assembly = Assembly.GetExecutingAssembly();
-    return $"{assembly.GetName().Name}.{fileName}".Replace("/", ".");
+    var assemblyName = Assembly.GetExecutingAssembly().GetName().Name!;
+    var resourceName = fileName.Replace("/", ".");
+
+    return resourceName.StartsWith(assemblyName)
+      ? resourceName
+      : $"{assemblyName}.{resourceName}";
   }
 
   /// <summary>
@@ -44,7 +48,7 @@ public static class ResourceHelper {
   /// <returns>The stream</returns>
   public static Stream ReadResourceStream(string fileName) {
     if (!Exists(fileName)) {
-      throw new MissingManifestResourceException($"Could not resolve {fileName}");
+      throw new MissingManifestResourceException($"Could not resolve the resource: '{fileName}'.");
     }
 
     return Assembly.GetExecutingAssembly().GetManifestResourceStream(ToResourceName(fileName))!;
@@ -105,13 +109,17 @@ public static class ResourceHelper {
     /// </summary>
     /// <see cref="GetTextResource"/>
     /// <returns>The content</returns>
-    public static string GetInitialEnv() => GetTextResource($"{ResourceDirectory}/.env-initial");
+    public static string GetInitialEnv() {
+      return GetTextResource($"{ResourceDirectory}/.env-initial");
+    }
 
     /// <summary>
     /// Gets the spinner apng file
     /// </summary>
     /// <see cref="GetTextResource"/>
     /// <returns>The file path</returns>
-    public static string GetSpinnerImageFile() => GetCachedFileResource($"{ResourceDirectory}/Spinner.png");
+    public static string GetSpinnerImageFile() {
+      return GetCachedFileResource($"{ResourceDirectory}/Spinner.png");
+    }
   }
 }
