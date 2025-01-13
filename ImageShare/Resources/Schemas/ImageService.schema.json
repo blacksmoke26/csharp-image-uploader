@@ -1,0 +1,263 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ImagePix - Image service schema",
+  "$comment": "Image service schema to generate ui and service related functionality at runtime",
+  "type": "object",
+  "properties": {
+    "ServiceName": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 25,
+      "pattern": "^([A-Z]+[a-z0-9]+)+$"
+    },
+    "Title": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 60
+    },
+    "Menu": {
+      "type": "object",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 30
+        },
+        "Icon": {
+          "$comment": "Icon unicode symbol from phosphoricons.com",
+          "type": "string",
+          "pattern": "^\\\\u[A-Z0-9]{4}$"
+        }
+      },
+      "required": [
+        "Text",
+        "Icon"
+      ]
+    },
+    "Logo": {
+      "$comment": "The base64 encoded image string",
+      "type": "string",
+      "pattern": "^data:(.+);base64,[^=]+=$"
+    },
+    "DocsUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 150
+    },
+    "ExpirationRange": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Label": {
+            "type": "string"
+          },
+          "Value": {
+            "type": "string",
+            "pattern": "^(None|((TM|TH|ED|EW|EM)[0-9]+))$"
+          }
+        },
+        "required": [
+          "Label",
+          "Value"
+        ]
+      }
+    },
+    "VariablePrefix": {
+      "type": "string",
+      "pattern": "^[A-Z](_[A-Z]|[A-Z])+$",
+      "minLength": 3,
+      "maxLength": 20
+    },
+    "Variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Label": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60
+          },
+          "Name": {
+            "type": "string",
+            "pattern": "^[A-Z](_[A-Z]|[A-Z])+$"
+          },
+          "Type": {
+            "type": "string",
+            "enum": ["string", "bool", "double", "int"]
+          },
+          "IsRequired": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "required": [
+          "Label",
+          "Name",
+          "Type",
+          "IsRequired"
+        ]
+      }
+    },
+    "RequestProps": {
+      "type": "object",
+      "properties": {
+        "Endpoint": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "FileInfo": {
+          "type": "object",
+          "properties": {
+            "AllowedTypes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]+$"
+              }
+            },
+            "Size": {
+              "type": "object",
+              "properties": {
+                "Minimum": {
+                  "type": "integer"
+                },
+                "Maximum": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "Minimum",
+                "Maximum"
+              ]
+            }
+          },
+          "required": [
+            "AllowedTypes",
+            "Size"
+          ]
+        },
+        "KeyConfig": {
+          "type": "object",
+          "properties": {
+            "Image": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 50,
+                  "pattern": "^[a-z]+((_|[A-Z])[a-z0-9]+)*$"
+                },
+                "IsRequired": {
+                  "type": "boolean"
+                },
+                "UseInRequest": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "Key",
+                "IsRequired",
+                "UseInRequest"
+              ]
+            },
+            "Api": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string"
+                },
+                "IsRequired": {
+                  "type": "boolean"
+                },
+                "UseInRequest": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "Key",
+                "IsRequired",
+                "UseInRequest"
+              ]
+            },
+            "Caption": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string"
+                },
+                "IsRequired": {
+                  "type": "boolean"
+                },
+                "UseInRequest": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "Key",
+                "IsRequired",
+                "UseInRequest"
+              ]
+            },
+            "Expiration": {
+              "type": "object",
+              "properties": {
+                "Key": {
+                  "type": "string",
+                  "pattern": "^[a-z](_[a-z]|[a-z])+$",
+                  "minLength": 3,
+                  "maxLength": 15
+                },
+                "IsRequired": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "UseInRequest": {
+                  "type": "boolean",
+                  "default": true
+                }
+              },
+              "required": [
+                "Key",
+                "IsRequired",
+                "UseInRequest"
+              ]
+            }
+          },
+          "required": [
+            "Image",
+            "Api",
+            "Caption",
+            "Expiration"
+          ]
+        }
+      },
+      "required": [
+        "Endpoint",
+        "FileInfo",
+        "KeyConfig"
+      ]
+    }
+  },
+  "required": [
+    "ServiceName",
+    "Title",
+    "Menu",
+    "Logo",
+    "DocsUrl",
+    "Description",
+    "ExpirationRange",
+    "VariablePrefix",
+    "Variables",
+    "RequestProps"
+  ]
+}
