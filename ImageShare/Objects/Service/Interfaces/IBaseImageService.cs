@@ -1,3 +1,7 @@
+// Licensed to the end users under one or more agreements.
+// Copyright (c) 2024-2025 Junaid Atari, and contributors
+// Website: https://github.com/blacksmoke26/
+
 namespace PixPost.Objects.Service.Interfaces;
 
 public interface IBaseImageService {
@@ -38,7 +42,7 @@ public interface IBaseImageService {
   /// Icon (Unicode)
   /// </summary>
   /// <example>MY_SERVICE</example>
-  public SchemaSpecs.Menu GetMenu ();
+  public (string Caption, string Icon) GetMenu ();
 
   /// <summary>
   /// List of expiration timespans
