@@ -80,7 +80,7 @@
       "items": {
         "type": "object",
         "properties": {
-          "Name": {
+          "Key": {
             "type": "string",
             "pattern": "^[A-Z](_[A-Z]|[A-Z])+$"
           },
@@ -148,7 +148,7 @@
           }
         },
         "required": [
-          "Name",
+          "Key",
           "Type"
         ],
         "additionalProperties": false
