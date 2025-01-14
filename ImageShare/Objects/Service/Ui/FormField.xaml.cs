@@ -10,7 +10,6 @@ public partial class FormField {
   public static readonly DependencyProperty ItemSourceProperty = DependencyProperty.Register(
     nameof(ItemSource), typeof(SchemaSpecs.Variable), typeof(FormField),
     new PropertyMetadata(default(SchemaSpecs.Variable), (o, args) => {
-      Console.WriteLine("XXX");
       ((o as FormField)!).ItemSource = (SchemaSpecs.Variable)args.NewValue;
     }));
 
