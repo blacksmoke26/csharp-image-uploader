@@ -35,7 +35,7 @@ public class SchemaSpecs {
 
   public class InputField {
     public required string Label { get; set; }
-    public required string Type { get; set; }
+    public required InputFieldType Type { get; set; }
     public string? Pattern { get; set; }
     public int? ExactLength { get; set; }
     public int? MinLength { get; set; }
@@ -47,7 +47,7 @@ public class SchemaSpecs {
   public class Variable {
     public required string Key { get; set; }
     public object? Value { get; set; }
-    public required string Type { get; set; }
+    public required VariableValueType Type { get; set; }
     public required InputField InputProps { get; set; }
   }
 
