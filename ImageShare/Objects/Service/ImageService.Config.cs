@@ -1,14 +1,21 @@
+// Licensed to the end users under one or more agreements.
+// Copyright (c) 2024-2025 Junaid Atari, and contributors
+// Website: https://github.com/blacksmoke26/
+
 using PixPost.Helpers;
 using PixPost.Objects.Service.Interfaces;
+using PixPost.Objects.Service.Objects;
 
 namespace PixPost.Objects.Service;
 
 public partial class ImageService : IServiceConfiguration {
+  private List<SchemaSpecs.Variable> _variablesMap = [];
+  
   /// <inheritdoc/>
   public string ToVariableName(string key) {
-    return key.StartsWith(GetVariablePrefix() + "_")
+    return key.StartsWith(VariablePrefix + "_")
       ? key
-      : string.Concat(GetVariablePrefix(), "_", key);
+      : string.Concat(VariablePrefix, "_", key);
   }
   
   /// <inheritdoc/>
@@ -19,7 +26,7 @@ public partial class ImageService : IServiceConfiguration {
     List<string> list = [];
 
     list.AddRange(GetVariablesMap()
-      .Select(variable => ToVariableName(variable.Name)));
+      .Select(variable => ToVariableName(variable.Key)));
 
     return list;
   }
@@ -30,22 +37,25 @@ public partial class ImageService : IServiceConfiguration {
 
     List<SchemaSpecs.Variable> variables = [
       new() {
-        Label = "Enabled",
-        Name = "ENABLED",
-        Type = "bool",
-        IsRequired = false,
+        Key = "ENABLED",
+        Type = "toggle",
+        InputProps = new () {
+          Label = "Enabled",
+          Type = "bool",
+          IsRequired = false,
+        },
       }
     ];
 
     variables.AddRange(GetSchema().Variables);
 
     return _variablesMap = variables.ToList().Select(x => {
-      x.Key = ToVariableName(x.Name);
-      x.Value = ConfigHelper.ParseValue<object?>(x.Name, x.Type);
+      x.Key = ToVariableName(x.Key);
+      x.Value = ConfigHelper.ParseValue<object?>(x.Key, x.Type);
       return x;
     }).ToList();
   }
-
+  
   /// <inheritdoc/>
   public void SaveConfig(Dictionary<string, object?> configuration, bool reload = false) {
     var config = GetVariablesMap()
@@ -69,7 +79,7 @@ public partial class ImageService : IServiceConfiguration {
   /// <inheritdoc/>
   public bool IsVariableRequired(string key) {
     return GetVariablesMap()
-      .FirstOrDefault(x => x.Name == key)?.IsRequired ?? false;
+      .FirstOrDefault(x => x.Key == key)?.InputProps.IsRequired ?? false;
   }
 
   /// <inheritdoc/>
