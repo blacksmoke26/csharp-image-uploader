@@ -22,7 +22,7 @@ public static class ServiceManager {
   /// <param name="serviceName">The service name to check</param>
   /// <returns>True when found, false otherwise</returns>
   public static bool Exists(string serviceName) {
-    return Services.Any(x => x.GetServiceName() == serviceName);
+    return Services.Any(x => x.ServiceName == serviceName);
   }
 
   /// <summary>
@@ -40,7 +40,7 @@ public static class ServiceManager {
   /// <returns>The service instance</returns>
   /// <exception cref="KeyNotFoundException">When the service is not found</exception>
   public static ImageService Locate(string serviceName) {
-    var service = Services.FirstOrDefault(s => s.GetServiceName() == serviceName);
+    var service = Services.FirstOrDefault(s => s.ServiceName == serviceName);
     return service ?? throw new KeyNotFoundException($"The service '{serviceName}' does not exist");
   }
 
@@ -91,7 +91,7 @@ public static class ServiceManager {
         service = ServiceFactory
         .CreateFromFile(schemaFile, out _);
 
-      if (Services.All(x => x.GetServiceName() != service.GetServiceName()))
+      if (Services.All(x => x.ServiceName != service.ServiceName))
         Services.Add(service);
     }
   }
@@ -112,7 +112,7 @@ public static class ServiceManager {
   /// </summary>
   /// <returns>List of services' name</returns>
   public static string[] GetNames() {
-    return Services.Select(x => x.GetServiceName()).ToArray();
+    return Services.Select(x => x.ServiceName).ToArray();
   }
 
   public static void Load() {
@@ -124,7 +124,7 @@ public static class ServiceManager {
     if (Exists(serviceName)) SetCurrent(serviceName);
 
     // Fallback to default service
-    if (!HasCurrent()) SetCurrent(Services.First().GetServiceName());
+    if (!HasCurrent()) SetCurrent(Services.First().ServiceName);
   }
 
   /// <summary>
