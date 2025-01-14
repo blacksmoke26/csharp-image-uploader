@@ -9,30 +9,49 @@
   Background="Transparent"
   d:DesignHeight="Infinity" d:DesignWidth="Infinity">
   <UserControl.Resources>
-    <ScaleTransform x:Key="FontStretchCondensed" ScaleX="0.8" />
-    <ScaleTransform x:Key="FontStretchExpanded" ScaleX="1.1" />
-    <Style TargetType="DockPanel" x:Key="MenuItemDock">
-      <Setter Property="Cursor" Value="Hand"></Setter>
-      <Setter Property="Margin" Value="0 3"></Setter>
-      <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    <Style TargetType="{x:Type Border}" x:Key="MenuItemDock">
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Margin" Value="7 3" />
+      <Setter Property="VerticalAlignment" Value="Center" />
       <Style.Triggers>
         <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="Background" Value="#19000000" />
+          <Setter Property="Background" Value="#EBF2FF" />
+          <Setter Property="CornerRadius" Value="10" />
         </Trigger>
       </Style.Triggers>
     </Style>
     <Style TargetType="TextBlock" x:Key="MenuItemLabel">
-      <Setter Property="Padding" Value="0 8"></Setter>
-      <Setter Property="FontWeight" Value="Regular"></Setter>
-      <Setter Property="Foreground" Value="#333"></Setter>
-      <Setter Property="FontSize" Value="14"></Setter>
+      <Setter Property="Padding" Value="0 8" />
+      <Setter Property="FontWeight" Value="Regular" />
+      <Setter Property="Foreground" Value="#333" />
+      <Setter Property="FontSize" Value="14" />
+      <Style.Triggers>
+        <DataTrigger
+          Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DockPanel}}, Path=IsMouseOver}"
+          Value="True">
+          <Setter Property="FontWeight" Value="Medium"/>
+          <Setter Property="LayoutTransform">
+            <Setter.Value>
+              <ScaleTransform ScaleX="0.9" />
+            </Setter.Value>
+          </Setter>
+          <Setter Property="Foreground" Value="#0D4FEC" />
+        </DataTrigger>
+      </Style.Triggers>
     </Style>
     <Style TargetType="TextBlock" x:Key="MenuItemIcon">
-      <Setter Property="Margin" Value="10 0 0 0"></Setter>
-      <Setter Property="Padding" Value="10 10"></Setter>
-      <Setter Property="FontFamily" Value="{StaticResource Phosphor}"></Setter>
-      <Setter Property="Foreground" Value="#333"></Setter>
-      <Setter Property="FontSize" Value="6"></Setter>
+      <Setter Property="Margin" Value="5 0 0 0" />
+      <Setter Property="Padding" Value="5 10" />
+      <Setter Property="FontFamily" Value="{StaticResource Phosphor}" />
+      <Setter Property="Foreground" Value="#333" />
+      <Setter Property="FontSize" Value="6" />
+      <Style.Triggers>
+        <DataTrigger
+          Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type DockPanel}}, Path=IsMouseOver}"
+          Value="True">
+          <Setter Property="Foreground" Value="#0D4FEC" />
+        </DataTrigger>
+      </Style.Triggers>
     </Style>
   </UserControl.Resources>
   <Grid>
@@ -83,17 +102,19 @@
                     <Setter.Value>
                       <ControlTemplate TargetType="{x:Type MenuItem}">
                         <StackPanel>
-                          <DockPanel Style="{StaticResource MenuItemDock}">
-                            <TextBlock Style="{StaticResource MenuItemIcon}" Text="{Binding Icon}" FontSize="16" />
-                            <TextBlock Style="{StaticResource MenuItemLabel}">
-                              <ContentPresenter Content="{Binding Label}" />
-                            </TextBlock>
-                            <behavior:Interaction.Triggers>
-                              <behavior:EventTrigger EventName="MouseDown">
-                                <behavior:CallMethodAction TargetObject="{Binding}" MethodName="OnItemClick" />
-                              </behavior:EventTrigger>
-                            </behavior:Interaction.Triggers>
-                          </DockPanel>
+                          <Border Style="{StaticResource MenuItemDock}">
+                            <DockPanel>
+                              <TextBlock Style="{StaticResource MenuItemIcon}" Text="{Binding Icon}" FontSize="16" />
+                              <TextBlock Style="{StaticResource MenuItemLabel}">
+                                <ContentPresenter Content="{Binding Label}" />
+                              </TextBlock>
+                              <behavior:Interaction.Triggers>
+                                <behavior:EventTrigger EventName="MouseDown">
+                                  <behavior:CallMethodAction TargetObject="{Binding}" MethodName="OnItemClick" />
+                                </behavior:EventTrigger>
+                              </behavior:Interaction.Triggers>
+                            </DockPanel>
+                          </Border>
                         </StackPanel>
                       </ControlTemplate>
                     </Setter.Value>
