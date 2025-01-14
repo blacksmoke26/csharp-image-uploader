@@ -86,9 +86,9 @@
           },
           "Type": {
             "type": "string",
-            "enum": ["string", "bool", "double", "int"]
+            "enum": ["String", "Bool", "Double", "Int"]
           },
-          "InputProps": {
+          "InputField": {
             "type": "object",
             "properties": {
               "Label": {
@@ -98,7 +98,7 @@
               },
               "Type": {
                 "type": "string",
-                "enum": ["string", "uri", "bool", "double", "int", "list"]
+                "enum": ["Text", "Url", "Toggle", "Number", "Integer", "List"]
               },
               "Pattern": {
                 "type": "string"
@@ -110,10 +110,12 @@
               },
               "MinLength": {
                 "type": "integer",
+                "minimum": 0,
                 "default": 0
               },
               "MaxLength": {
                 "type": "integer",
+                "minimum": 0,
                 "default": 60
               },
               "IsRequired": {
