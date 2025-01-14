@@ -80,11 +80,6 @@
       "items": {
         "type": "object",
         "properties": {
-          "Label": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 60
-          },
           "Name": {
             "type": "string",
             "pattern": "^[A-Z](_[A-Z]|[A-Z])+$"
@@ -93,17 +88,70 @@
             "type": "string",
             "enum": ["string", "bool", "double", "int"]
           },
-          "IsRequired": {
-            "type": "boolean",
-            "default": true
+          "InputProps": {
+            "type": "object",
+            "properties": {
+              "Label": {
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 60
+              },
+              "Type": {
+                "type": "string",
+                "enum": ["string", "uri", "bool", "double", "int", "list"]
+              },
+              "Pattern": {
+                "type": "string"
+              },
+              "ExactLength": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "MinLength": {
+                "type": "integer",
+                "default": 0
+              },
+              "MaxLength": {
+                "type": "integer",
+                "default": 60
+              },
+              "IsRequired": {
+                "type": "boolean",
+                "default": false
+              },
+              "Items": {
+                "type": "array",
+                "minItems": 0,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Label": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 30
+                    },
+                    "Value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 40
+                    }
+                  },
+                  "required": [
+                    "Label",
+                    "Value"
+                  ]
+                }
+              }
+            },
+            "required": ["Label", "Type"]
           }
         },
         "required": [
-          "Label",
           "Name",
-          "Type",
-          "IsRequired"
-        ]
+          "Type"
+        ],
+        "additionalProperties": false
       }
     },
     "RequestProps": {
@@ -245,7 +293,8 @@
         "Endpoint",
         "FileInfo",
         "KeyConfig"
-      ]
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -259,5 +308,6 @@
     "VariablePrefix",
     "Variables",
     "RequestProps"
-  ]
+  ],
+  "additionalProperties": false
 }
