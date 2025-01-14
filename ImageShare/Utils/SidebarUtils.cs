@@ -37,7 +37,7 @@ public static class SidebarUtils {
 
     foreach (var service in ServiceManager.GetAll()) {
       var menuItem = new SidebarMenuItem {
-        Id = "Service_" + service.GetServiceName(),
+        Id = "Service_" + service.ServiceName,
         Icon = service.GetMenu().Icon,
         Label = service.GetMenu().Caption,
       };
