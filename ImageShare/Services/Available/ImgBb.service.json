@@ -105,10 +105,23 @@
 	"VariablePrefix": "IMGBB",
 	"Variables": [
 		{
-			"Label": "Api Key",
+			"Name": "ENDPOINT",
+			"Type": "string",
+			"InputProps": {
+				"Label": "Endpoint URL",
+				"Type": "uri",
+				"IsRequired": true
+			}
+		},
+		{
 			"Name": "APIKEY",
 			"Type": "string",
-			"IsRequired": true
+			"InputProps": {
+				"Label": "Api Key",
+				"Type": "string",
+				"ExactLength": 32,
+				"IsRequired": true
+			}
 		}
 	],
 	"RequestProps": {
