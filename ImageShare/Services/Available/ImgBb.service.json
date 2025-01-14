@@ -106,19 +106,19 @@
 	"Variables": [
 		{
 			"Key": "ENDPOINT",
-			"Type": "string",
-			"InputProps": {
+			"Type": "String",
+			"InputField": {
 				"Label": "Endpoint URL",
-				"Type": "uri",
+				"Type": "Url",
 				"IsRequired": true
 			}
 		},
 		{
 			"Key": "APIKEY",
-			"Type": "string",
-			"InputProps": {
+			"Type": "String",
+			"InputField": {
 				"Label": "Api Key",
-				"Type": "string",
+				"Type": "Text",
 				"ExactLength": 32,
 				"IsRequired": true
 			}
