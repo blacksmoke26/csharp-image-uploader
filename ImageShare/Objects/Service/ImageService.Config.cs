@@ -5,19 +5,20 @@
 using PixPost.Helpers;
 using PixPost.Objects.Service.Interfaces;
 using PixPost.Objects.Service.Objects;
+using VariableValueType = PixPost.Objects.Service.Objects.SchemaSpecs.VariableValueType;
 
 namespace PixPost.Objects.Service;
 
 public partial class ImageService : IServiceConfiguration {
   private List<SchemaSpecs.Variable> _variablesMap = [];
-  
+
   /// <inheritdoc/>
   public string ToVariableName(string key) {
     return key.StartsWith(VariablePrefix + "_")
       ? key
       : string.Concat(VariablePrefix, "_", key);
   }
-  
+
   /// <inheritdoc/>
   public void RefreshVariables() => _variablesMap.Clear();
 
@@ -38,10 +39,10 @@ public partial class ImageService : IServiceConfiguration {
     List<SchemaSpecs.Variable> variables = [
       new() {
         Key = "ENABLED",
-        Type = "toggle",
-        InputProps = new () {
+        Type = VariableValueType.Bool,
+        InputProps = new() {
           Label = "Enabled",
-          Type = "bool",
+          Type = SchemaSpecs.InputFieldType.Toggle,
           IsRequired = false,
         },
       }
@@ -50,16 +51,19 @@ public partial class ImageService : IServiceConfiguration {
     variables.AddRange(GetSchema().Variables);
 
     return _variablesMap = variables.ToList().Select(x => {
-      x.Key = ToVariableName(x.Key);
-      x.Value = ConfigHelper.ParseValue<object?>(x.Key, x.Type);
+      var value = ToVariableName(x.Key);
+      x.Key = value;
+      x.Value = ConfigHelper.ParseValue<object>(x.Type.ToString().ToLower(), value);
       return x;
     }).ToList();
   }
-  
+
   /// <inheritdoc/>
   public void SaveConfig(Dictionary<string, object?> configuration, bool reload = false) {
     var config = GetVariablesMap()
-      .Select(x => new KeyValuePair<string, string>(x.Key, ConfigHelper.ConvertToString(x.Type, x.Value)))
+      .Select(x => new KeyValuePair<string, string>(
+        x.Key, ConfigHelper.ConvertToString(x.Type.ToString().ToLower(), x.Value)
+      ))
       .ToDictionary();
 
     ConfigHelper.Save(config, null, reload);
@@ -67,13 +71,9 @@ public partial class ImageService : IServiceConfiguration {
 
   /// <inheritdoc/>
   public Dictionary<string, object?> ReadConfig() {
-    Dictionary<string, object?> dict = [];
-
-    foreach (var variable in GetVariablesMap()) {
-      dict.Add(variable.Key, variable.Value);
-    }
-
-    return dict;
+    return GetVariablesMap().ToList()
+      .Select(x => new KeyValuePair<string, object?>(x.Key, x.Value))
+      .ToDictionary();
   }
 
   /// <inheritdoc/>
