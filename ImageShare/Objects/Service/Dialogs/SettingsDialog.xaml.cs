@@ -4,6 +4,7 @@
 
 using System.Windows;
 using System.Windows.Input;
+using Dumpify;
 
 namespace PixPost.Objects.Service.Dialogs;
 
@@ -20,6 +21,7 @@ public partial class SettingsDialog {
     InitializeComponent();
     Service = service;
     DataContext = this;
+    InputFieldsContainer.ItemsSource = Service.GetVariablesMap();
   }
 
   private void SettingsDialog_OnMouseDown(object sender, MouseButtonEventArgs e) {
