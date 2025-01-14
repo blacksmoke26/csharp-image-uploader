@@ -48,7 +48,7 @@ public class SchemaSpecs {
     public required string Key { get; set; }
     public object? Value { get; set; }
     public required VariableValueType Type { get; set; }
-    public required InputField InputProps { get; set; }
+    public required InputField InputField { get; set; }
   }
 
   public class FileSize {

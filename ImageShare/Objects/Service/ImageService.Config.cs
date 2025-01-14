@@ -40,7 +40,7 @@ public partial class ImageService : IServiceConfiguration {
       new() {
         Key = "ENABLED",
         Type = VariableValueType.Bool,
-        InputProps = new() {
+        InputField = new() {
           Label = "Enabled",
           Type = SchemaSpecs.InputFieldType.Toggle,
           IsRequired = false,
@@ -79,7 +79,7 @@ public partial class ImageService : IServiceConfiguration {
   /// <inheritdoc/>
   public bool IsVariableRequired(string key) {
     return GetVariablesMap()
-      .FirstOrDefault(x => x.Key == key)?.InputProps.IsRequired ?? false;
+      .FirstOrDefault(x => x.Key == key)?.InputField.IsRequired ?? false;
   }
 
   /// <inheritdoc/>
