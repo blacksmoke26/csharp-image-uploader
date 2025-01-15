@@ -32,14 +32,10 @@
     </Style>
     <Style x:Key="SimpleButtonStyle"
       TargetType="Button">
-      <Setter Property="FontSize"
-        Value="14" />
-      <Setter Property="FontWeight"
-        Value="Medium" />
-      <Setter Property="Foreground"
-        Value="White" />
-      <Setter Property="Margin"
-        Value="0 7 0 0" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="Margin" Value="0 7 0 0" />
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Button">
@@ -56,51 +52,36 @@
       </Setter>
       <Style.Resources>
         <Style TargetType="{x:Type Border}">
-          <Setter Property="CornerRadius"
-            Value="4" />
+          <Setter Property="CornerRadius" Value="4" />
         </Style>
       </Style.Resources>
     </Style>
     <Style x:Key="FormTextBoxStyle"
       TargetType="TextBox">
-      <Setter Property="BorderBrush"
-        Value="#ced4da" />
-      <Setter Property="BorderThickness"
-        Value="1" />
-      <Setter Property="FontSize"
-        Value="15" />
-      <Setter Property="Background"
-        Value="White" />
-      <Setter Property="Margin"
-        Value="0 7 0 0" />
-      <Setter Property="Padding"
-        Value="6 7" />
+      <Setter Property="BorderBrush" Value="#ced4da" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="Background" Value="White" />
+      <Setter Property="Margin" Value="0 7 0 0" />
+      <Setter Property="Padding" Value="6 7" />
       <Style.Resources>
         <Style TargetType="{x:Type Border}">
-          <Setter Property="CornerRadius"
-            Value="4" />
+          <Setter Property="CornerRadius" Value="4" />
         </Style>
       </Style.Resources>
     </Style>
     <Style x:Key="FormInputCaptionTextBox"
       TargetType="TextBlock">
-      <Setter Property="FontSize"
-        Value="14" />
-      <Setter Property="FontWeight"
-        Value="Medium" />
-      <Setter Property="Foreground"
-        Value="#333" />
-      <Setter Property="TextAlignment"
-        Value="Left" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="FontWeight" Value="Medium" />
+      <Setter Property="Foreground" Value="#333" />
+      <Setter Property="TextAlignment" Value="Left" />
     </Style>
     <Style x:Key="FormInputCaptionOptional"
       TargetType="Span">
-      <Setter Property="FontSize"
-        Value="14" />
-      <Setter Property="Foreground"
-        Value="#aaa" />
-      <Setter Property="FontWeight"
-        Value="Normal" />
+      <Setter Property="FontSize" Value="14" />
+      <Setter Property="Foreground" Value="#aaa" />
+      <Setter Property="FontWeight" Value="Normal" />
     </Style>
     <Style x:Key="CustomDialog" TargetType="Window">
       <Setter Property="Background" Value="Transparent" />
@@ -109,5 +90,58 @@
       <Setter Property="ShowInTaskbar" Value="False" />
       <Setter Property="SizeToContent" Value="WidthAndHeight" />
     </Style>
+    <Style x:Key="CheckboxStyle" TargetType="CheckBox">
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="Foreground" Value="#333" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type CheckBox}">
+          <BulletDecorator Background="Transparent">
+            <BulletDecorator.Bullet>
+              <Grid Width="18"
+                Height="18">
+                <Border x:Name="Border"
+                  Width="18"
+                  Height="18"
+                  BorderThickness="1"
+                  Background="Transparent"
+                  CornerRadius="2"
+                  BorderBrush="#8E8E8E" />
+                <Path x:Name="CheckMark"
+                  Width="10"
+                  Height="10"
+                  Stretch="Uniform"
+                  StrokeThickness="1"
+                  Data="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z">
+                  <Path.Resources>
+                    <Style TargetType="{x:Type Path}">
+                      <Setter Property="Stroke" Value="Transparent" />
+                      <Style.Triggers>
+                        <DataTrigger
+                          Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type CheckBox}}, Path=IsChecked}" Value="True">
+                          <Setter Property="Stroke" Value="#333" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Path.Resources>
+                </Path>
+              </Grid>
+            </BulletDecorator.Bullet>
+            <ContentPresenter Margin="5,-2,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              RecognizesAccessKey="True" />
+          </BulletDecorator>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+    <Setter Property="Padding" Value="6 5" />
+    <Setter Property="FontSize" Value="16" />
+    <Setter Property="Foreground" Value="#333" />
+  </Style>
   </Application.Resources>
 </Application>
