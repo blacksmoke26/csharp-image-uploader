@@ -53,7 +53,7 @@ public partial class ImageService : IServiceConfiguration {
     return _variablesMap = variables.ToList().Select(x => {
       var value = ToVariableName(x.Key);
       x.Key = value;
-      x.Value = ConfigHelper.ParseValue<object>(x.Type.ToString().ToLower(), value);
+      x.Value = ConfigHelper.ParseValue<object>(x.Type.ToString().ToLower(), ConfigHelper.GetString(value));
       return x;
     }).ToList();
   }
