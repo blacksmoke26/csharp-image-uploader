@@ -93,7 +93,6 @@
     <Style x:Key="CheckboxStyle" TargetType="CheckBox">
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     <Setter Property="FontSize" Value="16" />
-    <Setter Property="FontWeight" Value="Medium" />
     <Setter Property="Foreground" Value="#333" />
     <Setter Property="Template">
       <Setter.Value>
@@ -106,7 +105,7 @@
                   Width="18"
                   Height="18"
                   BorderThickness="1"
-                  Background="Transparent"
+                  Background="White"
                   CornerRadius="2"
                   BorderBrush="#8E8E8E" />
                 <Path x:Name="CheckMark"
