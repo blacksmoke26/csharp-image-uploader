@@ -2,9 +2,11 @@
 // Copyright (c) 2024-2025 Junaid Atari, and contributors
 // Website: https://github.com/blacksmoke26/
 
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Dumpify;
+using PixPost.Objects.Service.Objects;
 
 namespace PixPost.Objects.Service.Dialogs;
 
@@ -17,11 +19,27 @@ public partial class SettingsDialog {
     set => SetValue(ServiceProperty, value);
   }
 
+  public ObservableCollection<FormFieldInfo> VariableFormFields { get; set; } = [];
+
+  private void InitialVariableFormFields() {
+    if (VariableFormFields.Count > 0) {
+      return;
+    }
+
+    foreach (var variable in Service.GetVariablesMap()) {
+      FormFieldInfo field = new() {
+        Id = variable.Key,
+      };
+      field.FromSchemaVariable(variable);
+      VariableFormFields.Add(field);
+    }
+  }
+
   public SettingsDialog(ImageService service) {
     InitializeComponent();
     Service = service;
     DataContext = this;
-    InputFieldsContainer.ItemsSource = Service.GetVariablesMap();
+    InitialVariableFormFields();
   }
 
   private void SettingsDialog_OnMouseDown(object sender, MouseButtonEventArgs e) {
@@ -33,7 +51,9 @@ public partial class SettingsDialog {
   }
 
   private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
-    Close();
+    VariableFormFields[1].ErrorMessage = VariableFormFields[1].ErrorMessage == null ? "This is an error message" : null;
+    VariableFormFields[1].Dump();
+    //Close();
   }
 
   private void CancelButton_OnClick(object sender, RoutedEventArgs e) {
