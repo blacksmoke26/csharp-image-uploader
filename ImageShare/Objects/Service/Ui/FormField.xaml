@@ -4,35 +4,61 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:PixPost.Objects.Service.Ui"
+  xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
   mc:Ignorable="d"
   DataContext="{Binding}"
-  Background="Transparent"
   MinWidth="400">
   <UserControl.Resources>
     <ContentControl x:Key="ControlText">
-      <StackPanel Margin="0 15 0 0">
-        <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
-          Text="{Binding InputField.Label, Mode=OneWay}" />
-        <TextBox Style="{StaticResource FormTextBoxStyle}"
-          Text="{Binding Value, Mode=OneWay}" />
-      </StackPanel>
+      <TextBox Style="{StaticResource FormTextBoxStyle}"
+        Text="{Binding Value, Mode=TwoWay}" />
     </ContentControl>
     <ContentControl x:Key="ControlCheckbox">
-      <StackPanel Margin="0 15 0 0">
-        <CheckBox Style="{StaticResource CheckboxStyle}"
-          IsChecked="{Binding Value, Mode=OneWay}"
-          Content="{Binding InputField.Label, Mode=OneWay}" />
-      </StackPanel>
+      <CheckBox Style="{StaticResource CheckboxStyle}"
+        IsChecked="{Binding Value, Mode=TwoWay}"
+        Content="{Binding Label, Mode=OneWay}" />
     </ContentControl>
     <ContentControl x:Key="ControlComboBox">
-      <StackPanel Margin="0 15 0 0">
-        <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
-          Text="{Binding InputField.Label, Mode=OneWay}"
-          Margin="0  0 0 4" />
-        <ComboBox Style="{StaticResource ComboBoxStyle}" />
-      </StackPanel>
+      <ComboBox SelectedValue="{Binding Value, Mode=TwoWay}"
+        Style="{StaticResource ComboBoxStyle}" />
     </ContentControl>
-    
   </UserControl.Resources>
-  <Grid x:Name="MainGrid"/>
+  <Grid>
+    <StackPanel Margin="0 15 0 0">
+      <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
+        Text="{Binding Label, Mode=OneWay}"
+        Margin="0  0 0 2">
+        <behavior:Interaction.Triggers>
+          <behavior:DataTrigger
+            Binding="{Binding Type, Mode=OneWay}"
+            Value="Toggle"
+            Comparison="Equal">
+            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+          </behavior:DataTrigger>
+        </behavior:Interaction.Triggers>
+      </TextBlock>
+      <ContentControl Name="FieldContentControl" />
+      <TextBlock
+        x:Name="ErrorMessage"
+        Text="{Binding ErrorMessage, Mode=TwoWay}">
+        <behavior:Interaction.Triggers>
+          <behavior:DataTrigger
+            Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="NotEqual">
+            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Visible" />
+          </behavior:DataTrigger>
+          <behavior:DataTrigger
+            Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="Equal">
+            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+          </behavior:DataTrigger>
+        </behavior:Interaction.Triggers>
+        <TextBlock.Resources>
+          <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="#dc3545" />
+            <Setter Property="Padding" Value="5 2" />
+          </Style>
+        </TextBlock.Resources>
+      </TextBlock>
+    </StackPanel>
+  </Grid>
 </UserControl>
