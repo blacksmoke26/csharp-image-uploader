@@ -7,14 +7,32 @@
   mc:Ignorable="d"
   DataContext="{Binding}"
   Background="Transparent"
-  d:DesignWidth="300">
-  <StackPanel Margin="0 15 0 0">
-    <TextBlock
-      Style="{StaticResource FormInputCaptionTextBox}"
-      Text="{Binding InputField.Label, Mode=OneWay}"
-      />
-    <TextBox
-      Text="{Binding Path=Key, Mode=OneWay}"
-      Style="{StaticResource FormTextBoxStyle}" />
-  </StackPanel>
+  MinWidth="400">
+  <UserControl.Resources>
+    <ContentControl x:Key="ControlText">
+      <StackPanel Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
+          Text="{Binding InputField.Label, Mode=OneWay}" />
+        <TextBox Style="{StaticResource FormTextBoxStyle}"
+          Text="{Binding Value, Mode=OneWay}" />
+      </StackPanel>
+    </ContentControl>
+    <ContentControl x:Key="ControlCheckbox">
+      <StackPanel Margin="0 15 0 0">
+        <CheckBox Style="{StaticResource CheckboxStyle}"
+          IsChecked="{Binding Value, Mode=OneWay}"
+          Content="{Binding InputField.Label, Mode=OneWay}" />
+      </StackPanel>
+    </ContentControl>
+    <ContentControl x:Key="ControlComboBox">
+      <StackPanel Margin="0 15 0 0">
+        <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
+          Text="{Binding InputField.Label, Mode=OneWay}"
+          Margin="0  0 0 4" />
+        <ComboBox Style="{StaticResource ComboBoxStyle}" />
+      </StackPanel>
+    </ContentControl>
+    
+  </UserControl.Resources>
+  <Grid x:Name="MainGrid"/>
 </UserControl>
