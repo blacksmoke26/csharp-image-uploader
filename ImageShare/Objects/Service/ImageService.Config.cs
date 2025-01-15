@@ -5,7 +5,6 @@
 using PixPost.Helpers;
 using PixPost.Objects.Service.Interfaces;
 using PixPost.Objects.Service.Objects;
-using VariableValueType = PixPost.Objects.Service.Objects.SchemaSpecs.VariableValueType;
 
 namespace PixPost.Objects.Service;
 
@@ -42,7 +41,7 @@ public partial class ImageService : IServiceConfiguration {
         Type = VariableValueType.Bool,
         InputField = new() {
           Label = "Enabled",
-          Type = SchemaSpecs.InputFieldType.Toggle,
+          Type = InputFieldType.Toggle,
           IsRequired = false,
         },
       }
