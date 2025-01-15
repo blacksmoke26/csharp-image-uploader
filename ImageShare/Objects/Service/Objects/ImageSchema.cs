@@ -5,23 +5,23 @@
 using PixPost.Helpers;
 
 namespace PixPost.Objects.Service.Objects;
+public enum InputFieldType {
+  Text = 0,
+  Url = 1,
+  Toggle = 2,
+  Number = 3,
+  Integer = 4,
+  List = 5,
+}
+
+public enum VariableValueType {
+  String = 0,
+  Bool = 1,
+  Double = 2,
+  Int = 3,
+}
 
 public class SchemaSpecs {
-  public enum InputFieldType {
-    Text = 0,
-    Url = 1,
-    Toggle = 2,
-    Number = 3,
-    Integer = 4,
-    List = 5,
-  }
-
-  public enum VariableValueType {
-    String = 0,
-    Bool = 1,
-    Double = 2,
-    Int = 3,
-  }
 
   public class Menu {
     public required string Text { get; set; }
