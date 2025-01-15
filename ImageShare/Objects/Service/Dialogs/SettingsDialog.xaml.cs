@@ -40,7 +40,7 @@ public partial class SettingsDialog {
     Close();
   }
 
-  private void Dialog_CloseClick(object sender, RoutedEventArgs e) {
+  private void CloseIcon_OnMouseDown(object sender, MouseButtonEventArgs e) {
     Close();
   }
 }

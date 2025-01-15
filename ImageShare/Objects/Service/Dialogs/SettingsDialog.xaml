@@ -45,6 +45,7 @@
               VerticalAlignment="Top"
               Text="{Binding Title, StringFormat={}{0} Configuration}" />
             <TextBlock FontSize="18"
+              MouseDown="CloseIcon_OnMouseDown"
               FontFamily="{StaticResource Phosphor}"
               Text="&#xE4F6;"
               Foreground="#333"
