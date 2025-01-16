@@ -5,7 +5,7 @@
 		"Text": "ImgBB",
 		"Icon": "\\uE5D4"
 	},
-	"Logo": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAJsAAAAgCAMAAAAysvoIAAAAkFBMVEVHcEwiotkiqOAdk8Qip+Aip94ipt8iqOAAbZMjqN8hpdsiqN8iotgip98ip+AiqOAip+Aio9wip+Aip98ip98hpt4jp90iqOAipt0hpd4ioNohpt4eoNAip+AiqN8ip+Ahpd4dntMiqOAiqN8ip98hpt4ipdwip+Aip98ipuAYisUiqOAiqN8ip98ip98jqOAM5QOUAAAAL3RSTlMAHOMH3E9w+wH+Jc0VXvXwlimEvJJJQKo5NSFZCuvVyEUQ0aNUOy+1aHwDw4yAnJjPk9MAAAKaSURBVHhe3dZbb+IwEAXg4yQEO4SwQCEUEij3e+f//7utx7a8WT8hWVq038v4VEayxjAu/gNn+jHFaz5IGwY5rpKYwEsGpI2DHJcgVuAVaZ9+jGSQIwhasJZ4xYK0aZBjK9ZE6zFekpM2CXJki97hej1seaUVqzxflYA4XHoCDk7DfCV4wxzAnrTHZbUE6+R4EtJKt1IV/ah6ey4TCTbfkUM1gMwF9SER5Lg/08ysvL6tObSLIi8Hyk4Mciw92wtehXYA8MUnVQmxBTAjL0GQY5mQlvOKZWSYk7QARMv3e5QVdzQFnqR9L+66FEGOZUra0a3UWbak/ZIjd9nfpF1QcB0AONsPrXT5CnIsLfeiAcyZ1LLhC6xK8NnugOA/ZBJDc2i4D6VmrB2CHEnhvlWuKzhyPUNw/QAe9tbdm+m3mr2zIEfieuFXOdcnDu4kGWmFfzOxslvNnkWQo/C98Kua68y2a2n71/o302/lPaoJciQb0k64NWvblYTr1nQpcfPh7t/MtNm5Tmbm+7Dp5khu5hWQeBIbSTuLbZdqpMRq/2YOiLUSc12vkFU3R1LYpmwTYlM7gfc4cb3i4s52M2fqnchtvel+9QVENyOSI2mD2Z2MiZvF5irVfjjirNpZTaw8k5F97e0v4NTNsZyoq2dn8QJfXAPJlaj+M28B0c2xpBUZbZ+LkCM7RktFxm7z1/8A6+2anNEnAHRyPBNiyVxx8WMU38SS4rOiP2WC336WnaB1cjzyWRG1j625wtrPYqSTlqhfC2DhO0fVowEwHxCR2uQpDJ/jasZCQgvI5XgLtszIUCWMcrxsYPj8L/gv2Brv5kG0m9jLfjcZ0XxjZ8y7SYha0pIb3s3Zj+a3YyecyvGGxvus39afiOY3shDVlDIzOR8AAAAASUVORK5CYII=",
+	"Logo": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAAAgCAMAAABUxMQaAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAk1BMVEVHcEwip+Aip98ip98ip98iotgiotkiqN8io9whpdsdk8QiqOAiqOAAbZMiqN8ipt0ipt8ip+Aip94ip98ipuAdntMhpt4ip98ipdwjp90iqN8iqN8ioNoiqOAjqN8ip+AiqOAiqOAip+Ahpd4hpt4ip+Ahpt4ip98ip98iqOAip+AeoNAip+AYisUhpd4jqOD////CaEQTAAAAL3RSTlMAtbySXhUczSklB/vwAdU5cIRPVHwQWWgvQKOMIeP+9dGq3EVJ6zuAnMOWCsgDNdQDw2IAAAABYktHRDCu3C3kAAAAB3RJTUUH6QEQEScOsH/I4AAAAp5JREFUSMe1VWuXojAMjaMgDxEE8W1RFB+L2v//77ZN0sLguGc8x80H6W2T2zTNrQD/zXpS2debQX0dJAcvsYNYuu+xDjHIe4ldYvXfIg1CHTOKXmHeZhy9xRrL72XrYgB/rEi9t0ghQZbJSwxxmk2nWY4jbf4sSWaOqkw2T1vFXgySmYsOS4VWyLKezza02sWwxQnHjEShf4sU/YoJF2a5k9b2CpcGiD56dDG1QGlHbCF/EySdi9ZS8t01gWcMqd0/lT/YTvsccA9Bp5IxwLHlsYVnDBO7AY2kOQxxVLr3KqzGKcLihAHAGdcu8ZV7sovhCydOZiR6EXLIP9HIlOaCE3Pw8TsElqMKmunP4RkDcoQ1ALGJTY3HLRxA1qtKFSfKCAa0nQ0KqE2zZ+zb6plMTvjtseb6AGtTI6t1mzT6Hp9wa38zooY+Q2Y4qNB+S+szE5TR7XVx660xo72kDSnFDedctbVug7SPqJ8w3HBiAfd6zJnQ3eeU2dZ0zbXRelDvTPYlVe/WwXdsliLi3lCZGFVQZnsIpGloo3UqhKwiWOrvFKjjGsx1vkLOHf7FWljBQpLL3LDeiS1dSON61zmGLteowXzhw+OVXSdWFXhwsRpgf0lRHane0umxa3lY8R0tOhjMxsZSVkUMB/mjbacq7zbO7btvMQQFo4qeE5cUpRraMQ/K7tZmVW7jfGzh6KFV38VG/NuloCtvVHnhFf9RtGll6fJro8cLaF6fBkN0VjHVOj/wnTSqCCZKh+FeFT9uZVusa/3c6psTtyTgN7qLAWrPffGfFW28nEYb85AJh9ccb1O3fbv4F9YUcvxm5L9MCXE3saX5lKnzL2/ceZ8zJTx6yrf3D7IaOX00VeCOFcknSQG8VRlW+8cvvf8Cc/3adz65S1AAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMDEtMTZUMTc6Mzg6NDMrMDA6MDCbK2ZxAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTAxLTE2VDE3OjM4OjQzKzAwOjAw6nbezQAAAABJRU5ErkJggg==",
 	"DocsUrl": "https://api.imgbb.com/",
 	"Description": "Free image hosting and sharing service, upload pictures, photo host.",
 	"ExpirationRange": [
@@ -123,31 +123,6 @@
 				"Type": "Text",
 				"ExactLength": 32,
 				"IsRequired": true
-			}
-		},
-		{
-			"Key": "DATA_LIST",
-			"Type": "String",
-			"TargetParam": "FileType",
-			"InputField": {
-				"Label": "Expiration Span",
-				"Type": "List",
-				"Items": [{
-					"Label": "None",
-					"Value": "None"
-				}, {
-					"Label": "Test",
-					"Value": "Test"
-				}]
-			}
-		},
-		{
-			"Key": "PRICE",
-			"Type": "Double",
-			"TargetParam": "Custom",
-			"InputField": {
-				"Label": "Total Amount",
-				"Type": "Double"
 			}
 		}
 	],
