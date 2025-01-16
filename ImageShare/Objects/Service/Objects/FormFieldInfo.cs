@@ -8,9 +8,11 @@ using System.Text.RegularExpressions;
 
 namespace PixPost.Objects.Service.Objects;
 
-public class FormFieldInfo : INotifyPropertyChanged {
+public sealed class FormFieldInfo : INotifyPropertyChanged {
+  public event PropertyChangedEventHandler? PropertyChanged;
+  
   public required string Id { get; init; }
-  public InputFieldType Type { get; init; }
+  public InputFieldType Type { get; private set; }
   public string Label { get; private set; } = string.Empty;
   public int? ExactLength { get; private set; }
   public int? MinLength { get; private set; }
@@ -39,6 +41,7 @@ public class FormFieldInfo : INotifyPropertyChanged {
 
   public void FromSchemaVariable(SchemaSpecs.Variable variable) {
     Label = variable.InputField.Label;
+    Type = variable.InputField.Type;
     ExactLength = variable.InputField.ExactLength;
     MinLength = variable.InputField.MinLength;
     MaxLength = variable.InputField.MaxLength;
@@ -63,7 +66,7 @@ public class FormFieldInfo : INotifyPropertyChanged {
 
   private bool ValidateToggle() {
     if (IsRequired && (Value == null || !(bool)Value)) {
-      ErrorMessage = $"You must check before continue.";
+      ErrorMessage = "You must check before continue.";
       return false;
     }
 
@@ -133,10 +136,12 @@ public class FormFieldInfo : INotifyPropertyChanged {
       return false;
     }
 
-    if (!int.TryParse(currentValue, out var number)) {
+    if (!Regex.IsMatch(currentValue, @"^\d+$")) {
       ErrorMessage = "The value must be an integer number.";
       return false;
     }
+
+    var number = int.Parse(currentValue);
 
     if (Minimum != null && number < Minimum) {
       ErrorMessage = $"The value should be less than {MinLength}.";
@@ -159,10 +164,12 @@ public class FormFieldInfo : INotifyPropertyChanged {
       return false;
     }
 
-    if (!double.TryParse(currentValue, out var number)) {
-      ErrorMessage = "The value must be a decimal number.";
+    if (!Regex.IsMatch(currentValue, @"^\d+(\.\d+)?$")) {
+      ErrorMessage = "The value must be a float number.";
       return false;
     }
+
+    var number = int.Parse(currentValue);
 
     if (Minimum != null && number < Minimum) {
       ErrorMessage = $"The value should be less than {MinLength}.";
@@ -180,26 +187,22 @@ public class FormFieldInfo : INotifyPropertyChanged {
   public bool Validate() {
     ErrorMessage = null;
     return Type switch {
-      InputFieldType.Text => ValidateText(),
       InputFieldType.Url => ValidateUrl(),
       InputFieldType.Toggle => ValidateToggle(),
       InputFieldType.Double => ValidateDouble(),
       InputFieldType.Integer => ValidateInteger(),
       InputFieldType.List => ValidateList(),
-      _ => throw new ArgumentOutOfRangeException()
+      _ => ValidateText()
     };
   }
 
-  public event PropertyChangedEventHandler? PropertyChanged;
-
-  protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+  private void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
   }
 
-  protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
-    if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+  private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null) {
+    if (EqualityComparer<T>.Default.Equals(field, value)) return;
     field = value;
     OnPropertyChanged(propertyName);
-    return true;
   }
 }
