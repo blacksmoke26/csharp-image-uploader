@@ -62,49 +62,26 @@ public partial class FormField {
   }
 
   private void InitDoubleControl(TextBox control) {
-    control.PreviewTextInput += (sender, e) => {
-      /*
-      var isNum = e.Text == "." || int.TryParse(ctrl.Text, out _) || decimal.TryParse(ctrl.Text, out _);
-        Console.WriteLine(isNum);
-        e.Handled = r.IsMatch(ctrl.Text);//!isNum || !decimal.TryParse(e.Text, out var _));*/
-      //e.Handled = !e.Text.All(cc => Char.IsNumber(cc) || cc == '.' || cc == '-');
-      //ctrl.Text = Regex.Replace(ctrl.Text,  @"[^\d\.]+", "");
-      //base.OnPreviewTextInput(e);
-    };
-    /*control.PreviewKeyDown += (sender, e) => {
-      var ctrl = (TextBox)sender;
-      ctrl.Text = e.Key switch {
-        Key.Up when double.TryParse(ctrl.Text, out var uv) => $"{uv + 1}",
-        Key.Down when double.TryParse(ctrl.Text, out var dv) => $"{dv - 1}",
-        _ => ctrl.Text
-      };
-    };
-    control.MouseWheel += (sender, e) => {
-      var ctrl = (TextBox)sender;
-      ctrl.Text = e.Delta switch {
-        > 0 => $"{double.Parse(ctrl.Text) + 1}",
-        < 0 => $"{double.Parse(ctrl.Text) - 1}",
-        _ => ctrl.Text
-      };
-    };*/
-    /*DataObject.AddPastingHandler(control, (sender, e) => {
-      if (e.DataObject.GetDataPresent(typeof(string))) {
-        var text = (string)e.DataObject.GetData(typeof(string))!;
-        if (!double.TryParse(text, out _)) e.CancelCommand();
-      }
-      else e.CancelCommand();
-    });*/
-  }
-
-  private void InitUrlControl(TextBox control) {
-  }
-
-  private void InitToggleControl(CheckBox control) {
+    control.MinWidth = 200;
+    control.MaxWidth = 200;
+    control.HorizontalAlignment = HorizontalAlignment.Left;
   }
 
   private void InitIntegerControl(TextBox control) {
+    control.MinWidth = 200;
+    control.MaxWidth = 200;
+    control.HorizontalAlignment = HorizontalAlignment.Left;
+  }
+
+  private void InitUrlControl(TextBox control) {
+    // Implement logic here
+  }
+
+  private void InitToggleControl(CheckBox control) {
+    // Implement logic here
   }
 
   private void InitListControl(ComboBox control) {
+    // Implement logic here
   }
 }
