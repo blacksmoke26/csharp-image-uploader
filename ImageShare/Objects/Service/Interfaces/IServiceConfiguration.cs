@@ -49,7 +49,7 @@ public interface IServiceConfiguration {
   /// </summary>
   /// <param name="configuration">Service configuration</param>
   /// <param name="reload">Upon successful file save, load configuration file into memory</param>
-  public void SaveConfig(Dictionary<string, object?> configuration, bool reload = false);
+  public void SaveConfig(Dictionary<string, string> configuration, bool reload = false);
 
   /// <summary>
   /// Reads the service configuration
