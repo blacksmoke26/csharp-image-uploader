@@ -21,6 +21,8 @@ public partial class SettingsDialog {
   public ObservableCollection<FormFieldInfo> VariableFormFields { get; set; } = [];
 
   private void InitialVariableFormFields() {
+    Service.RefreshVariables();
+    
     if (VariableFormFields.Count > 0) {
       return;
     }
@@ -51,13 +53,20 @@ public partial class SettingsDialog {
 
   private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
     var formValidated = true;
+    Dictionary<string, string> config = [];
 
     foreach (var field in VariableFormFields) {
-      if (!field.Validate()) formValidated = false;
+      if (!field.Validate()) {
+        formValidated = false;
+        continue;
+      }
+
+      config[field.Id] = field.GetConfigValue();
     }
 
     if (!formValidated) return;
-
+    
+    Service.SaveConfig(config, true);
     Close();
   }
 
