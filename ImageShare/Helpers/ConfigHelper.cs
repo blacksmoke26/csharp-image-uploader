@@ -7,7 +7,7 @@ namespace PixPost.Helpers;
 public static class ConfigHelper {
   public const string ImgBbEndpoint = "IMGBB_ENDPOINT";
   public const string ImgBbApiKey = "IMGBB_API_KEY";
-  private static object?[] _falsyValues = ["0", "false", "nil", "null", null, string.Empty, "undefined"];
+  private static readonly object?[] FalsyValues = ["false", "nil", "null", null, string.Empty, "undefined"];
 
   /// <summary>
   /// Get application .env absolute path  
@@ -128,7 +128,7 @@ public static class ConfigHelper {
   }
 
   private static bool IsFalsy(object value) {
-    return IsStringy(value) && _falsyValues.Contains(value);
+    return IsStringy(value) && FalsyValues.Contains(value);
   }
 
   public static string ConvertToString(string type, object? value) {
@@ -138,21 +138,26 @@ public static class ConfigHelper {
 
     return type switch {
       "bool" => BoolToString((bool)value),
-      "double" => (string)value,
-      "int" => (string)value,
-      _ => (string)value,
+      "double" => $"{value}",
+      "int" => $"{value}",
+      _ => $"{value}",
     };
   }
 
-  public static object? ParseValue<T>(string type, object value) {
-    if (IsStringy(value) && string.IsNullOrEmpty((string)value)) {
-      return null;
+  public static object? ParseValue(string type, object? value) {
+    if (value == null || IsStringy(value) && string.IsNullOrEmpty((string)value)) {
+      return type switch {
+        "bool" => false,
+        "double" => 0,
+        "int" => 0,
+        _ => ""
+      };
     }
 
     return type switch {
       "bool" => IsStringy(value) ? !IsFalsy(value) : bool.Parse((string)value),
-      "double" => IsStringy(value) ? long.Parse((string)value) : (long)value,
-      "int" => IsStringy(value) ? int.Parse((string)value) : (int)value,
+      "double" => IsStringy(value) ? double.Parse($"{value}") : (long)value,
+      "int" => IsStringy(value) ? int.Parse($"{value}") : (int)value,
       _ => value
     };
   }
