@@ -13,52 +13,53 @@
       <TextBox Style="{StaticResource FormTextBoxStyle}"
         Text="{Binding Value, Mode=TwoWay}" />
     </ContentControl>
-    <ContentControl x:Key="ControlCheckbox">
+    <ContentControl x:Key="ControlToggle">
       <CheckBox Style="{StaticResource CheckboxStyle}"
         IsChecked="{Binding Value, Mode=TwoWay}"
         Content="{Binding Label, Mode=OneWay}" />
     </ContentControl>
     <ContentControl x:Key="ControlComboBox">
-      <ComboBox SelectedValue="{Binding Value, Mode=TwoWay}"
-        Style="{StaticResource ComboBoxStyle}" />
+      <ComboBox
+        ItemsSource="{Binding Items}"
+        SelectedItem="{Binding Value, Mode=TwoWay}"
+        Style="{StaticResource ComboBoxStyle}"
+        Margin="0 5 0 0"
+        SelectedValuePath="Value" DisplayMemberPath="Label"/>
     </ContentControl>
   </UserControl.Resources>
-  <Grid>
-    <StackPanel Margin="0 15 0 0">
-      <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
-        Text="{Binding Label, Mode=OneWay}"
-        Margin="0  0 0 2">
-        <behavior:Interaction.Triggers>
-          <behavior:DataTrigger
-            Binding="{Binding Type, Mode=OneWay}"
-            Value="Toggle"
-            Comparison="Equal">
-            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
-          </behavior:DataTrigger>
-        </behavior:Interaction.Triggers>
-      </TextBlock>
-      <ContentControl Name="FieldContentControl" />
-      <TextBlock
-        x:Name="ErrorMessage"
-        Text="{Binding ErrorMessage, Mode=TwoWay}">
-        <behavior:Interaction.Triggers>
-          <behavior:DataTrigger
-            Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="NotEqual">
-            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Visible" />
-          </behavior:DataTrigger>
-          <behavior:DataTrigger
-            Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="Equal">
-            <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
-          </behavior:DataTrigger>
-        </behavior:Interaction.Triggers>
-        <TextBlock.Resources>
-          <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="11" />
-            <Setter Property="Foreground" Value="#dc3545" />
-            <Setter Property="Padding" Value="5 2" />
-          </Style>
-        </TextBlock.Resources>
-      </TextBlock>
-    </StackPanel>
-  </Grid>
+  <StackPanel Margin="0 15 0 0">
+    <TextBlock Style="{StaticResource FormInputCaptionTextBox}"
+      Text="{Binding Label, Mode=OneWay}"
+      Margin="0  0 0 2">
+      <behavior:Interaction.Triggers>
+        <behavior:DataTrigger
+          Binding="{Binding Type, Mode=OneWay}"
+          Value="Toggle"
+          Comparison="Equal">
+          <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+        </behavior:DataTrigger>
+      </behavior:Interaction.Triggers>
+    </TextBlock>
+    <ContentControl Name="FieldContentControl" />
+    <TextBlock
+      Text="{Binding ErrorMessage, Mode=TwoWay}">
+      <behavior:Interaction.Triggers>
+        <behavior:DataTrigger
+          Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="NotEqual">
+          <behavior:ChangePropertyAction PropertyName="Visibility" Value="Visible" />
+        </behavior:DataTrigger>
+        <behavior:DataTrigger
+          Binding="{Binding ErrorMessage}" Value="{x:Null}" Comparison="Equal">
+          <behavior:ChangePropertyAction PropertyName="Visibility" Value="Collapsed" />
+        </behavior:DataTrigger>
+      </behavior:Interaction.Triggers>
+      <TextBlock.Resources>
+        <Style TargetType="TextBlock">
+          <Setter Property="FontSize" Value="11" />
+          <Setter Property="Foreground" Value="#dc3545" />
+          <Setter Property="Padding" Value="5 2" />
+        </Style>
+      </TextBlock.Resources>
+    </TextBlock>
+  </StackPanel>
 </UserControl>
