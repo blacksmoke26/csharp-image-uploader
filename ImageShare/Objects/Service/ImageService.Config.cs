@@ -52,17 +52,15 @@ public partial class ImageService : IServiceConfiguration {
     return _variablesMap = variables.ToList().Select(x => {
       var value = ToVariableName(x.Key);
       x.Key = value;
-      x.Value = ConfigHelper.ParseValue<object>(x.Type.ToString().ToLower(), ConfigHelper.GetString(value));
+      x.Value = ConfigHelper.ParseValue(x.Type.ToString().ToLower(), ConfigHelper.GetString(value));
       return x;
     }).ToList();
   }
 
   /// <inheritdoc/>
-  public void SaveConfig(Dictionary<string, object?> configuration, bool reload = false) {
+  public void SaveConfig(Dictionary<string, string> configuration, bool reload = false) {
     var config = GetVariablesMap()
-      .Select(x => new KeyValuePair<string, string>(
-        x.Key, ConfigHelper.ConvertToString(x.Type.ToString().ToLower(), x.Value)
-      ))
+      .Select(x => new KeyValuePair<string, string>(x.Key, configuration[x.Key]))
       .ToDictionary();
 
     ConfigHelper.Save(config, null, reload);
