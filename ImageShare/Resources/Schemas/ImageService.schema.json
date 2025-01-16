@@ -88,6 +88,10 @@
             "type": "string",
             "enum": ["String", "Bool", "Double", "Int"]
           },
+          "TargetParam": {
+            "type": "string",
+            "enum": ["Custom", "Endpoint", "ApiKey", "FileType", "FileSizeMin", "FileSizeMax"]
+          },
           "InputField": {
             "type": "object",
             "properties": {
@@ -98,29 +102,31 @@
               },
               "Type": {
                 "type": "string",
-                "enum": ["Text", "Url", "Toggle", "Number", "Integer", "List"]
-              },
-              "Pattern": {
-                "type": "string"
+                "enum": ["Text", "Url", "Toggle", "Double", "Integer", "List"]
               },
               "ExactLength": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 100
+                "maximum": 300
               },
               "MinLength": {
-                "type": "integer",
-                "minimum": 0,
-                "default": 0
+                "type": "integer"
               },
               "MaxLength": {
-                "type": "integer",
-                "minimum": 0,
-                "default": 60
+                "type": "integer"
+              },
+              "Minimum": {
+                "type": "integer"
+              },
+              "Maximum": {
+                "type": "integer"
               },
               "IsRequired": {
                 "type": "boolean",
                 "default": false
+              },
+              "Pattern": {
+                "type": "string"
               },
               "Items": {
                 "type": "array",
@@ -151,7 +157,9 @@
         },
         "required": [
           "Key",
-          "Type"
+          "Type",
+          "TargetParam",
+          "InputField"
         ],
         "additionalProperties": false
       }
