@@ -37,7 +37,7 @@
     "Logo": {
       "$comment": "The base64 encoded image string",
       "type": "string",
-      "pattern": "^data:(.+);base64,[^=]+=$"
+      "pattern": "^data:(.+);base64,.+=$"
     },
     "DocsUrl": {
       "type": "string",
