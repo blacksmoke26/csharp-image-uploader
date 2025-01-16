@@ -14,7 +14,8 @@
   MouseDown="SettingsDialog_OnMouseDown"
   KeyDown="SettingsDialog_OnKeyDown"
   ShowInTaskbar="False"
-  Width="600">
+  Width="500"
+  MaxWidth="500">
   <Grid>
     <Border CornerRadius="6"
       Background="Transparent"
@@ -38,6 +39,9 @@
           <DockPanel HorizontalAlignment="Stretch"
             VerticalAlignment="Top"
             Margin="0 0 0 15">
+            <Image
+              HorizontalAlignment="Left"
+              Source="{Binding Service.LogoPath}" Height="20" Margin="0 7 10 0"/>
             <TextBlock FontSize="19"
               Foreground="#333"
               HorizontalAlignment="Left"
