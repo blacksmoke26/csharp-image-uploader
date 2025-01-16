@@ -5,13 +5,23 @@
 using PixPost.Helpers;
 
 namespace PixPost.Objects.Service.Objects;
+
 public enum InputFieldType {
   Text = 0,
   Url = 1,
   Toggle = 2,
-  Number = 3,
+  Double = 3,
   Integer = 4,
   List = 5,
+}
+
+public enum TargetParamType {
+  Custom = 0,
+  Endpoint = 1,
+  ApiKey = 2,
+  FileType = 3,
+  FileSizeMin = 4,
+  FileSizeMax = 5
 }
 
 public enum VariableValueType {
@@ -22,7 +32,6 @@ public enum VariableValueType {
 }
 
 public class SchemaSpecs {
-
   public class Menu {
     public required string Text { get; set; }
     public required string Icon { get; set; }
@@ -36,19 +45,22 @@ public class SchemaSpecs {
   public class InputField {
     public required string Label { get; set; }
     public required InputFieldType Type { get; set; }
-    public string? Pattern { get; set; }
     public int? ExactLength { get; set; }
     public int? MinLength { get; set; }
     public int? MaxLength { get; set; }
+    public int? Minimum { get; set; }
+    public int? Maximum { get; set; }
+    public string? Pattern { get; set; }
     public bool IsRequired { get; set; }
     public IList<ListItem>? Items { get; set; }
   }
 
   public class Variable {
     public required string Key { get; set; }
-    public object? Value { get; set; }
     public required VariableValueType Type { get; set; }
+    public required TargetParamType TargetParam { get; set; }
     public required InputField InputField { get; set; }
+    public object? Value { get; set; }
   }
 
   public class FileSize {
