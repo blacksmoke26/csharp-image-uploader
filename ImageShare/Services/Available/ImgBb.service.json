@@ -107,6 +107,7 @@
 		{
 			"Key": "ENDPOINT",
 			"Type": "String",
+			"TargetParam": "Endpoint",
 			"InputField": {
 				"Label": "Endpoint URL",
 				"Type": "Url",
@@ -116,11 +117,37 @@
 		{
 			"Key": "APIKEY",
 			"Type": "String",
+			"TargetParam": "ApiKey",
 			"InputField": {
 				"Label": "Api Key",
 				"Type": "Text",
 				"ExactLength": 32,
 				"IsRequired": true
+			}
+		},
+		{
+			"Key": "DATA_LIST",
+			"Type": "String",
+			"TargetParam": "FileType",
+			"InputField": {
+				"Label": "Expiration Span",
+				"Type": "List",
+				"Items": [{
+					"Label": "None",
+					"Value": "None"
+				}, {
+					"Label": "Test",
+					"Value": "Test"
+				}]
+			}
+		},
+		{
+			"Key": "PRICE",
+			"Type": "Double",
+			"TargetParam": "Custom",
+			"InputField": {
+				"Label": "Total Amount",
+				"Type": "Double"
 			}
 		}
 	],
