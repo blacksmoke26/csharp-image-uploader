@@ -3,14 +3,16 @@
 // Website: https://github.com/blacksmoke26/
 
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using PixPost.Helpers;
 
 namespace PixPost.Objects.Service.Objects;
 
 public sealed class FormFieldInfo : INotifyPropertyChanged {
   public event PropertyChangedEventHandler? PropertyChanged;
-  
+
   public required string Id { get; init; }
   public InputFieldType Type { get; private set; }
   public string Label { get; private set; } = string.Empty;
@@ -39,6 +41,10 @@ public sealed class FormFieldInfo : INotifyPropertyChanged {
     set => SetField(ref _value, value);
   }
 
+  /// <summary>
+  /// Populate the field from `SchemaSpecs.Variable` instance 
+  /// </summary>
+  /// <param name="variable">The Variable instance</param>
   public void FromSchemaVariable(SchemaSpecs.Variable variable) {
     Label = variable.InputField.Label;
     Type = variable.InputField.Type;
@@ -71,6 +77,40 @@ public sealed class FormFieldInfo : INotifyPropertyChanged {
     }
 
     return true;
+  }
+  
+  /// <summary>
+  /// Parse and convert value into a proper type 
+  /// </summary>
+  /// <returns>The computed value</returns>
+  public object? GetParsedValue() {
+    if (Value == null) return null;
+
+    return Type switch {
+      InputFieldType.Toggle => (bool)Value,
+      InputFieldType.Double => double.Parse($"{Value}"),
+      InputFieldType.Integer => int.Parse($"{Value}"),
+      InputFieldType.List => Value is SchemaSpecs.ListItem ? (Value as SchemaSpecs.ListItem)?.Value : Value,
+      _ => (string)Value
+    };
+  }
+
+  /// <summary>
+  /// Get configuration string representation of current value
+  /// </summary>
+  /// <returns>The textual value</returns>
+  public string GetConfigValue() {
+    var parsed = GetParsedValue();
+    if (parsed == null) {
+      return "null";
+    }
+
+    return Type switch {
+      InputFieldType.Toggle => ConfigHelper.ConvertToString("bool", parsed),
+      InputFieldType.Double => ((double)parsed).ToString(CultureInfo.InvariantCulture),
+      InputFieldType.Integer => ((int)parsed).ToString(CultureInfo.InvariantCulture),
+      _ =>(string)parsed,
+    };
   }
 
   private bool ValidateText() {
@@ -129,27 +169,26 @@ public sealed class FormFieldInfo : INotifyPropertyChanged {
   }
 
   private bool ValidateInteger() {
-    var currentValue = Value == null ? string.Empty : (string)Value;
+    var currentValue = Value == null ? string.Empty : $"{Value}";
 
     if (IsRequired && string.IsNullOrWhiteSpace(currentValue)) {
       ErrorMessage = $"Please provide a valid {Label.ToLower()}.";
       return false;
     }
 
-    if (!Regex.IsMatch(currentValue, @"^\d+$")) {
+    if (!int.TryParse(currentValue, out var number)) {
       ErrorMessage = "The value must be an integer number.";
       return false;
     }
 
-    var number = int.Parse(currentValue);
 
-    if (Minimum != null && number < Minimum) {
-      ErrorMessage = $"The value should be less than {MinLength}.";
+    if (Minimum >= 0 && number < Minimum) {
+      ErrorMessage = $"The value should be lesser than {Minimum}.";
       return false;
     }
 
-    if (Maximum != null && number > Maximum) {
-      ErrorMessage = $"The value should be greater than {Maximum}.";
+    if (Maximum >= 0 && number > Maximum) {
+      ErrorMessage = $"The value shouldn't be greater than {Maximum}.";
       return false;
     }
 
@@ -157,33 +196,35 @@ public sealed class FormFieldInfo : INotifyPropertyChanged {
   }
 
   private bool ValidateDouble() {
-    var currentValue = Value == null ? string.Empty : (string)Value;
+    var currentValue = Value == null ? string.Empty : $"{Value}";
 
     if (IsRequired && string.IsNullOrWhiteSpace(currentValue)) {
       ErrorMessage = $"Please provide a valid {Label.ToLower()}.";
       return false;
     }
 
-    if (!Regex.IsMatch(currentValue, @"^\d+(\.\d+)?$")) {
+    if (!double.TryParse(currentValue, out var number)) {
       ErrorMessage = "The value must be a float number.";
       return false;
     }
 
-    var number = int.Parse(currentValue);
-
-    if (Minimum != null && number < Minimum) {
-      ErrorMessage = $"The value should be less than {MinLength}.";
+    if (Minimum >= 0 && number < Minimum) {
+      ErrorMessage = $"The value should be lesser than {Minimum}.";
       return false;
     }
 
-    if (Maximum != null && number > Maximum) {
-      ErrorMessage = $"The value should be greater than {Maximum}.";
+    if (Maximum >= 0 && number > Maximum) {
+      ErrorMessage = $"The value shouldn't be greater than {Maximum}.";
       return false;
     }
 
     return true;
   }
 
+  /// <summary>
+  /// Validates the value
+  /// </summary>
+  /// <returns>Whatever the value is valid or not</returns>
   public bool Validate() {
     ErrorMessage = null;
     return Type switch {
