@@ -51,9 +51,11 @@ public partial class SettingsDialog {
   }
 
   private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
-    VariableFormFields[1].ErrorMessage = VariableFormFields[1].ErrorMessage == null ? "This is an error message" : null;
-    VariableFormFields[1].Dump();
-    //Close();
+    if (VariableFormFields.Any(field => !field.Validate())) {
+      return;
+    }
+
+    Close();
   }
 
   private void CancelButton_OnClick(object sender, RoutedEventArgs e) {
