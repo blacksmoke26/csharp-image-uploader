@@ -13,9 +13,9 @@ public partial class ImageService : IServiceConfiguration {
 
   /// <inheritdoc/>
   public string ToVariableName(string key) {
-    return key.StartsWith(VariablePrefix + "_")
+    return key.StartsWith($"{VariablePrefix}_")
       ? key
-      : string.Concat(VariablePrefix, "_", key);
+      : $"{VariablePrefix}_{key}";
   }
 
   /// <inheritdoc/>
@@ -42,8 +42,7 @@ public partial class ImageService : IServiceConfiguration {
         TargetParam = TargetParamType.Custom,
         InputField = new() {
           Label = "Enabled",
-          Type = InputFieldType.Toggle,
-          IsRequired = false,
+          Type = InputFieldType.Toggle
         }
       }
     ];
