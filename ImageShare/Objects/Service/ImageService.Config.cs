@@ -39,11 +39,12 @@ public partial class ImageService : IServiceConfiguration {
       new() {
         Key = "ENABLED",
         Type = VariableValueType.Bool,
+        TargetParam = TargetParamType.Custom,
         InputField = new() {
           Label = "Enabled",
           Type = InputFieldType.Toggle,
           IsRequired = false,
-        },
+        }
       }
     ];
 
