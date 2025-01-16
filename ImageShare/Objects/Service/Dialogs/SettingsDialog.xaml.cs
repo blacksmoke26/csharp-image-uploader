@@ -5,7 +5,6 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using Dumpify;
 using PixPost.Objects.Service.Objects;
 
 namespace PixPost.Objects.Service.Dialogs;
@@ -51,9 +50,13 @@ public partial class SettingsDialog {
   }
 
   private void UpdateButton_OnClick(object sender, RoutedEventArgs e) {
-    if (VariableFormFields.Any(field => !field.Validate())) {
-      return;
+    var formValidated = true;
+
+    foreach (var field in VariableFormFields) {
+      if (!field.Validate()) formValidated = false;
     }
+
+    if (!formValidated) return;
 
     Close();
   }
