@@ -294,8 +294,7 @@
           "required": [
             "Image",
             "Api",
-            "Caption",
-            "Expiration"
+            "Caption"
           ]
         }
       },
@@ -314,7 +313,6 @@
     "Logo",
     "DocsUrl",
     "Description",
-    "ExpirationRange",
     "VariablePrefix",
     "Variables",
     "RequestProps"
