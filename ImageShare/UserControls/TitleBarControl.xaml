@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="PixPost.UserControls.TitleBarControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:PixPost.UserControls"
+  MinWidth="600"
+  mc:Ignorable="d">
+  <UserControl.Resources>
+    <Style x:Key="IconStyle"
+      TargetType="TextBlock">
+      <Setter Property="FontFamily"
+        Value="{StaticResource Phosphor}" />
+      <Setter Property="FontSize"
+        Value="18" />
+      <Setter Property="Foreground"
+        Value="#444" />
+      <Setter Property="Cursor"
+        Value="Hand" />
+      <Setter Property="Margin"
+        Value="15 0 0 0" />
+    </Style>
+  </UserControl.Resources>
+  <Grid Margin="20"
+    VerticalAlignment="Top">
+    <DockPanel>
+      <TextBlock VerticalAlignment="Top"
+        HorizontalAlignment="Left"
+        FontWeight="Medium"
+        Text="PixPost - Image Sharing Online"
+        Foreground="#333" />
+      <DockPanel HorizontalAlignment="Right">
+        <UniformGrid Columns="4">
+          <TextBlock Style="{StaticResource IconStyle}"
+            ToolTip="Notifications"
+            Text="&#xE0CE;"
+            MouseDown="Notifications_OnMouseDown"
+            />
+          <TextBlock Style="{StaticResource IconStyle}"
+            ToolTip="Show sidebar"
+            Text="&#xEAB6;"
+            MouseDown="ShowSidebar_OnMouseDown" />
+          <TextBlock Style="{StaticResource IconStyle}"
+            ToolTip="Minimize"
+            Text="&#xE136;"
+            MouseDown="Minimize_OnMouseDown" />
+          <TextBlock Style="{StaticResource IconStyle}"
+            ToolTip="Close"
+            Text="&#xE4F6;"
+            MouseDown="Close_OnMouseDown" />
+        </UniformGrid>
+      </DockPanel>
+    </DockPanel>
+  </Grid>
+</UserControl>
