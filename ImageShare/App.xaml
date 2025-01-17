@@ -99,15 +99,17 @@
         <ControlTemplate TargetType="{x:Type CheckBox}">
           <BulletDecorator Background="Transparent">
             <BulletDecorator.Bullet>
-              <Grid Width="18"
-                Height="18">
+              <Grid Width="15"
+                Margin="0 -1 0 0"
+                Height="15">
                 <Border x:Name="Border"
-                  Width="18"
-                  Height="18"
+                  Width="15"
+                  Height="15"
                   BorderThickness="1"
                   Background="White"
                   CornerRadius="2"
-                  BorderBrush="#8E8E8E" />
+                  BorderBrush="#6B7280">
+                </Border>
                 <Path x:Name="CheckMark"
                   Width="10"
                   Height="10"
@@ -120,7 +122,7 @@
                       <Style.Triggers>
                         <DataTrigger
                           Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type CheckBox}}, Path=IsChecked}" Value="True">
-                          <Setter Property="Stroke" Value="#333" />
+                          <Setter Property="Stroke" Value="#0c83ff" />
                         </DataTrigger>
                       </Style.Triggers>
                     </Style>
