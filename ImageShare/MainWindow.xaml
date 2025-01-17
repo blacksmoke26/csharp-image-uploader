@@ -8,14 +8,16 @@
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
   Title="PixPost - Image Sharing Online"
-  Height="450"
-  Width="800"
+  Width="950"
+  Height="600"
   WindowStyle="None"
   AllowsTransparency="True"
   Background="Transparent"
+  MouseDown="MainWindow_OnMouseDown"
   KeyDown="MainWindow_OnKeyDown"
   AllowDrop="True">
   <Window.Resources>
+    <ContentControl x:Key="X"></ContentControl>
   </Window.Resources>
   <Border
     CornerRadius="6"
@@ -32,18 +34,11 @@
       BorderBrush="#dee2e6"
       CornerRadius="6">
       <Grid>
-      <uc:SidebarDrawer x:Name="SidebarDrawer" Visibility="Collapsed" Panel.ZIndex="3"/>
-      <uc:DragOverPreview x:Name="DragPreviewPanel"
-        Background="#F2F2F2"
-        HorizontalContentAlignment="Center"
-        VerticalContentAlignment="Center"
-        Panel.ZIndex="2"
-        Visibility="Collapsed" />
-      <StackPanel Margin="20"
-        Panel.ZIndex="1"
-        x:Name="FileInfoPanel"
-        Background="#F2F2F2">
-        <DockPanel>
+        <uc:TitleBarControl x:Name="WindowTitleBarControl" />
+        <uc:SidebarDrawer x:Name="SidebarDrawer" Visibility="Collapsed" Panel.ZIndex="3"/>
+        <StackPanel
+        x:Name="FileInfoPanel">
+        <!--<DockPanel>
           <TextBlock VerticalAlignment="Top"
             HorizontalAlignment="Left"
             FontWeight="Medium"
@@ -88,15 +83,23 @@
                 MouseDown="ContentElement_OnMouseDown" />
             </TextBlock>
           </DockPanel>
-        </DockPanel>
-        <uc:ImageDropArea Margin="0 130 0 0"
+        </DockPanel>-->
+        <!--<uc:ImageDropArea Margin="0 130 0 0"
           Background="#F2F2F2"
           VerticalAlignment="Center"
           HorizontalContentAlignment="Center"
           VerticalContentAlignment="Center"
-          UploadClick="ImageDropArea_OnUploadClick" />
+          UploadClick="ImageDropArea_OnUploadClick" />-->
       </StackPanel>
-      <StackPanel Margin="20"
+        <!---->
+      <!--<uc:DragOverPreview x:Name="DragPreviewPanel"
+        Background="#F2F2F2"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        Panel.ZIndex="2"
+        Visibility="Collapsed" />-->
+      
+      <!--<StackPanel Margin="20"
         VerticalAlignment="Top"
         Panel.ZIndex="0"
         Background="#F2F2F2">
@@ -163,7 +166,7 @@
             Style="{StaticResource PlainButtonStyle}"
             Content="Upload" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </StackPanel>
-      </StackPanel>
+      </StackPanel>-->
     </Grid>
     </Border>
   </Border>

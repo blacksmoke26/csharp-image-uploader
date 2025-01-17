@@ -23,22 +23,45 @@ public partial class MainWindow {
 
   public MainWindow() {
     InitializeComponent();
+    InitializeSidebarDrawer();
+    InitializeWindowTitleBar();
     InitializeUi();
   }
 
+  private void InitializeWindowTitleBar() {
+    WindowTitleBarControl.MinimizeClick += (_, _) => { WindowState = WindowState.Minimized; };
+    WindowTitleBarControl.SidebarClick += (_, _) => { SidebarDrawer.Visibility = Visibility.Visible; };
+    WindowTitleBarControl.CloseClick += (_, _) => { Close(); };
+    WindowTitleBarControl.NotificationsClick += (_, _) => {
+      var dialog = new HistoryDialog {
+        Owner = Application.Current.MainWindow,
+        WindowStartupLocation = WindowStartupLocation.CenterOwner,
+      };
+      dialog.ShowDialog();
+    };
+  }
+
   private void InitializeUi() {
-    PreviewHeaderFilesInfo.Text = string.Concat(
+    //WindowTitleBarControl.CloseClick += TitleBar_CloseClick;
+    //WindowTitleBarControl.NotificationsClick += TitleBar_NotificationsClick;
+    //
+    /*TitleBar_MinimizeClick
+      TitleBar_SidebarClick
+    TitleBar_CloseClick
+      TitleBar_NotificationsClick*/
+
+    /*PreviewHeaderFilesInfo.Text = string.Concat(
       string.Join(" ", ImageHelper.ImageExtTypes),
       " ", ImageBb.SizeToMb(ImageBb.MaxSize), " MB").ToUpper();
     FileInfoPanel.Visibility = Visibility.Visible;
     ExpiryComboBox.ItemsSource = ImageBb.Expirations;
     PreviewDrop += MainWindow_Drop;
     MouseDown += MainWindow_OnMouseDown;
-    ImagesViewer.ImagesList = _uploadedImages;
+    ImagesViewer.ImagesList = _uploadedImages;*/
 
     #region Events Binding
 
-    PreviewDragEnter += (_, _) => DragPreviewPanel.Visibility = Visibility.Visible;
+    /*PreviewDragEnter += (_, _) => DragPreviewPanel.Visibility = Visibility.Visible;
     PreviewDragLeave += (_, _) => DragPreviewPanel.Visibility = Visibility.Collapsed;
     _uploadedImages.ListChanged += (_, _) => {
       FileInfoPanel.Visibility = _uploadedImages.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
@@ -47,32 +70,30 @@ public partial class MainWindow {
     ImagesViewer.EditClick += (_, e) => {
       var dialog = new EditImageDialog((ImageThumb)e.OriginalSource);
       dialog.ShowDialog();
-    };
-
-    InitializeSidebarDrawer();
+    };*/
 
     #endregion
   }
 
   private void InitializeSidebarDrawer() {
-    foreach (var menuItem in SidebarUtils.GetMenuItems(SidebarDrawer_MenuItemClick)) {
+    var items = SidebarUtils.GetMenuItems(menuItem => {
+      if (menuItem.HideDrawer)
+        SidebarDrawer.Visibility = Visibility.Collapsed;
+      SidebarUtils.MenuItemClickHandler(menuItem);
+    });
+    
+    foreach (var menuItem in items) {
       SidebarDrawer.MenuItems.Add(menuItem);
     }
   }
 
-  private void SidebarDrawer_MenuItemClick(SidebarMenuItem menuItem) {
-    if (menuItem.HideDrawer)
-      SidebarDrawer.Visibility = Visibility.Collapsed;
-    SidebarUtils.MenuItemClickHandler(menuItem);
-  }
-
   private void MainWindow_Drop(object sender, DragEventArgs e) {
-    DragPreviewPanel.Visibility = Visibility.Collapsed;
+    /*DragPreviewPanel.Visibility = Visibility.Collapsed;
 
     if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 
     if (e.Data.GetData(DataFormats.FileDrop, true) is string[] filePaths)
-      ProcessUploadedImageList(filePaths);
+      ProcessUploadedImageList(filePaths);*/
   }
 
   private bool ValidateFile(string filePath, List<string> errors) {
