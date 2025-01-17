@@ -56,6 +56,10 @@
       <EmbeddedResource Include="Resources\Schemas\ImageService.schema.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
+      <None Remove="Services\Available\Imghippo.service.json" />
+      <EmbeddedResource Include="Services\Available\Imghippo.service.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
